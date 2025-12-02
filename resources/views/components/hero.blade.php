@@ -1,0 +1,52 @@
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+        <img
+            src="{{ asset('images/hero-luxury.jpg') }}"
+            alt="Luxury Portuguese Architecture"
+            class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-graphite/80 via-graphite/60 to-graphite/80"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container relative z-10 mx-auto px-4 text-center">
+        <div class="max-w-4xl mx-auto animate-fade-up">
+            <h1 class="font-heading text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+                Where Vision Meets Value
+            </h1>
+            <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Premium Real Estate Investments in Portugal
+            </p>
+            <p class="text-lg text-white/80 mb-12 max-w-xl mx-auto">
+                Discover exceptional opportunities across Portugal's most exclusive markets
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                    href="#municipalities"
+                    class="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-md text-white bg-accent hover:bg-accent/90 transition-colors"
+                >
+                    Explore Municipalities
+                </a>
+                <a
+                    href="#contact"
+                    class="inline-flex items-center justify-center px-8 py-3 text-base font-medium rounded-md border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-colors"
+                >
+                    Join Off Market Club
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a
+            href="#about"
+            class="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/60 hover:text-accent transition-colors animate-bounce"
+            aria-label="Scroll to content"
+        >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </a>
+    </div>
+</section>
