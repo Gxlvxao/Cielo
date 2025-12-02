@@ -47,6 +47,11 @@ class AdminController extends Controller
         return view('admin.access-requests', compact('requests'));
     }
 
+    public function showAccessRequest(AccessRequest $accessRequest)
+    {
+        return view('admin.access-requests-show', compact('accessRequest'));
+    }
+
     public function approveAccessRequest(AccessRequest $accessRequest)
     {
         $role = $accessRequest->requested_role;
@@ -68,7 +73,7 @@ class AdminController extends Controller
                 $accessRequest->user_id = $user->id;
             }
             
-            $message .= " Perfil do usuário vinculado e atualizado.";
+            $message .= " Perfil vinculado. O usuário já possui senha definida.";
         } else {
             $tempPassword = Str::random(10);
             
@@ -83,7 +88,7 @@ class AdminController extends Controller
 
             $accessRequest->user_id = $user->id;
             
-            $message .= " Usuário criado. Senha temporária: {$tempPassword}";
+            $message .= " Usuário criado. SENHA TEMPORÁRIA: {$tempPassword}";
         }
 
         $accessRequest->status = 'approved';
@@ -109,6 +114,41 @@ class AdminController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Pedido rejeitado.');
+    }
+
+    public function toggleUserStatus(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return redirect()->back()->with('error', 'Você não pode bloquear sua própria conta.');
+        }
+
+        $newStatus = $user->status === 'active' ? 'inactive' : 'active';
+        $user->update(['status' => $newStatus]);
+
+        $statusMsg = $newStatus === 'active' ? 'desbloqueado' : 'bloqueado';
+        return redirect()->back()->with('success', "Usuário {$statusMsg} com sucesso.");
+    }
+
+    public function resetUserPassword(User $user)
+    {
+        $newPassword = Str::random(12);
+        
+        $user->update([
+            'password' => Hash::make($newPassword),
+        ]);
+
+        return redirect()->back()->with('success', "Senha resetada com sucesso! Nova senha: {$newPassword}");
+    }
+
+    public function deleteUser(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return redirect()->back()->with('error', 'Você não pode excluir sua própria conta.');
+        }
+
+        $user->delete();
+
+        return redirect()->route('admin.access-requests')->with('success', 'Usuário excluído permanentemente.');
     }
 
     public function properties(Request $request)
