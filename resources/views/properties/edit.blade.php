@@ -1,260 +1,120 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Editar Imóvel
+        <h2 class="font-semibold text-xl text-graphite leading-tight font-heading">
+            Editar Imóvel: {{ $property->title }}
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-8">
-                    <form method="POST" action="{{ route('properties.update', $property) }}" enctype="multipart/form-data" class="space-y-6">
-                        @csrf
-                        @method('PATCH')
-
-                        <!-- Title -->
-                        <div>
-                            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Título do Imóvel</label>
-                            <input 
-                                type="text" 
-                                id="title" 
-                                name="title" 
-                                value="{{ old('title', $property->title) }}"
-                                required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                            >
-                            @error('title')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <!-- Description -->
-                        <div>
-                            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Descrição</label>
-                            <textarea 
-                                id="description" 
-                                name="description" 
-                                rows="4"
-                                required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                            >{{ old('description', $property->description) }}</textarea>
-                            @error('description')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <!-- Type and Transaction Type -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Imóvel</label>
-                                <select 
-                                    id="type" 
-                                    name="type" 
-                                    required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                                    <option value="apartment" {{ old('type', $property->type) == 'apartment' ? 'selected' : '' }}>Apartamento</option>
-                                    <option value="house" {{ old('type', $property->type) == 'house' ? 'selected' : '' }}>Moradia</option>
-                                    <option value="land" {{ old('type', $property->type) == 'land' ? 'selected' : '' }}>Terreno</option>
-                                    <option value="commercial" {{ old('type', $property->type) == 'commercial' ? 'selected' : '' }}>Comercial</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="transaction_type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Transação</label>
-                                <select 
-                                    id="transaction_type" 
-                                    name="transaction_type" 
-                                    required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                                    <option value="sale" {{ old('transaction_type', $property->transaction_type) == 'sale' ? 'selected' : '' }}>Venda</option>
-                                    <option value="rent" {{ old('transaction_type', $property->transaction_type) == 'rent' ? 'selected' : '' }}>Arrendamento</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Price -->
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Preço (€)</label>
-                            <input 
-                                type="number" 
-                                id="price" 
-                                name="price" 
-                                value="{{ old('price', $property->price) }}"
-                                required
-                                min="0"
-                                step="0.01"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                            >
-                        </div>
-
-                        <!-- Location -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="city" class="block text-sm font-medium text-gray-700 mb-2">Cidade</label>
-                                <select 
-                                    id="city" 
-                                    name="city" 
-                                    required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                                    <option value="Lisboa" {{ old('city', $property->city) == 'Lisboa' ? 'selected' : '' }}>Lisboa</option>
-                                    <option value="Porto" {{ old('city', $property->city) == 'Porto' ? 'selected' : '' }}>Porto</option>
-                                    <option value="Coimbra" {{ old('city', $property->city) == 'Coimbra' ? 'selected' : '' }}>Coimbra</option>
-                                    <option value="Braga" {{ old('city', $property->city) == 'Braga' ? 'selected' : '' }}>Braga</option>
-                                    <option value="Faro" {{ old('city', $property->city) == 'Faro' ? 'selected' : '' }}>Faro</option>
-                                    <option value="Leiria" {{ old('city', $property->city) == 'Leiria' ? 'selected' : '' }}>Leiria</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="district" class="block text-sm font-medium text-gray-700 mb-2">Distrito/Freguesia</label>
-                                <input 
-                                    type="text" 
-                                    id="district" 
-                                    name="district" 
-                                    value="{{ old('district', $property->district) }}"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                            </div>
-                        </div>
-
-                        <!-- Address -->
-                        <div>
-                            <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Endereço</label>
-                            <input 
-                                type="text" 
-                                id="address" 
-                                name="address" 
-                                value="{{ old('address', $property->address) }}"
-                                required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                            >
-                        </div>
-
-                        <!-- Property Details -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div>
-                                <label for="bedrooms" class="block text-sm font-medium text-gray-700 mb-2">Quartos</label>
-                                <input 
-                                    type="number" 
-                                    id="bedrooms" 
-                                    name="bedrooms" 
-                                    value="{{ old('bedrooms', $property->bedrooms) }}"
-                                    min="0"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                            </div>
-
-                            <div>
-                                <label for="bathrooms" class="block text-sm font-medium text-gray-700 mb-2">Casas de Banho</label>
-                                <input 
-                                    type="number" 
-                                    id="bathrooms" 
-                                    name="bathrooms" 
-                                    value="{{ old('bathrooms', $property->bathrooms) }}"
-                                    min="0"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                            </div>
-
-                            <div>
-                                <label for="area" class="block text-sm font-medium text-gray-700 mb-2">Área (m²)</label>
-                                <input 
-                                    type="number" 
-                                    id="area" 
-                                    name="area" 
-                                    value="{{ old('area', $property->area) }}"
-                                    min="0"
-                                    step="0.01"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                            </div>
-
-                            <div>
-                                <label for="year_built" class="block text-sm font-medium text-gray-700 mb-2">Ano</label>
-                                <input 
-                                    type="number" 
-                                    id="year_built" 
-                                    name="year_built" 
-                                    value="{{ old('year_built', $property->year_built) }}"
-                                    min="1800"
-                                    max="{{ date('Y') }}"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                >
-                            </div>
-                        </div>
-
-                        <!-- WhatsApp -->
-                        <div>
-                            <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-2">WhatsApp para Contato</label>
-                            <input 
-                                type="text" 
-                                id="whatsapp" 
-                                name="whatsapp" 
-                                value="{{ old('whatsapp', $property->whatsapp) }}"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                                placeholder="+351 912 345 678"
-                            >
-                            <p class="mt-1 text-sm text-gray-500">Número de WhatsApp para clientes interessados entrarem em contato</p>
-                        </div>
-
-                        <!-- Current Images -->
-                        @if($property->images && count($property->images) > 0)
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Imagens Atuais</label>
-                                <div class="grid grid-cols-4 gap-2">
-                                    @foreach($property->images as $image)
-                                        <img src="{{ asset('storage/' . $image) }}" alt="Property image" class="w-full h-24 object-cover rounded">
-                                    @endforeach
+        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+            <form method="POST" action="{{ route('properties.update', $property) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-graphite mb-4 border-b pb-2">Informações Principais</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                                    <input type="text" name="title" value="{{ old('title', $property->title) }}" required class="w-full rounded-lg border-gray-300 focus:border-accent focus:ring-accent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+                                    <textarea name="description" rows="5" required class="w-full rounded-lg border-gray-300 focus:border-accent focus:ring-accent">{{ old('description', $property->description) }}</textarea>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Preço (€)</label>
+                                        <input type="number" name="price" value="{{ old('price', $property->price) }}" required class="w-full rounded-lg border-gray-300 focus:border-accent focus:ring-accent font-bold">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                                        <select name="type" class="w-full rounded-lg border-gray-300">
+                                            @foreach(['apartment','house','villa','land','commercial','office'] as $t)
+                                                <option value="{{ $t }}" {{ $property->type == $t ? 'selected' : '' }}>{{ ucfirst($t) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Transação</label>
+                                        <select name="transaction_type" class="w-full rounded-lg border-gray-300">
+                                            <option value="sale" {{ $property->transaction_type == 'sale' ? 'selected' : '' }}>Venda</option>
+                                            <option value="rent" {{ $property->transaction_type == 'rent' ? 'selected' : '' }}>Arrendamento</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        @endif
-
-                        <!-- New Images -->
-                        <div>
-                            <label for="images" class="block text-sm font-medium text-gray-700 mb-2">Novas Imagens (opcional)</label>
-                            <input 
-                                type="file" 
-                                id="images" 
-                                name="images[]" 
-                                multiple
-                                accept="image/jpeg,image/png,image/jpg,image/webp"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"
-                            >
-                            <p class="mt-1 text-sm text-gray-500">Selecionar novas imagens substituirá as atuais</p>
                         </div>
 
-                        <!-- Exclusive Checkbox -->
-                        <div class="flex items-center">
-                            <input 
-                                type="checkbox" 
-                                id="is_exclusive" 
-                                name="is_exclusive" 
-                                value="1"
-                                {{ old('is_exclusive', $property->is_exclusive) ? 'checked' : '' }}
-                                class="w-4 h-4 text-accent border-gray-300 rounded focus:ring-accent"
-                            >
-                            <label for="is_exclusive" class="ml-2 block text-sm text-gray-700">
-                                <span class="font-medium">Imóvel Exclusivo</span>
-                                <span class="text-gray-500 block">Apenas usuários logados poderão visualizar este imóvel</span>
-                            </label>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-graphite mb-4 border-b pb-2">Localização & Detalhes</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" name="city" value="{{ $property->city }}" placeholder="Cidade" class="w-full rounded-lg border-gray-300">
+                                <input type="text" name="address" value="{{ $property->address }}" placeholder="Endereço" class="w-full rounded-lg border-gray-300">
+                                <input type="number" name="bedrooms" value="{{ $property->bedrooms }}" placeholder="Quartos" class="w-full rounded-lg border-gray-300">
+                                <input type="number" name="area" value="{{ $property->area }}" placeholder="Área (m2)" class="w-full rounded-lg border-gray-300">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-1 space-y-6">
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-graphite mb-4">Capa Atual</h3>
+                            @if($property->cover_image)
+                                <img src="{{ Storage::url($property->cover_image) }}" class="w-full h-48 object-cover rounded-lg mb-4 shadow-sm">
+                            @endif
+                            
+                            <label class="block text-sm font-medium text-accent mb-2">Alterar Capa</label>
+                            <input type="file" name="cover_image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-accent file:text-white hover:file:bg-accent/90">
                         </div>
 
-                        <!-- Submit Buttons -->
-                        <div class="flex gap-4 pt-6 border-t border-gray-200">
-                            <button type="submit" class="flex-1 bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
-                                Atualizar Imóvel
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="text-lg font-bold text-graphite mb-4">Galeria</h3>
+                            
+                            @if($property->images && count($property->images) > 0)
+                                <div class="grid grid-cols-2 gap-2 mb-4">
+                                    @foreach($property->images as $img)
+                                        <div class="relative group">
+                                            <img src="{{ Storage::url($img) }}" class="w-full h-24 object-cover rounded-lg">
+                                            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg">
+                                                <label class="flex items-center gap-1 text-white text-xs cursor-pointer">
+                                                    <input type="checkbox" name="delete_images[]" value="{{ $img }}" class="text-red-500 rounded focus:ring-red-500">
+                                                    Excluir
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <p class="text-xs text-gray-400 mb-4">Selecione para excluir ao salvar.</p>
+                            @endif
+
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Adicionar Mais Fotos</label>
+                            <input type="file" name="images[]" multiple accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-gray-600 file:text-white hover:file:bg-gray-700">
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Vídeo URL</label>
+                                <input type="url" name="video_url" value="{{ old('video_url', $property->video_url) }}" class="w-full rounded-lg border-gray-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                                <input type="text" name="whatsapp" value="{{ old('whatsapp', $property->whatsapp) }}" class="w-full rounded-lg border-gray-300">
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 p-6 rounded-xl shadow-lg">
+                            <button type="submit" class="w-full bg-accent hover:bg-accent/90 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all transform hover:scale-105">
+                                Salvar Alterações
                             </button>
-                            <a href="{{ route('properties.my') }}" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium">
-                                Cancelar
-                            </a>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </x-app-layout>

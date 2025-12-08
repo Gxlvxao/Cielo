@@ -15,8 +15,10 @@ class Property extends Model
         'user_id',
         'title',
         'description',
+        'cover_image', // NOVO
         'type',
         'transaction_type',
+        'condition',
         'price',
         'city',
         'district',
@@ -29,6 +31,9 @@ class Property extends Model
         'area',
         'land_area',
         'year_built',
+        'energy_rating',
+        'video_url',
+        'whatsapp',
         'features',
         'images',
         'status',
@@ -48,110 +53,87 @@ class Property extends Model
         'published_at' => 'datetime',
     ];
 
-    /**
-     * Get the owner/developer of the property
-     */
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * Scope for public properties
-     */
+    // Scopes (mantidos iguais para manter a lógica de filtro)
     public function scopePublic($query)
     {
-        return $query->where('is_exclusive', false)
-                    ->where('status', 'published');
+        return $query->where('is_exclusive', false)->where('status', 'published');
     }
 
-    /**
-     * Scope for exclusive properties
-     */
     public function scopeExclusive($query)
     {
-        return $query->where('is_exclusive', true)
-                    ->where('status', 'published');
+        return $query->where('is_exclusive', true)->where('status', 'published');
     }
 
-    /**
-     * Scope for featured properties
-     */
     public function scopeFeatured($query)
     {
-        return $query->where('is_featured', true)
-                    ->where('status', 'published');
+        return $query->where('is_featured', true)->where('status', 'published');
     }
 
-    /**
-     * Scope for filtering by city
-     */
     public function scopeByCity($query, $city)
     {
         return $query->where('city', $city);
     }
 
-    /**
-     * Scope for filtering by type
-     */
     public function scopeByType($query, $type)
     {
         return $query->where('type', $type);
     }
 
-    /**
-     * Scope for filtering by transaction type
-     */
     public function scopeByTransactionType($query, $transactionType)
     {
         return $query->where('transaction_type', $transactionType);
     }
 
-    /**
-     * Scope for filtering by price range
-     */
     public function scopeByPriceRange($query, $min, $max)
     {
         return $query->whereBetween('price', [$min, $max]);
     }
 
-    /**
-     * Scope for filtering by bedrooms
-     */
     public function scopeByBedrooms($query, $bedrooms)
     {
         return $query->where('bedrooms', '>=', $bedrooms);
     }
 
-    /**
-     * Check if property is published
-     */
     public function isPublished(): bool
     {
         return $this->status === 'published';
     }
 
-    /**
-     * Check if property is exclusive
-     */
-    public function isExclusive(): bool
-    {
-        return $this->is_exclusive;
-    }
-
-    /**
-     * Get formatted price
-     */
     public function getFormattedPriceAttribute(): string
     {
-        return '€' . number_format($this->price, 0, ',', '.');
+        return '€ ' . number_format($this->price, 0, ',', '.');
     }
 
-    /**
-     * Get first image
-     */
-    public function getFirstImageAttribute(): ?string
+    // Retorna a URL do Embed para o vídeo
+    public function getVideoEmbedAttribute(): ?string
     {
-        return $this->images[0] ?? null;
+        if (!$this->video_url) return null;
+
+        // Suporte para YouTube
+        if (str_contains($this->video_url, 'youtube.com') || str_contains($this->video_url, 'youtu.be')) {
+            // Extrai o ID do vídeo
+            preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $this->video_url, $matches);
+            return isset($matches[1]) ? "https://www.youtube.com/embed/{$matches[1]}" : null;
+        }
+
+        // Suporte para Vimeo
+        if (str_contains($this->video_url, 'vimeo.com')) {
+            $videoId = (int) substr(parse_url($this->video_url, PHP_URL_PATH), 1);
+            return "https://player.vimeo.com/video/{$videoId}";
+        }
+
+        return null;
+    }
+
+    public function getWhatsappLinkAttribute(): ?string
+    {
+        if (!$this->whatsapp) return null;
+        $number = preg_replace('/[^0-9]/', '', $this->whatsapp);
+        return "https://wa.me/{$number}?text=" . urlencode("Olá, vi o imóvel '{$this->title}' no portal Crow Global e gostaria de mais informações.");
     }
 }

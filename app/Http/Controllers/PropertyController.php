@@ -6,25 +6,21 @@ use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\VisitRequestMail;
+use Illuminate\Support\Facades\Mail;
 
 class PropertyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $query = Property::query();
 
-        // Base filter: show published properties
         $query->where('status', 'published');
 
-        // If user is not authenticated, hide exclusive properties
         if (!Auth::check()) {
             $query->where('is_exclusive', false);
         }
 
-        // Apply filters
         if ($request->filled('city')) {
             $query->byCity($request->city);
         }
@@ -45,7 +41,6 @@ class PropertyController extends Controller
             $query->byPriceRange($request->min_price, $request->max_price);
         }
 
-        // Order by featured first, then by newest
         $query->orderBy('is_featured', 'desc')
               ->orderBy('published_at', 'desc');
 
@@ -54,34 +49,29 @@ class PropertyController extends Controller
         return view('properties.index', compact('properties'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        // Check if user can manage properties
         if (!Auth::user()->canManageProperties()) {
-            abort(403, 'Você não tem permissão para adicionar imóveis.');
+            abort(403);
         }
 
         return view('properties.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // Check if user can manage properties
         if (!Auth::user()->canManageProperties()) {
-            abort(403, 'Você não tem permissão para adicionar imóveis.');
+            abort(403);
         }
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'type' => 'required|in:apartment,house,land,commercial',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'type' => 'required|in:apartment,house,villa,land,commercial,office',
             'transaction_type' => 'required|in:sale,rent',
+            'condition' => 'nullable|in:new,used,renovated,under_construction',
             'price' => 'required|numeric|min:0',
             'city' => 'required|string|max:255',
             'district' => 'nullable|string|max:255',
@@ -92,18 +82,21 @@ class PropertyController extends Controller
             'area' => 'nullable|numeric|min:0',
             'land_area' => 'nullable|numeric|min:0',
             'year_built' => 'nullable|integer|min:1800|max:' . date('Y'),
-            'features' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
-            'is_exclusive' => 'nullable|boolean',
+            'energy_rating' => 'nullable|string|max:5',
+            'video_url' => 'nullable|url',
             'whatsapp' => 'nullable|string|max:20',
+            'features' => 'nullable|array',
+            'is_exclusive' => 'nullable|boolean',
         ]);
 
-        // Handle image uploads
+        if ($request->hasFile('cover_image')) {
+            $validated['cover_image'] = $request->file('cover_image')->store('properties/covers', 'public');
+        }
+
         $imagePaths = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('properties', 'public');
-                $imagePaths[] = $path;
+                $imagePaths[] = $image->store('properties/gallery', 'public');
             }
         }
 
@@ -119,17 +112,12 @@ class PropertyController extends Controller
             ->with('success', 'Imóvel adicionado com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Property $property)
     {
-        // Check if property is exclusive and user is not authenticated
         if ($property->is_exclusive && !Auth::check()) {
-            abort(403, 'Este imóvel é exclusivo para membros.');
+            abort(403);
         }
 
-        // Check if property is published or user is the owner/admin
         if (!$property->isPublished() && (!Auth::check() || (Auth::id() !== $property->user_id && !Auth::user()->isAdmin()))) {
             abort(404);
         }
@@ -137,34 +125,29 @@ class PropertyController extends Controller
         return view('properties.show', compact('property'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Property $property)
     {
-        // Check if user can edit this property
         if (!Auth::user()->canManageProperties() || (Auth::id() !== $property->user_id && !Auth::user()->isAdmin())) {
-            abort(403, 'Você não tem permissão para editar este imóvel.');
+            abort(403);
         }
 
         return view('properties.edit', compact('property'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Property $property)
     {
-        // Check if user can edit this property
         if (!Auth::user()->canManageProperties() || (Auth::id() !== $property->user_id && !Auth::user()->isAdmin())) {
-            abort(403, 'Você não tem permissão para editar este imóvel.');
+            abort(403);
         }
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'type' => 'required|in:apartment,house,land,commercial',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'type' => 'required|in:apartment,house,villa,land,commercial,office',
             'transaction_type' => 'required|in:sale,rent',
+            'condition' => 'nullable|in:new,used,renovated,under_construction',
             'price' => 'required|numeric|min:0',
             'city' => 'required|string|max:255',
             'district' => 'nullable|string|max:255',
@@ -175,28 +158,39 @@ class PropertyController extends Controller
             'area' => 'nullable|numeric|min:0',
             'land_area' => 'nullable|numeric|min:0',
             'year_built' => 'nullable|integer|min:1800|max:' . date('Y'),
-            'features' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
-            'is_exclusive' => 'nullable|boolean',
+            'energy_rating' => 'nullable|string|max:5',
+            'video_url' => 'nullable|url',
             'whatsapp' => 'nullable|string|max:20',
+            'features' => 'nullable|array',
+            'is_exclusive' => 'nullable|boolean',
+            'delete_images' => 'nullable|array',
         ]);
 
-        // Handle image uploads
-        if ($request->hasFile('images')) {
-            // Delete old images
-            if ($property->images) {
-                foreach ($property->images as $oldImage) {
-                    Storage::disk('public')->delete($oldImage);
+        if ($request->hasFile('cover_image')) {
+            if ($property->cover_image) {
+                Storage::disk('public')->delete($property->cover_image);
+            }
+            $validated['cover_image'] = $request->file('cover_image')->store('properties/covers', 'public');
+        }
+
+        $currentImages = $property->images ?? [];
+        
+        if ($request->filled('delete_images')) {
+            foreach ($request->delete_images as $imageToDelete) {
+                if (($key = array_search($imageToDelete, $currentImages)) !== false) {
+                    Storage::disk('public')->delete($imageToDelete);
+                    unset($currentImages[$key]);
                 }
             }
-
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('properties', 'public');
-                $imagePaths[] = $path;
-            }
-            $validated['images'] = $imagePaths;
+            $currentImages = array_values($currentImages);
         }
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $currentImages[] = $image->store('properties/gallery', 'public');
+            }
+        }
+        $validated['images'] = $currentImages;
 
         $validated['is_exclusive'] = $request->boolean('is_exclusive');
 
@@ -206,17 +200,16 @@ class PropertyController extends Controller
             ->with('success', 'Imóvel atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Property $property)
     {
-        // Check if user can delete this property
         if (!Auth::user()->canManageProperties() || (Auth::id() !== $property->user_id && !Auth::user()->isAdmin())) {
-            abort(403, 'Você não tem permissão para excluir este imóvel.');
+            abort(403);
         }
 
-        // Delete images
+        if ($property->cover_image) {
+            Storage::disk('public')->delete($property->cover_image);
+        }
+        
         if ($property->images) {
             foreach ($property->images as $image) {
                 Storage::disk('public')->delete($image);
@@ -229,13 +222,10 @@ class PropertyController extends Controller
             ->with('success', 'Imóvel excluído com sucesso!');
     }
 
-    /**
-     * Display user's properties (for developers)
-     */
     public function myProperties()
     {
         if (!Auth::user()->canManageProperties()) {
-            abort(403, 'Você não tem permissão para acessar esta página.');
+            abort(403);
         }
 
         $properties = Property::where('user_id', Auth::id())
@@ -243,5 +233,22 @@ class PropertyController extends Controller
             ->paginate(12);
 
         return view('properties.my-properties', compact('properties'));
+    }
+
+    public function sendVisitRequest(Request $request, Property $property)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'preferred_date' => 'required|string',
+            'message' => 'nullable|string',
+        ]);
+
+        $recipient = $property->owner->email ?? 'admin@crowglobal.com';
+
+        Mail::to($recipient)->send(new VisitRequestMail($property, $validated));
+
+        return redirect()->back()->with('success', 'Sua solicitação de visita foi enviada! Entraremos em contato em breve.');
     }
 }

@@ -10,7 +10,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
-Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
+
+Route::post('/properties/{property}/visit', [PropertyController::class, 'sendVisitRequest'])->name('properties.visit');
 
 Route::post('/access-request', [App\Http\Controllers\AccessRequestController::class, 'store'])->name('access-request.store');
 
@@ -37,14 +38,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware('can:isAdmin,App\Models\User')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-        
-        // Rotas de Pedidos de Acesso
         Route::get('/access-requests', [AdminController::class, 'accessRequests'])->name('access-requests');
         Route::get('/access-requests/{accessRequest}', [AdminController::class, 'showAccessRequest'])->name('access-requests.show');
         Route::patch('/access-requests/{accessRequest}/approve', [AdminController::class, 'approveAccessRequest'])->name('access-requests.approve');
         Route::patch('/access-requests/{accessRequest}/reject', [AdminController::class, 'rejectAccessRequest'])->name('access-requests.reject');
         
-        // Rotas de Gestão de Usuários (NOVAS)
         Route::patch('/users/{user}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('users.toggle-status');
         Route::patch('/users/{user}/reset-password', [AdminController::class, 'resetUserPassword'])->name('users.reset-password');
         Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('users.delete');
@@ -53,5 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/properties/{property}', [AdminController::class, 'deleteProperty'])->name('properties.destroy');
     });
 });
+
+Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 
 require __DIR__.'/auth.php';
