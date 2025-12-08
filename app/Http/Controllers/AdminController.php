@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Str;
+use Illuminate\Support\Str; // <--- CORRIGIDO AQUI (Era Support\Facades\Str)
 
 class AdminController extends Controller
 {
@@ -17,9 +17,7 @@ class AdminController extends Controller
         $stats = [
             'pending_requests' => AccessRequest::where('status', 'pending')->count(),
             'exclusive_pending' => User::whereNotNull('developer_id')->where('status', 'pending')->count(),
-            // Contador de Imóveis Pendentes
             'pending_properties' => Property::where('status', 'pending_review')->count(),
-            
             'total_properties' => Property::count(),
             'published_properties' => Property::where('status', 'active')->count(),
             'total_users' => User::where('role', '!=', 'admin')->count(),
@@ -40,8 +38,6 @@ class AdminController extends Controller
 
         return view('admin.dashboard', compact('stats', 'recentRequests', 'recentProperties'));
     }
-
-    // --- MÉTODOS DE APROVAÇÃO DE IMÓVEIS (NOVOS) ---
 
     public function pendingProperties()
     {
@@ -64,8 +60,6 @@ class AdminController extends Controller
         $property->update(['status' => 'draft']);
         return redirect()->back()->with('success', 'Imóvel rejeitado e retornado para rascunho.');
     }
-
-    // ------------------------------------------------
 
     public function accessRequests()
     {
