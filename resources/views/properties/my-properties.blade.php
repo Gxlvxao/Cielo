@@ -2,11 +2,11 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Meus Imóveis
+                {{ __('messages.my_properties') }}
             </h2>
             <a href="{{ route('properties.create') }}" class="bg-accent hover:bg-accent/90 text-white font-semibold py-2 px-6 rounded-lg transition-colors inline-flex items-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                Adicionar Imóvel
+                {{ __('messages.add_property') }}
             </a>
         </div>
     </x-slot>
@@ -27,20 +27,20 @@
                                 @if($property->cover_image)
                                     <img src="{{ Storage::url($property->cover_image) }}" alt="{{ $property->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
                                 @else
-                                    <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">Sem imagem</div>
+                                    <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">{{ __('messages.no_image') }}</div>
                                 @endif
                                 
                                 <div class="absolute top-4 left-4 flex flex-col gap-1">
                                     @if($property->status === 'active')
-                                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">Ativo</span>
+                                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">{{ __('messages.active') }}</span>
                                     @elseif($property->status === 'negotiating')
-                                        <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">Em Negociação</span>
+                                        <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">{{ __('messages.negotiating') }}</span>
                                     @elseif($property->status === 'draft')
-                                        <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">Rascunho</span>
+                                        <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">{{ __('messages.draft') }}</span>
                                     @endif
 
                                     @if($property->is_exclusive)
-                                        <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">Off-Market</span>
+                                        <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">{{ __('messages.off_market') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -51,16 +51,16 @@
                                 
                                 <div class="flex flex-col gap-2 border-t border-gray-100 pt-4">
                                     <div class="flex gap-2">
-                                        <a href="{{ route('properties.edit', $property) }}" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded text-sm text-center transition-colors">Editar</a>
+                                        <a href="{{ route('properties.edit', $property) }}" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded text-sm text-center transition-colors">{{ __('messages.edit') }}</a>
                                         
                                         <button @click="openModal({{ $property->id }}, '{{ $property->title }}')" class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-2 rounded text-sm transition-colors border border-blue-200">
-                                            Gerenciar Acesso
+                                            {{ __('messages.manage_access') }}
                                         </button>
                                     </div>
                                     
                                     <div class="flex justify-between items-center mt-2">
-                                        <a href="{{ route('properties.show', $property) }}" class="text-xs text-gray-400 hover:text-accent">Ver como cliente</a>
-                                        <button onclick="confirmDelete({{ $property->id }})" class="text-red-400 hover:text-red-600 text-xs">Excluir</button>
+                                        <a href="{{ route('properties.show', $property) }}" class="text-xs text-gray-400 hover:text-accent">{{ __('messages.view_as_client') }}</a>
+                                        <button onclick="confirmDelete({{ $property->id }})" class="text-red-400 hover:text-red-600 text-xs">{{ __('messages.delete') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -70,9 +70,9 @@
                 <div class="mt-8">{{ $properties->links() }}</div>
             @else
                 <div class="bg-white rounded-lg shadow-sm p-12 text-center">
-                    <p class="text-gray-500 mb-6">Nenhum imóvel cadastrado.</p>
+                    <p class="text-gray-500 mb-6">{{ __('messages.no_properties') }}</p>
                     <a href="{{ route('properties.create') }}" class="inline-block bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
-                        Adicionar Primeiro Imóvel
+                        {{ __('messages.add_first_property') }}
                     </a>
                 </div>
             @endif
@@ -83,8 +83,8 @@
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
                 <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                     <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <h3 class="text-xl font-bold leading-6 text-graphite mb-2">Acesso: <span x-text="currentPropertyTitle"></span></h3>
-                        <p class="text-sm text-gray-500 mb-4">Selecione quais investidores podem visualizar este imóvel.</p>
+                        <h3 class="text-xl font-bold leading-6 text-graphite mb-2">{{ __('messages.access_title') }} <span x-text="currentPropertyTitle"></span></h3>
+                        <p class="text-sm text-gray-500 mb-4">{{ __('messages.select_investors') }}</p>
                         
                         <div class="max-h-60 overflow-y-auto border rounded-lg divide-y divide-gray-100 bg-gray-50 p-2" x-show="!loading">
                             <template x-for="client in clients" :key="client.id">
@@ -105,13 +105,13 @@
                                 </div>
                             </template>
                             <div x-show="clients.length === 0" class="text-center py-4 text-gray-500 text-sm">
-                                Nenhuma cliente na sua carteira. <a href="{{ route('developer.clients') }}" class="text-accent underline">Adicionar Clientes</a>
+                                {{ __('messages.no_clients') }} <a href="{{ route('developer.clients') }}" class="text-accent underline">{{ __('messages.add_clients_link') }}</a>
                             </div>
                         </div>
-                        <div x-show="loading" class="py-8 text-center text-gray-500">Carregando lista...</div>
+                        <div x-show="loading" class="py-8 text-center text-gray-500">{{ __('messages.loading_list') }}</div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button type="button" @click="closeModal()" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Fechar</button>
+                        <button type="button" @click="closeModal()" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">{{ __('messages.close') }}</button>
                     </div>
                 </div>
             </div>
@@ -120,13 +120,13 @@
         <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
             <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
                 <div class="mt-3 text-center">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900 mb-2">Confirmar Exclusão</h3>
-                    <p class="text-sm text-gray-500 mb-4">Tem certeza que deseja excluir este imóvel?</p>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900 mb-2">{{ __('messages.confirm_deletion_title') }}</h3>
+                    <p class="text-sm text-gray-500 mb-4">{{ __('messages.confirm_deletion_text') }}</p>
                     <form id="deleteForm" method="POST">
                         @csrf @method('DELETE')
                         <div class="flex gap-3">
-                            <button type="submit" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">Confirmar</button>
-                            <button type="button" onclick="closeDeleteModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors">Cancelar</button>
+                            <button type="submit" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">{{ __('messages.confirm') }}</button>
+                            <button type="button" onclick="closeDeleteModal()" class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors">{{ __('messages.cancel') }}</button>
                         </div>
                     </form>
                 </div>
@@ -153,7 +153,7 @@
                     fetch(`/properties/${propertyId}/access-list`)
                         .then(res => res.json())
                         .then(data => {
-                            this.clients = data.clients.data ? data.clients.data : data.clients; // Handle pagination wrapper if present
+                            this.clients = data.clients.data ? data.clients.data : data.clients;
                             this.allowedIds = data.allowed_ids;
                             this.loading = false;
                         });
@@ -173,13 +173,12 @@
                         },
                         body: JSON.stringify({ user_id: clientId, access: isChecked })
                     }).then(res => {
-                        if(!res.ok) alert('Erro ao atualizar permissão.');
+                        if(!res.ok) alert('{{ __('messages.error') }}');
                     });
                 }
             }
         }
 
-        // Delete Modal Logic
         function confirmDelete(propertyId) {
             const modal = document.getElementById('deleteModal');
             const form = document.getElementById('deleteForm');

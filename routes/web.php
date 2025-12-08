@@ -11,7 +11,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('language/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'pt'])) abort(400);
+    if (! in_array($locale, ['en', 'pt'])) {
+        abort(400);
+    }
     session(['locale' => $locale]);
     return redirect()->back()->withCookie(cookie('crow_locale', $locale, 525600));
 })->name('language.switch');
@@ -22,7 +24,9 @@ Route::post('/access-request', [App\Http\Controllers\AccessRequestController::cl
 
 Route::middleware(['auth', 'active_access'])->group(function () {
     Route::get('/dashboard', function () {
-        if (auth()->user()->role === 'admin') return redirect()->route('admin.dashboard');
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
         return view('dashboard');
     })->name('dashboard');
 
@@ -41,8 +45,11 @@ Route::middleware(['auth', 'active_access'])->group(function () {
         Route::get('/my-clients', [DeveloperController::class, 'index'])->name('developer.clients');
         Route::post('/my-clients', [DeveloperController::class, 'store'])->name('developer.clients.store');
         Route::patch('/my-clients/{client}/toggle', [DeveloperController::class, 'toggleClientStatus'])->name('developer.clients.toggle');
-        // NOVA ROTA
         Route::patch('/my-clients/{client}/toggle-market', [DeveloperController::class, 'toggleMarketAccess'])->name('developer.clients.toggle-market');
+        
+        // NOVA ROTA
+        Route::patch('/my-clients/{client}/reset-password', [DeveloperController::class, 'resetClientPassword'])->name('developer.clients.reset-password');
+        
         Route::delete('/my-clients/{client}', [DeveloperController::class, 'destroy'])->name('developer.clients.destroy');
         
         Route::get('/properties/{property}/access-list', [PropertyController::class, 'getAccessList'])->name('properties.access-list');
@@ -51,7 +58,6 @@ Route::middleware(['auth', 'active_access'])->group(function () {
 
     Route::middleware('can:isAdmin,App\Models\User')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-        
         Route::get('/access-requests', [AdminController::class, 'accessRequests'])->name('access-requests');
         Route::get('/access-requests/{accessRequest}', [AdminController::class, 'showAccessRequest'])->name('access-requests.show');
         Route::patch('/access-requests/{accessRequest}/approve', [AdminController::class, 'approveAccessRequest'])->name('access-requests.approve');

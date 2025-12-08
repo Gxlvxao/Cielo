@@ -28,7 +28,7 @@
                                 C
                             </div>
                             <span class="font-heading font-bold text-xl tracking-wider group-hover:text-gray-200 transition-colors">
-                                CROW<span class="text-accent">GLOBAL</span>
+                                {{ __('messages.hero_title_1') }}<span class="text-accent">{{ __('messages.hero_title_2') }}</span>
                             </span>
                         </a>
                         
@@ -36,11 +36,11 @@
                             @if(Auth::user()->isAdmin())
                                 <a href="{{ route('admin.dashboard') }}" 
                                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.dashboard') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
-                                    Visão Geral
+                                    {{ __('messages.overview') }}
                                 </a>
                                 <a href="{{ route('admin.access-requests') }}" 
                                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.access-requests') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
-                                    Pedidos (Site)
+                                    {{ __('messages.requests') }}
                                     @php
                                         $pendingCount = \App\Models\AccessRequest::where('status', 'pending')->count();
                                     @endphp
@@ -50,7 +50,7 @@
                                 </a>
                                 <a href="{{ route('admin.exclusive-requests') }}" 
                                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.exclusive-requests') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
-                                    Carteiras (Devs)
+                                    {{ __('messages.wallets') }}
                                     @php
                                         $exclusivePending = \App\Models\User::whereNotNull('developer_id')->where('status', 'pending')->count();
                                     @endphp
@@ -60,21 +60,21 @@
                                 </a>
                                 <a href="{{ route('admin.properties') }}" 
                                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.properties') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
-                                    Imóveis
+                                    {{ __('messages.properties') }}
                                 </a>
                             @else
                                 <a href="{{ route('dashboard') }}" 
                                    class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('dashboard') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
-                                    Dashboard
+                                    {{ __('messages.my_investments') }}
                                 </a>
                                 @can('manageProperties', App\Models\User::class)
                                     <a href="{{ route('properties.my') }}" 
                                        class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('properties.my') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
-                                        Meus Imóveis
+                                        {{ __('messages.my_properties') }}
                                     </a>
                                     <a href="{{ route('developer.clients') }}" 
                                        class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('developer.clients') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
-                                        Meus Clientes
+                                        {{ __('messages.my_clients') }}
                                     </a>
                                 @endcan
                             @endif
@@ -85,6 +85,7 @@
                         <div class="relative" x-data="{ open: false }" @click.away="open = false">
                             <button @click="open = !open" class="flex items-center gap-1 text-gray-300 hover:text-white transition-colors">
                                 <span class="text-lg">{{ App::getLocale() == 'pt' ? '🇵🇹' : '🇬🇧' }}</span>
+                                <span class="text-xs font-bold uppercase">{{ App::getLocale() }}</span>
                                 <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                             
@@ -100,14 +101,14 @@
 
                         <a href="{{ route('home') }}" class="text-gray-400 hover:text-white text-sm flex items-center gap-1 transition-colors" target="_blank">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            Site
+                            {{ __('messages.view_site') }}
                         </a>
 
                         <div class="relative" x-data="{ open: false }" @click.away="open = false">
                             <button @click="open = !open" class="inline-flex items-center px-3 py-2 border border-gray-700 rounded-full text-sm leading-4 font-medium text-gray-300 hover:text-white hover:bg-gray-800 focus:outline-none transition ease-in-out duration-150 gap-3 group">
                                 <div class="text-right hidden lg:block">
                                     <div class="text-[10px] uppercase tracking-widest text-accent font-bold">
-                                        {{ Auth::user()->role === 'admin' ? 'ADMIN' : (Auth::user()->role === 'developer' ? 'PARCEIRO' : 'CLIENTE') }}
+                                        {{ Auth::user()->role === 'admin' ? __('messages.admin_role') : (Auth::user()->role === 'developer' ? __('messages.developer_role') : __('messages.client_role')) }}
                                     </div>
                                     <div class="font-semibold leading-none">{{ Auth::user()->name }}</div>
                                 </div>
@@ -117,10 +118,15 @@
                             </button>
 
                             <div x-show="open" x-transition class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-2xl py-2 ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
-                                <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">Meu Perfil</a>
+                                <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-accent transition-colors">
+                                    {{ __('messages.my_profile') }}
+                                </a>
+                                <div class="border-t border-gray-100 my-1"></div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">Sair</button>
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                                        {{ __('messages.logout') }}
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -139,14 +145,7 @@
 
             <div :class="{'block': open, 'hidden': !open}" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
                 <div class="pt-2 pb-3 space-y-1">
-                    @if(Auth::user()->isAdmin())
-                        <a href="{{ route('admin.dashboard') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-300 hover:bg-gray-700 hover:text-white">Visão Geral</a>
-                        <a href="{{ route('admin.access-requests') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-300 hover:bg-gray-700 hover:text-white">Pedidos</a>
-                        <a href="{{ route('admin.exclusive-requests') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-300 hover:bg-gray-700 hover:text-white">Carteiras</a>
-                        <a href="{{ route('admin.properties') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-300 hover:bg-gray-700 hover:text-white">Imóveis</a>
-                    @else
-                        <a href="{{ route('dashboard') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-300 hover:bg-gray-700 hover:text-white">Dashboard</a>
-                    @endif
+                    <a href="{{ route('dashboard') }}" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-300 hover:text-white">{{ __('messages.dashboard') }}</a>
                 </div>
             </div>
         </nav>
@@ -164,8 +163,14 @@
         </main>
 
         <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-                &copy; {{ date('Y') }} CROW GLOBAL. Todos os direitos reservados.
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <div class="mb-2 md:mb-0">
+                    &copy; {{ date('Y') }} <span class="text-graphite font-bold">CROW GLOBAL</span>. {{ __('messages.rights_reserved') }}
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-accent">{{ __('messages.support') }}</a>
+                    <a href="#" class="hover:text-accent">{{ __('messages.privacy') }}</a>
+                </div>
             </div>
         </footer>
     </div>

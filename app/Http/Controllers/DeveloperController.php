@@ -34,7 +34,7 @@ class DeveloperController extends Controller
             'status' => 'pending', 
             'developer_id' => Auth::id(),
             'email_verified_at' => now(),
-            'can_view_all_properties' => false, // Começa restrito por padrão (segurança)
+            'can_view_all_properties' => false,
         ]);
 
         return redirect()->back()->with('success', "Pré-cadastro realizado! Senha: {$tempPassword}");
@@ -54,7 +54,6 @@ class DeveloperController extends Controller
         return redirect()->back()->with('success', 'Status atualizado.');
     }
 
-    // NOVO: Alterna se o cliente vê tudo ou só o restrito
     public function toggleMarketAccess(User $client)
     {
         if ($client->developer_id !== Auth::id()) abort(403);
@@ -64,6 +63,17 @@ class DeveloperController extends Controller
 
         $status = $client->can_view_all_properties ? 'Mercado Aberto' : 'Carteira Fechada';
         return redirect()->back()->with('success', "Visibilidade alterada para: {$status}");
+    }
+
+    // NOVO: Resetar Senha
+    public function resetClientPassword(User $client)
+    {
+        if ($client->developer_id !== Auth::id()) abort(403);
+
+        $newPassword = Str::random(10);
+        $client->update(['password' => Hash::make($newPassword)]);
+
+        return redirect()->back()->with('success', "Senha resetada com sucesso! Nova senha: {$newPassword}");
     }
 
     public function destroy(User $client)
