@@ -1,5 +1,4 @@
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
         <img
             src="{{ asset('images/hero-luxury.jpg') }}"
@@ -9,9 +8,21 @@
         <div class="absolute inset-0 bg-gradient-to-b from-graphite/80 via-graphite/60 to-graphite/80"></div>
     </div>
 
-    <!-- Content -->
     <div class="container relative z-10 mx-auto px-4 text-center">
         <div class="max-w-4xl mx-auto animate-fade-up">
+            
+            {{-- NOVO: MOLDURA REDONDA PARA O LOGO DO CLIENTE --}}
+            {{-- Usa cores do tema (accent) para a moldura, fundo branco/blur para destacar --}}
+            <div class="w-32 h-32 sm:w-40 sm:h-40 mx-auto bg-white/10 backdrop-blur-sm rounded-full p-3 border-4 border-accent shadow-2xl overflow-hidden mb-6">
+                {{-- **SUBSTITUA** 'images/client-logo.png' pelo caminho real da logo --}}
+                <img 
+                    src="{{ asset('images/client-logo.png') }}" 
+                    alt="Logo do Cliente" 
+                    class="w-full h-full object-contain rounded-full"
+                >
+            </div>
+            {{-- FIM NOVO BLOCO --}}
+
             <h1 class="font-heading text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
                 Where Vision Meets Value
             </h1>
@@ -38,7 +49,6 @@
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
         <a
             href="#about"
             class="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/60 hover:text-accent transition-colors animate-bounce"

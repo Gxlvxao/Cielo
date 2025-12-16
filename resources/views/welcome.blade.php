@@ -7,6 +7,14 @@
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
             
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
+                
+                {{-- NOVO: MOLDURA REDONDA PARA O LOGO DO CLIENTE --}}
+                <div class="w-32 h-32 sm:w-40 sm:h-40 mx-auto bg-white/10 backdrop-blur-sm rounded-full p-3 border-4 border-accent shadow-2xl overflow-hidden mb-6 animate-fade-in-up">
+                    {{-- **SUBSTITUA** 'images/client-logo.png' pelo caminho real da logo --}}
+                    <img src="{{ asset('images/client-logo.png') }}" alt="Logo do Cliente" class="w-full h-full object-contain rounded-full">
+                </div>
+                {{-- FIM NOVO BLOCO --}}
+
                 <h1 class="font-heading text-5xl md:text-7xl font-bold mb-4 animate-fade-in-up">
                     <span class="text-white">{{ __('messages.hero_title_1') }}</span>
                     <span class="text-accent">{{ __('messages.hero_title_2') }}</span>
