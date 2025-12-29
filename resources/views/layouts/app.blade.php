@@ -40,11 +40,11 @@
                     <div class="hidden lg:flex items-center gap-1">
                         @if(Auth::user()->isAdmin())
                             <a href="{{ route('admin.dashboard') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-                                {{ __('messages.overview') }}
+                                {{ __('Overview') }}
                             </a>
                             
                             <a href="{{ route('admin.access-requests') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 {{ request()->routeIs('admin.access-requests') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-                                {{ __('messages.requests') }}
+                                {{ __('Requests') }}
                                 @php $pendingCount = \App\Models\AccessRequest::where('status', 'pending')->count(); @endphp
                                 @if($pendingCount > 0)
                                     <span class="bg-yellow-500 text-white text-[10px] px-1.5 py-0.5 rounded-full animate-pulse">{{ $pendingCount }}</span>
@@ -52,7 +52,7 @@
                             </a>
 
                             <a href="{{ route('admin.exclusive-requests') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 {{ request()->routeIs('admin.exclusive-requests') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-                                {{ __('messages.wallets') }}
+                                {{ __('Wallets') }}
                                 @php $exclusivePending = \App\Models\User::whereNotNull('developer_id')->where('status', 'pending')->count(); @endphp
                                 @if($exclusivePending > 0)
                                     <span class="bg-blue-500 text-white text-[10px] px-1.5 py-0.5 rounded-full animate-pulse">{{ $exclusivePending }}</span>
@@ -60,7 +60,7 @@
                             </a>
 
                             <a href="{{ route('admin.properties.pending') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 {{ request()->routeIs('admin.properties.pending') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-                                Moderação
+                                {{ __('Moderation') }}
                                 @php $pendingProps = \App\Models\Property::where('status', 'pending_review')->count(); @endphp
                                 @if($pendingProps > 0)
                                     <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full animate-pulse">{{ $pendingProps }}</span>
@@ -68,14 +68,14 @@
                             </a>
                         @else
                             <a href="{{ route('dashboard') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all {{ request()->routeIs('dashboard') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-                                {{ __('messages.my_investments') }}
+                                {{ __('My Investments') }}
                             </a>
                             @can('manageProperties', App\Models\User::class)
                                 <a href="{{ route('properties.my') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all {{ request()->routeIs('properties.my') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-                                    {{ __('messages.my_properties') }}
+                                    {{ __('My Properties') }}
                                 </a>
                                 <a href="{{ route('developer.clients') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all {{ request()->routeIs('developer.clients') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
-                                    {{ __('messages.my_clients') }}
+                                    {{ __('My Clients') }}
                                 </a>
                             @endcan
                         @endif
@@ -118,13 +118,13 @@
                             </div>
 
                             <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-accent transition-colors">
-                                {{ __('messages.my_profile') }}
+                                {{ __('My Profile') }}
                             </a>
                             
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium">
-                                    {{ __('messages.logout') }}
+                                    {{ __('Log Out') }}
                                 </button>
                             </form>
                         </div>
@@ -142,10 +142,10 @@
             <div x-show="open" x-transition class="absolute top-20 left-4 right-4 bg-gray-800 rounded-2xl border border-white/10 shadow-2xl p-4 lg:hidden pointer-events-auto">
                 <div class="space-y-1">
                     @if(Auth::user()->isAdmin())
-                        <a href="{{ route('admin.dashboard') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('messages.overview') }}</a>
-                        <a href="{{ route('admin.access-requests') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('messages.requests') }}</a>
+                        <a href="{{ route('admin.dashboard') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Overview') }}</a>
+                        <a href="{{ route('admin.access-requests') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Requests') }}</a>
                     @else
-                        <a href="{{ route('dashboard') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('messages.dashboard') }}</a>
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Dashboard') }}</a>
                     @endif
                 </div>
             </div>
@@ -169,11 +169,11 @@
         <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                 <div class="mb-2 md:mb-0">
-                    &copy; {{ date('Y') }} <span class="text-graphite font-bold">CROW GLOBAL</span>. {{ __('messages.rights_reserved') }}
+                    &copy; {{ date('Y') }} <span class="text-graphite font-bold">CROW GLOBAL</span>. {{ __('All rights reserved.') }}
                 </div>
                 <div class="flex gap-4">
-                    <a href="#" class="hover:text-accent">{{ __('messages.support') }}</a>
-                    <a href="#" class="hover:text-accent">{{ __('messages.privacy') }}</a>
+                    <a href="#" class="hover:text-accent">{{ __('Support') }}</a>
+                    <a href="#" class="hover:text-accent">{{ __('Privacy Policy') }}</a>
                 </div>
             </div>
         </footer>

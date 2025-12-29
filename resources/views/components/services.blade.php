@@ -1,23 +1,23 @@
 @php
 $services = [
     [
-        'title' => 'Investment Consulting',
-        'description' => 'Strategic guidance to identify and acquire premium properties that align with your investment goals and risk profile.',
+        'title' => __('Investment Consulting'),
+        'description' => __('Strategic guidance to identify and acquire premium properties that align with your investment goals and risk profile.'),
         'icon' => 'building',
     ],
     [
-        'title' => 'Relocation Services',
-        'description' => 'Comprehensive support for families and professionals relocating to Portugal, from visas to lifestyle integration.',
+        'title' => __('Relocation Services'),
+        'description' => __('Comprehensive support for families and professionals relocating to Portugal, from visas to lifestyle integration.'),
         'icon' => 'user-check',
     ],
     [
-        'title' => 'International Portfolio',
-        'description' => 'Access to exclusive off-market opportunities across Portugal\'s most desirable locations and emerging markets.',
+        'title' => __('International Portfolio'),
+        'description' => __('Access to exclusive off-market opportunities across Portugal\'s most desirable locations and emerging markets.'),
         'icon' => 'globe',
     ],
     [
-        'title' => 'Family Office Solutions',
-        'description' => 'Bespoke wealth management and real estate services for high-net-worth individuals and family offices.',
+        'title' => __('Family Office Solutions'),
+        'description' => __('Bespoke wealth management and real estate services for high-net-worth individuals and family offices.'),
         'icon' => 'briefcase',
     ],
 ];
@@ -27,13 +27,13 @@ $services = [
     <div class="container mx-auto px-4">
         <div class="text-center max-w-3xl mx-auto mb-16 animate-fade-up">
             <div class="inline-block px-4 py-1 bg-accent/10 rounded-full mb-6">
-                <span class="text-accent text-sm font-medium">Our Services</span>
+                <span class="text-accent text-sm font-medium">{{ __('Our Services') }}</span>
             </div>
             <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                Boutique Consulting Excellence
+                {{ __('Boutique Consulting Excellence') }}
             </h2>
             <p class="text-lg text-muted-foreground">
-                Personalized service, complete transparency, and exclusive access to premium opportunities
+                {{ __('Personalized service, complete transparency, and exclusive access to premium opportunities') }}
             </p>
         </div>
 
