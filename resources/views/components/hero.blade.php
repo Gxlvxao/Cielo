@@ -45,13 +45,14 @@
             </div>
         </div>
 
+        {{-- Seta Scroll Down Corrigida --}}
         <a
             href="#about"
             class="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/60 hover:text-accent transition-colors animate-bounce"
             aria-label="Scroll to content"
         >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7 7"></path>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
         </a>
     </div>
