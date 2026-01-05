@@ -25,20 +25,38 @@
             <div>
                 <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Quick Links') }}</h3>
                 <ul class="space-y-2">
-                    <li><a href="#about" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('About Us') }}</a></li>
-                    <li><a href="#municipalities" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Municipalities') }}</a></li>
-                    <li><a href="#services" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Services') }}</a></li>
-                    <li><a href="#contact" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Contact') }}</a></li>
+                    {{-- Usando route('home') para garantir compatibilidade --}}
+                    <li><a href="{{ route('home') }}#about" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('About Us') }}</a></li>
+                    <li><a href="{{ route('home') }}#municipalities" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Municipalities') }}</a></li>
+                    <li><a href="{{ route('home') }}#services" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Services') }}</a></li>
+                    <li><a href="{{ route('home') }}#contact" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Contact') }}</a></li>
                 </ul>
             </div>
 
             <div>
-                <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Legal') }}</h3>
+                {{-- ALTERAÇÃO AQUI: Mudamos de 'Legal' para 'Legal Info' para evitar conflito com o arquivo legal.php --}}
+                <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Legal Info') }}</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Privacy Policy') }}</a></li>
-                    <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Terms of Service') }}</a></li>
-                    <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Cookie Policy') }}</a></li>
-                    <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Legal Notice') }}</a></li>
+                    <li>
+                        <a href="{{ route('legal.privacy') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
+                            {{ __('legal.privacy.title') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('legal.terms') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
+                            {{ __('legal.terms.title') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('legal.cookies') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
+                            {{ __('legal.cookies.title') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('legal.notice') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
+                            {{ __('legal.notice.title') }}
+                        </a>
+                    </li>
                 </ul>
             </div>
 

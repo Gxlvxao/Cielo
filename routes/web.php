@@ -4,7 +4,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\LegalController; // Adicionado para facilitar
 use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/', function () {
     return view('home');
@@ -16,10 +23,20 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back()->withCookie(cookie('crow_locale', $locale, 525600));
 })->name('language.switch');
 
+// Rotas Públicas de Imóveis
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::post('/properties/{property}/visit', [PropertyController::class, 'sendVisitRequest'])->name('properties.visit');
 Route::post('/access-request', [App\Http\Controllers\AccessRequestController::class, 'store'])->name('access-request.store');
 
+// Rotas Públicas Institucionais (Legal)
+Route::controller(LegalController::class)->group(function () {
+    Route::get('/privacy-policy', 'privacy')->name('legal.privacy');
+    Route::get('/terms-of-service', 'terms')->name('legal.terms');
+    Route::get('/cookies-policy', 'cookies')->name('legal.cookies');
+    Route::get('/legal-notice', 'notice')->name('legal.notice');
+});
+
+// Área Autenticada
 Route::middleware(['auth', 'active_access'])->group(function () {
     Route::get('/dashboard', function () {
         $user = auth()->user();
@@ -41,6 +58,7 @@ Route::middleware(['auth', 'active_access'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Rotas de Gestão (Developer & Admin)
     Route::middleware('can:manageProperties,App\Models\User')->group(function () {
         Route::get('/my-properties', [PropertyController::class, 'myProperties'])->name('properties.my');
         Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
@@ -60,6 +78,7 @@ Route::middleware(['auth', 'active_access'])->group(function () {
         Route::post('/properties/{property}/access', [DeveloperController::class, 'toggleAccess'])->name('properties.access');
     });
 
+    // Rotas Administrativas
     Route::middleware('can:isAdmin,App\Models\User')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         
@@ -85,6 +104,7 @@ Route::middleware(['auth', 'active_access'])->group(function () {
     });
 });
 
+// Detalhes do imóvel (Pode ser público ou restrito, controlado no controller)
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 
 require __DIR__.'/auth.php';
