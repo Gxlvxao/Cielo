@@ -20,7 +20,8 @@ class SetLocale
             $locale = $request->cookie('crow_locale');
         }
 
-        if (! in_array($locale, ['en', 'pt'])) {
+        // CORREÇÃO AQUI: Adicionar 'fr' ao array
+        if (! in_array($locale, ['en', 'pt', 'fr'])) {
             $locale = 'pt';
         }
 

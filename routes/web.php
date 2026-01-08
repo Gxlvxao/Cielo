@@ -4,7 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DeveloperController;
-use App\Http\Controllers\LegalController; // Adicionado para facilitar
+use App\Http\Controllers\LegalController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ToolsController; // Importado
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,22 +15,49 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Home (Gerida pelo PageController)
+Route::get('/', [PageController::class, 'home'])->name('home');
 
+// Troca de idioma (PT, EN, FR)
 Route::get('language/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'pt'])) abort(400);
+    if (! in_array($locale, ['en', 'pt', 'fr'])) abort(400);
     session(['locale' => $locale]);
     return redirect()->back()->withCookie(cookie('crow_locale', $locale, 525600));
 })->name('language.switch');
+
+// Páginas Institucionais (Estrutura Multi-Page)
+Route::controller(PageController::class)->group(function () {
+    Route::get('/about', 'about')->name('pages.about');
+    Route::get('/services', 'services')->name('pages.services');
+    Route::get('/sell-with-us', 'sell')->name('pages.sell');
+    Route::get('/contact', 'contact')->name('pages.contact');
+    Route::get('/simulators', 'simulators')->name('pages.simulators'); // Hub de simuladores
+});
+
+// Ferramentas & Simuladores (ToolsController)
+Route::controller(ToolsController::class)->group(function () {
+    // Mais-Valias
+    Route::get('/simulators/capital-gains', 'showGainsSimulator')->name('tools.gains');
+    Route::post('/simulators/capital-gains/calculate', 'calculateGains')->name('tools.gains.calculate');
+
+    // Crédito Habitação
+    Route::get('/simulators/credit', 'showCreditSimulator')->name('tools.credit');
+    Route::post('/simulators/credit/send', 'sendCreditSimulation')->name('tools.credit.send');
+
+    // IMT & Selo
+    Route::get('/simulators/imt', 'showImtSimulator')->name('tools.imt');
+    Route::post('/simulators/imt/send', 'sendImtSimulation')->name('tools.imt.send');
+
+    // Envio do Formulário de Contacto Geral
+    Route::post('/contact/send', 'sendContact')->name('contact.send');
+});
 
 // Rotas Públicas de Imóveis
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
 Route::post('/properties/{property}/visit', [PropertyController::class, 'sendVisitRequest'])->name('properties.visit');
 Route::post('/access-request', [App\Http\Controllers\AccessRequestController::class, 'store'])->name('access-request.store');
 
-// Rotas Públicas Institucionais (Legal)
+// Rotas Institucionais (Legal)
 Route::controller(LegalController::class)->group(function () {
     Route::get('/privacy-policy', 'privacy')->name('legal.privacy');
     Route::get('/terms-of-service', 'terms')->name('legal.terms');
@@ -104,7 +133,7 @@ Route::middleware(['auth', 'active_access'])->group(function () {
     });
 });
 
-// Detalhes do imóvel (Pode ser público ou restrito, controlado no controller)
+// Detalhes do imóvel (Pode ser público ou restrito)
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 
 require __DIR__.'/auth.php';
