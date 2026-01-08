@@ -21,7 +21,9 @@
         ::-webkit-scrollbar-thumb:hover { background: #b08d4b; }
     </style>
 </head>
-<body class="font-sans antialiased text-graphite bg-gray-50 selection:bg-[#c9a35e] selection:text-white">
+<body class="font-sans antialiased text-graphite bg-gray-50 selection:bg-[#c9a35e] selection:text-white relative">
+    
+    {{-- Estrutura Principal --}}
     <div class="min-h-screen flex flex-col">
         {{ $slot ?? '' }}
         @yield('content')
@@ -30,8 +32,8 @@
     {{-- Componente de Banner de Cookies --}}
     <x-cookie-banner />
 
-    {{-- Floating Action Buttons --}}
-    <div class="fixed bottom-6 right-6 flex flex-col gap-4 z-50" x-data="{ showTop: false }" @scroll.window="showTop = (window.pageYOffset > 300)">
+    {{-- Floating Action Buttons (Agora à ESQUERDA: left-6) --}}
+    <div class="fixed bottom-6 left-6 flex flex-col gap-4 z-40" x-data="{ showTop: false }" @scroll.window="showTop = (window.pageYOffset > 300)">
         
         {{-- Back Button --}}
         <button onclick="window.history.back()" 
@@ -67,5 +69,9 @@
             </svg>
         </button>
     </div>
+
+    {{-- Chatbot Widget --}}
+    <x-chatbot />
+
 </body>
 </html>

@@ -1,33 +1,35 @@
 <header class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-    <nav x-data="{ mobileOpen: false, toolsOpen: false }" class="pointer-events-auto bg-gray-900/40 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 shadow-2xl flex items-center justify-between gap-8 transition-all duration-300 hover:bg-gray-900/60 max-w-7xl w-full">
+    {{-- Aumentei o max-w para 7xl e ajustei o padding para evitar quebra --}}
+    <nav x-data="{ mobileOpen: false, toolsOpen: false }" class="pointer-events-auto bg-gray-900/40 backdrop-blur-md border border-white/10 rounded-full px-4 lg:px-6 py-3 shadow-2xl flex items-center justify-between gap-4 lg:gap-8 transition-all duration-300 hover:bg-gray-900/60 w-full max-w-[1400px]">
         
         {{-- LOGO --}}
         <a href="{{ route('home') }}" class="shrink-0 flex items-center gap-2 group">
             <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform">
                 C
             </div>
-            <span class="font-heading font-bold text-lg tracking-wider text-white">
+            {{-- Esconde o texto 'CROW' em telas muito pequenas se necessário, mas aqui mantive --}}
+            <span class="font-heading font-bold text-lg tracking-wider text-white whitespace-nowrap">
                 CROW<span class="text-accent">GLOBAL</span>
             </span>
         </a>
 
-        {{-- MENU DESKTOP --}}
-        <div class="hidden lg:flex items-center gap-1">
-            <a href="{{ route('properties.index') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all {{ request()->routeIs('properties.*') ? 'bg-white/10 text-white' : '' }}">
+        {{-- MENU DESKTOP (Ajustado para lg:flex e whitespace-nowrap) --}}
+        <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+            <a href="{{ route('properties.index') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-3 xl:px-4 py-2 rounded-full transition-all whitespace-nowrap {{ request()->routeIs('properties.*') ? 'bg-white/10 text-white' : '' }}">
                 {{ __('Explore Properties') }}
             </a>
             
-            <a href="{{ route('pages.about') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all {{ request()->routeIs('pages.about') ? 'bg-white/10 text-white' : '' }}">
+            <a href="{{ route('pages.about') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-3 xl:px-4 py-2 rounded-full transition-all whitespace-nowrap {{ request()->routeIs('pages.about') ? 'bg-white/10 text-white' : '' }}">
                 {{ __('About Us') }}
             </a>
 
-            <a href="{{ route('pages.services') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all {{ request()->routeIs('pages.services') ? 'bg-white/10 text-white' : '' }}">
+            <a href="{{ route('pages.services') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-3 xl:px-4 py-2 rounded-full transition-all whitespace-nowrap {{ request()->routeIs('pages.services') ? 'bg-white/10 text-white' : '' }}">
                 {{ __('Services') }}
             </a>
 
             {{-- DROPDOWN FERRAMENTAS --}}
             <div class="relative" @click.away="toolsOpen = false">
-                <button @click="toolsOpen = !toolsOpen" class="flex items-center gap-1 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all {{ request()->routeIs('tools.*') ? 'bg-white/10 text-white' : '' }}">
+                <button @click="toolsOpen = !toolsOpen" class="flex items-center gap-1 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-3 xl:px-4 py-2 rounded-full transition-all whitespace-nowrap {{ request()->routeIs('tools.*') ? 'bg-white/10 text-white' : '' }}">
                     <span>{{ __('Simulators') }}</span>
                     <svg class="w-4 h-4 transition-transform duration-200" :class="toolsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
@@ -39,48 +41,48 @@
                      x-transition:leave="transition ease-in duration-75"
                      x-transition:leave-start="opacity-100 scale-100"
                      x-transition:leave-end="opacity-0 scale-95"
-                     class="absolute top-full left-0 mt-2 w-48 bg-gray-900 border border-white/10 rounded-xl shadow-xl overflow-hidden py-1"
+                     class="absolute top-full left-0 mt-2 w-56 bg-gray-900 border border-white/10 rounded-xl shadow-xl overflow-hidden py-1 z-50"
                      style="display: none;">
                     
-                    <a href="{{ route('tools.gains') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <a href="{{ route('tools.gains') }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
                         {{ __('Capital Gains') }}
                     </a>
-                    <a href="{{ route('tools.imt') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <a href="{{ route('tools.imt') }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
                         {{ __('IMT & Stamp Duty') }}
                     </a>
-                    <a href="{{ route('tools.credit') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+                    <a href="{{ route('tools.credit') }}" class="block px-4 py-3 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
                         {{ __('Mortgage') }}
                     </a>
                 </div>
             </div>
 
-            <a href="{{ route('pages.sell') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-4 py-2 rounded-full transition-all {{ request()->routeIs('pages.sell') ? 'bg-white/10 text-white' : '' }}">
+            <a href="{{ route('pages.sell') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-3 xl:px-4 py-2 rounded-full transition-all whitespace-nowrap {{ request()->routeIs('pages.sell') ? 'bg-white/10 text-white' : '' }}">
                 {{ __('Sell with us') }}
             </a>
         </div>
 
         {{-- ACTIONS --}}
-        <div class="hidden lg:flex items-center gap-4">
+        <div class="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
             
             {{-- LANGUAGE SWITCHER --}}
             <div class="flex items-center bg-black/20 rounded-full px-1 py-1 border border-white/5">
-                <a href="{{ route('language.switch', 'pt') }}" class="px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'pt' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">PT</a>
-                <a href="{{ route('language.switch', 'en') }}" class="px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'en' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">EN</a>
-                <a href="{{ route('language.switch', 'fr') }}" class="px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'fr' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">FR</a>
+                <a href="{{ route('language.switch', 'pt') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'pt' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">PT</a>
+                <a href="{{ route('language.switch', 'en') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'en' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">EN</a>
+                <a href="{{ route('language.switch', 'fr') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'fr' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">FR</a>
             </div>
 
             <div class="w-px h-6 bg-white/20 mx-1"></div>
 
             @if (Route::has('login'))
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/10 px-5 py-2 rounded-full transition-all">
+                    <a href="{{ url('/dashboard') }}" class="text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/10 px-4 xl:px-5 py-2 rounded-full transition-all whitespace-nowrap">
                         {{ __('Dashboard') }}
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-200 hover:text-white px-3 py-2 transition-colors">
+                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-200 hover:text-white px-2 transition-colors whitespace-nowrap">
                         {{ __('Log in') }}
                     </a>
-                    <a href="{{ route('pages.contact') }}" class="text-sm font-bold text-graphite bg-accent hover:bg-white hover:text-accent px-5 py-2 rounded-full transition-all shadow-lg shadow-accent/20">
+                    <a href="{{ route('pages.contact') }}" class="text-sm font-bold text-graphite bg-accent hover:bg-white hover:text-accent px-4 xl:px-5 py-2 rounded-full transition-all shadow-lg shadow-accent/20 whitespace-nowrap">
                         {{ __('Request Access') }}
                     </a>
                 @endauth

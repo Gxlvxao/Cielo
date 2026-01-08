@@ -19,23 +19,23 @@
     @php
     $services = [
         [
+            'title' => __('Acquisition (Buy-side)'),
+            'description' => __('Strategic sourcing and acquisition of premium assets. We identify opportunities that align with your investment profile with total discretion.'),
+            'icon' => 'search',
+        ],
+        [
+            'title' => __('Alienation (Sell-side)'),
+            'description' => __('Exclusive representation for selling your asset. We promote your property directly to our private network of qualified investors.'),
+            'icon' => 'chart',
+        ],
+        [
+            'title' => __('Confidential Mandates'),
+            'description' => __('Off-market transactions where privacy is paramount. Access opportunities that never hit the public market.'),
+            'icon' => 'lock',
+        ],
+        [
             'title' => __('Investment Consulting'),
-            'description' => __('Strategic guidance to identify and acquire premium properties that align with your investment goals and risk profile.'),
-            'icon' => 'building',
-        ],
-        [
-            'title' => __('Relocation Services'),
-            'description' => __('Comprehensive support for families and professionals relocating to Portugal, from visas to lifestyle integration.'),
-            'icon' => 'user-check',
-        ],
-        [
-            'title' => __('International Portfolio'),
-            'description' => __('Access to exclusive off-market opportunities across Portugal\'s most desirable locations and emerging markets.'),
-            'icon' => 'globe',
-        ],
-        [
-            'title' => __('Family Office Solutions'),
-            'description' => __('Bespoke wealth management and real estate services for high-net-worth individuals and family offices.'),
+            'description' => __('Structural advice for complex real estate operations, asset valuation, and yield maximization strategies.'),
             'icon' => 'briefcase',
         ],
     ];
@@ -48,14 +48,14 @@
         <div class="container mx-auto px-4">
             <div class="text-center max-w-3xl mx-auto mb-20 animate-fade-up">
                 <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                    {{ __('Boutique Consulting Excellence') }}
+                    {{ __('360º Real Estate Solutions') }}
                 </h2>
                 <p class="text-xl text-muted-foreground font-light">
-                    {{ __('Personalized service, complete transparency, and exclusive access to premium opportunities.') }}
+                    {{ __('From sourcing to deal structuring, we provide a full-service approach for investors and property owners.') }}
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-20">
                 @foreach($services as $index => $service)
                 <div class="group p-10 rounded-2xl border border-white/5 bg-card hover:bg-white/5 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-fade-up relative overflow-hidden"
                      style="animation-delay: {{ $index * 0.1 }}s">
@@ -65,12 +65,12 @@
 
                     <div class="relative z-10">
                         <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-8 group-hover:bg-accent group-hover:text-white transition-all duration-300 shadow-lg">
-                            @if($service['icon'] === 'building')
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                            @elseif($service['icon'] === 'user-check')
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            @elseif($service['icon'] === 'globe')
-                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            @if($service['icon'] === 'search')
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            @elseif($service['icon'] === 'chart')
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+                            @elseif($service['icon'] === 'lock')
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                             @else
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             @endif
@@ -84,6 +84,14 @@
                     </div>
                 </div>
                 @endforeach
+            </div>
+
+            {{-- CTA FINAL --}}
+            <div class="text-center animate-fade-up delay-300">
+                <h3 class="text-2xl font-bold mb-6 text-foreground">{{ __('Ready to discuss your investment?') }}</h3>
+                <a href="{{ route('pages.contact') }}" class="inline-block bg-accent hover:bg-white hover:text-accent text-white font-bold py-4 px-10 rounded-full transition-all shadow-lg transform hover:-translate-y-1">
+                    {{ __('Schedule a Meeting') }}
+                </a>
             </div>
         </div>
     </section>
