@@ -6,64 +6,62 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ToolsController; // Importado
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ToolsController;
 use App\Http\Controllers\Api\ChatbotController;
+use App\Http\Controllers\AccessRequestController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routes (CORRIGIDO)
 |--------------------------------------------------------------------------
 */
 
-// Home (Gerida pelo PageController)
+// 1. Home & Institucional (Público)
 Route::get('/', [PageController::class, 'home'])->name('home');
 
-
+// Chatbot AI
 Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])
     ->name('chatbot.send')
     ->middleware(['web']);
 
-// Troca de idioma (PT, EN, FR)
+// Troca de idioma
 Route::get('language/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'pt', 'fr'])) abort(400);
     session(['locale' => $locale]);
     return redirect()->back()->withCookie(cookie('crow_locale', $locale, 525600));
 })->name('language.switch');
 
-// Páginas Institucionais (Estrutura Multi-Page)
+// Páginas Estáticas
 Route::controller(PageController::class)->group(function () {
     Route::get('/about', 'about')->name('pages.about');
     Route::get('/services', 'services')->name('pages.services');
     Route::get('/sell-with-us', 'sell')->name('pages.sell');
     Route::get('/contact', 'contact')->name('pages.contact');
-    Route::get('/simulators', 'simulators')->name('pages.simulators'); // Hub de simuladores
+    Route::get('/simulators', 'simulators')->name('pages.simulators');
 });
 
-// Ferramentas & Simuladores (ToolsController)
+// Ferramentas & Simuladores
 Route::controller(ToolsController::class)->group(function () {
-    // Mais-Valias
     Route::get('/simulators/capital-gains', 'showGainsSimulator')->name('tools.gains');
     Route::post('/simulators/capital-gains/calculate', 'calculateGains')->name('tools.gains.calculate');
-
-    // Crédito Habitação
     Route::get('/simulators/credit', 'showCreditSimulator')->name('tools.credit');
     Route::post('/simulators/credit/send', 'sendCreditSimulation')->name('tools.credit.send');
-
-    // IMT & Selo
     Route::get('/simulators/imt', 'showImtSimulator')->name('tools.imt');
     Route::post('/simulators/imt/send', 'sendImtSimulation')->name('tools.imt.send');
-
-    // Envio do Formulário de Contacto Geral
     Route::post('/contact/send', 'sendContact')->name('contact.send');
 });
 
-// Rotas Públicas de Imóveis
+// Imóveis (Listagem Pública)
 Route::get('/properties', [PropertyController::class, 'index'])->name('properties.index');
-Route::post('/properties/{property}/visit', [PropertyController::class, 'sendVisitRequest'])->name('properties.visit');
-Route::post('/access-request', [App\Http\Controllers\AccessRequestController::class, 'store'])->name('access-request.store');
 
-// Rotas Institucionais (Legal)
+// Formulários Públicos (Lead Generation)
+// NOTA: Definimos estas rotas específicas ANTES da rota genérica 'show'
+Route::post('/properties/{property}/visit', [PropertyController::class, 'sendVisitRequest'])->name('properties.visit');
+Route::post('/properties/{property}/contact', [PropertyController::class, 'sendContact'])->name('properties.contact');
+Route::post('/access-request', [AccessRequestController::class, 'store'])->name('access-request.store');
+
+// Legal
 Route::controller(LegalController::class)->group(function () {
     Route::get('/privacy-policy', 'privacy')->name('legal.privacy');
     Route::get('/terms-of-service', 'terms')->name('legal.terms');
@@ -71,21 +69,20 @@ Route::controller(LegalController::class)->group(function () {
     Route::get('/legal-notice', 'notice')->name('legal.notice');
 });
 
-// Área Autenticada
+// 2. Área Autenticada
 Route::middleware(['auth', 'active_access'])->group(function () {
+    
     Route::get('/dashboard', function () {
         $user = auth()->user();
-        if ($user->role === 'admin') return redirect()->route('admin.dashboard');
+        if ($user->isAdmin()) return redirect()->route('admin.dashboard');
         
         $exclusiveProperties = collect([]);
-        
-        if ($user->role === 'client') {
-            $exclusiveProperties = $user->accessibleProperties()
-                                        ->with('owner')
-                                        ->where('status', 'active')
-                                        ->get();
+        if ($user->role === 'client' || $user->role === 'developer') {
+            $exclusiveProperties = App\Models\Property::where('is_exclusive', true)
+                                         ->where('status', 'active')
+                                         ->limit(3)
+                                         ->get(); 
         }
-        
         return view('dashboard', compact('exclusiveProperties'));
     })->name('dashboard');
 
@@ -93,11 +90,13 @@ Route::middleware(['auth', 'active_access'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Rotas de Gestão (Developer & Admin)
+    // Gestão de Imóveis (Developer & Admin)
     Route::middleware('can:manageProperties,App\Models\User')->group(function () {
+        // ROTAS ESPECÍFICAS PRIMEIRO
         Route::get('/my-properties', [PropertyController::class, 'myProperties'])->name('properties.my');
-        Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
+        Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create'); // <--- AQUI ESTAVA O CONFLITO
         Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+        
         Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('properties.edit');
         Route::patch('/properties/{property}', [PropertyController::class, 'update'])->name('properties.update');
         Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('properties.destroy');
@@ -113,22 +112,22 @@ Route::middleware(['auth', 'active_access'])->group(function () {
         Route::post('/properties/{property}/access', [DeveloperController::class, 'toggleAccess'])->name('properties.access');
     });
 
-    // Rotas Administrativas
+    // ADMIN
     Route::middleware('can:isAdmin,App\Models\User')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         
-        Route::get('/access-requests', [AdminController::class, 'accessRequests'])->name('access-requests');
-        Route::get('/access-requests/{accessRequest}', [AdminController::class, 'showAccessRequest'])->name('access-requests.show');
-        Route::patch('/access-requests/{accessRequest}/approve', [AdminController::class, 'approveAccessRequest'])->name('access-requests.approve');
-        Route::patch('/access-requests/{accessRequest}/reject', [AdminController::class, 'rejectAccessRequest'])->name('access-requests.reject');
+        Route::get('/access-requests', [AccessRequestController::class, 'index'])->name('access-requests');
+        Route::get('/access-requests/{accessRequest}', [AccessRequestController::class, 'show'])->name('access-requests.show');
+        Route::patch('/access-requests/{accessRequest}/approve', [AccessRequestController::class, 'approve'])->name('access-requests.approve');
+        Route::patch('/access-requests/{accessRequest}/reject', [AccessRequestController::class, 'reject'])->name('access-requests.reject');
         
         Route::get('/exclusive-requests', [AdminController::class, 'exclusiveRequests'])->name('exclusive-requests');
         Route::patch('/exclusive-requests/{user}/approve', [AdminController::class, 'approveExclusiveRequest'])->name('exclusive-requests.approve');
         Route::delete('/exclusive-requests/{user}/reject', [AdminController::class, 'rejectExclusiveRequest'])->name('exclusive-requests.reject');
 
         Route::get('/properties/pending', [AdminController::class, 'pendingProperties'])->name('properties.pending');
-        Route::patch('/properties/{property}/approve-listing', [AdminController::class, 'approveProperty'])->name('properties.approve-listing');
-        Route::patch('/properties/{property}/reject-listing', [AdminController::class, 'rejectProperty'])->name('properties.reject-listing');
+        Route::patch('/properties/{property}/approve-listing', [PropertyController::class, 'approve'])->name('properties.approve-listing');
+        Route::patch('/properties/{property}/reject-listing', [PropertyController::class, 'reject'])->name('properties.reject-listing');
 
         Route::patch('/users/{user}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('users.toggle-status');
         Route::patch('/users/{user}/reset-password', [AdminController::class, 'resetUserPassword'])->name('users.reset-password');
@@ -139,7 +138,8 @@ Route::middleware(['auth', 'active_access'])->group(function () {
     });
 });
 
-// Detalhes do imóvel (Pode ser público ou restrito)
+// 3. Rota Genérica (WILDCARD) - SEMPRE NO FINAL
+// Se colocarmos antes, ela "engole" a rota /properties/create achando que 'create' é um ID.
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 
 require __DIR__.'/auth.php';

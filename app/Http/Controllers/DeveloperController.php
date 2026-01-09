@@ -7,7 +7,9 @@ use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Str;
+use Illuminate\Support\Facades\Mail; // Adicionado
+use Illuminate\Support\Facades\Log;  // Adicionado
 
 class DeveloperController extends Controller
 {
@@ -37,7 +39,20 @@ class DeveloperController extends Controller
             'can_view_all_properties' => false,
         ]);
 
-        return redirect()->back()->with('success', "Pré-cadastro realizado! Senha: {$tempPassword}");
+        // --- ALTERAÇÃO: Notificar Admin para aprovação ---
+        try {
+            $admins = User::where('role', 'admin')->pluck('email')->toArray();
+            if (empty($admins)) $admins = ['admin@crow-global.com'];
+
+            Mail::raw("Novo Cliente pré-cadastrado por Developer!\n\nDeveloper: " . Auth::user()->name . "\nCliente: {$validated['name']}\nEmail: {$validated['email']}\n\nAcesse o painel 'Exclusive Requests' (Wallets) para aprovar.", function ($m) use ($admins) {
+                $m->to($admins)->subject('🔔 Validação de Carteira Exclusiva Necessária');
+            });
+        } catch (\Exception $e) {
+            Log::error("Erro ao notificar admin sobre cliente do dev: " . $e->getMessage());
+        }
+        // ------------------------------------------------
+
+        return redirect()->back()->with('success', "Pré-cadastro realizado! O Admin foi notificado. Senha: {$tempPassword}");
     }
 
     public function toggleClientStatus(User $client)
@@ -57,6 +72,11 @@ class DeveloperController extends Controller
     public function toggleMarketAccess(User $client)
     {
         if ($client->developer_id !== Auth::id()) abort(403);
+
+        // Só permite liberar mercado se estiver ativo (aprovado pelo admin)
+        if ($client->status !== 'active') {
+            return redirect()->back()->with('error', 'O cliente precisa estar Ativo para receber acesso ao mercado.');
+        }
 
         $client->can_view_all_properties = !$client->can_view_all_properties;
         $client->save();
@@ -98,7 +118,7 @@ class DeveloperController extends Controller
         }
 
         if ($user->status !== 'active') {
-            return response()->json(['message' => 'Cliente inativo.'], 403);
+            return response()->json(['message' => 'Cliente inativo ou pendente.'], 403);
         }
 
         if ($request->boolean('access')) {
