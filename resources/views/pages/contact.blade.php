@@ -53,8 +53,8 @@
                             </div>
                             <div>
                                 <h3 class="text-lg font-bold mb-2">{{ __('Direct Contacts') }}</h3>
-                                <p class="text-muted-foreground mb-1"><a href="mailto:info@crow-global.com" class="hover:text-accent transition-colors">info@crow-global.com</a></p>
-                                <p class="text-muted-foreground"><a href="tel:+351210000000" class="hover:text-accent transition-colors">+351 210 000 000</a></p>
+                                <p class="text-muted-foreground mb-1"><a href="mailto:info@crowglobal.pt" class="hover:text-accent transition-colors">info@crowglobal.pt</a></p>
+                                <p class="text-muted-foreground"><a href="tel:+351210000000" class="hover:text-accent transition-colors">+351 21 123 4567</a></p>
                             </div>
                         </div>
 
