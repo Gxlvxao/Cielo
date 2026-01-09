@@ -1,6 +1,7 @@
-<footer class="bg-graphite text-white pt-16 pb-8">
+<footer class="bg-graphite text-white pt-16 pb-8 border-t border-gray-800">
     <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-4 gap-12 mb-12">
+            
             <div>
                 <div class="font-heading text-2xl font-bold mb-4">
                     <span class="text-white">CROW</span>
@@ -25,7 +26,6 @@
             <div>
                 <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Quick Links') }}</h3>
                 <ul class="space-y-2">
-                    {{-- Usando route('home') para garantir compatibilidade --}}
                     <li><a href="{{ route('home') }}#about" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('About Us') }}</a></li>
                     <li><a href="{{ route('home') }}#municipalities" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Municipalities') }}</a></li>
                     <li><a href="{{ route('home') }}#services" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('Services') }}</a></li>
@@ -34,29 +34,12 @@
             </div>
 
             <div>
-                {{-- ALTERAÇÃO AQUI: Mudamos de 'Legal' para 'Legal Info' para evitar conflito com o arquivo legal.php --}}
                 <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Legal Info') }}</h3>
                 <ul class="space-y-2">
-                    <li>
-                        <a href="{{ route('legal.privacy') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
-                            {{ __('legal.privacy.title') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('legal.terms') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
-                            {{ __('legal.terms.title') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('legal.cookies') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
-                            {{ __('legal.cookies.title') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('legal.notice') }}" class="text-white/70 hover:text-accent transition-colors text-sm">
-                            {{ __('legal.notice.title') }}
-                        </a>
-                    </li>
+                    <li><a href="{{ route('legal.privacy') }}" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('legal.privacy.title') }}</a></li>
+                    <li><a href="{{ route('legal.terms') }}" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('legal.terms.title') }}</a></li>
+                    <li><a href="{{ route('legal.cookies') }}" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('legal.cookies.title') }}</a></li>
+                    <li><a href="{{ route('legal.notice') }}" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('legal.notice.title') }}</a></li>
                 </ul>
             </div>
 
@@ -79,8 +62,21 @@
             </div>
         </div>
 
-        <div class="pt-8 border-t border-white/10 text-center">
-            <p class="text-white/60 text-sm">© {{ date('Y') }} Crow Global Investments. {{ __('All rights reserved.') }}</p>
+        <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <p class="text-white/60 text-sm text-center md:text-left">
+                © {{ date('Y') }} Crow Global Investments. {{ __('All rights reserved.') }}
+            </p>
+
+            <div class="flex items-center gap-3 opacity-40 hover:opacity-100 transition-all duration-500 group cursor-pointer" title="Developed by MaxSell">
+                <span class="text-[10px] text-white/50 uppercase tracking-widest group-hover:text-white transition-colors hidden md:block">
+                    Technology by
+                </span>
+                <img src="{{ asset('images/maxsell.png') }}" 
+                     alt="MaxSell" 
+                     class="h-6 w-auto grayscale group-hover:grayscale-0 transition-all duration-500">
+            </div>
+
         </div>
     </div>
 </footer>
