@@ -8,6 +8,7 @@ use App\Http\Controllers\LegalController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ToolsController; // Importado
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ChatbotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 // Home (Gerida pelo PageController)
 Route::get('/', [PageController::class, 'home'])->name('home');
+
+
+Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])
+    ->name('chatbot.send')
+    ->middleware(['web']);
 
 // Troca de idioma (PT, EN, FR)
 Route::get('language/{locale}', function ($locale) {

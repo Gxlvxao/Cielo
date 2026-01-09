@@ -25,14 +25,15 @@
     
     {{-- Estrutura Principal --}}
     <div class="min-h-screen flex flex-col">
-        {{ $slot ?? '' }}
-        @yield('content')
+        @if(isset($slot))
+    {{ $slot }}
+@endif
     </div>
 
     {{-- Componente de Banner de Cookies --}}
     <x-cookie-banner />
 
-    {{-- Floating Action Buttons (Agora à ESQUERDA: left-6) --}}
+    {{-- Floating Action Buttons (Lateral ESQUERDA) --}}
     <div class="fixed bottom-6 left-6 flex flex-col gap-4 z-40" x-data="{ showTop: false }" @scroll.window="showTop = (window.pageYOffset > 300)">
         
         {{-- Back Button --}}
@@ -70,7 +71,7 @@
         </button>
     </div>
 
-    {{-- Chatbot Widget --}}
+    {{-- Chatbot Widget (Lateral DIREITA) --}}
     <x-chatbot />
 
 </body>
