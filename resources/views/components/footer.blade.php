@@ -2,6 +2,7 @@
     <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-4 gap-12 mb-12">
             
+            {{-- BRANDING & SOCIAL --}}
             <div>
                 <div class="font-heading text-2xl font-bold mb-4">
                     <span class="text-white">CROW</span>
@@ -23,6 +24,7 @@
                 </div>
             </div>
 
+            {{-- QUICK LINKS --}}
             <div>
                 <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Quick Links') }}</h3>
                 <ul class="space-y-2">
@@ -33,6 +35,7 @@
                 </ul>
             </div>
 
+            {{-- LEGAL INFO --}}
             <div>
                 <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Legal Info') }}</h3>
                 <ul class="space-y-2">
@@ -40,12 +43,21 @@
                     <li><a href="{{ route('legal.terms') }}" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('legal.terms.title') }}</a></li>
                     <li><a href="{{ route('legal.cookies') }}" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('legal.cookies.title') }}</a></li>
                     <li><a href="{{ route('legal.notice') }}" class="text-white/70 hover:text-accent transition-colors text-sm">{{ __('legal.notice.title') }}</a></li>
+                    
+                    {{-- ADIÇÃO: LIVRO DE RECLAMAÇÕES --}}
+                    <li class="pt-2">
+                        <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white/70 hover:text-accent transition-colors text-sm group">
+                            {{ __('Complaints Book') }}
+                            <svg class="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
+            {{-- CONTACT --}}
             <div>
                 <h3 class="font-heading text-lg font-semibold mb-4">{{ __('Contact') }}</h3>
-                <ul class="space-y-3">
+                <ul class="space-y-4"> {{-- Aumentei um pouco o espaçamento aqui --}}
                     <li class="flex items-start gap-3">
                         <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <span class="text-white/70 text-sm">Avenida da Liberdade 123<br />1250-140 Lisboa, Portugal</span>
@@ -57,6 +69,16 @@
                     <li class="flex items-center gap-3">
                         <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         <span class="text-white/70 text-sm">info@crowglobal.pt</span>
+                    </li>
+
+                    {{-- ADIÇÃO: HORÁRIO DE FUNCIONAMENTO --}}
+                    <li class="flex items-start gap-3 border-t border-white/10 pt-4 mt-2">
+                        <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="text-white/70 text-sm">
+                            <span class="block text-white font-bold text-xs uppercase tracking-wider mb-1">{{ __('Opening Hours') }}</span>
+                            <span class="block">{{ __('Mon - Fri') }}: 09:00 - 18:00</span>
+                            <span class="block">{{ __('Weekends') }}: <span class="italic text-white/50">{{ __('By appointment') }}</span></span>
+                        </div>
                     </li>
                 </ul>
             </div>

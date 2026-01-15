@@ -11,12 +11,30 @@
             
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 pt-20">
                 
-                {{-- Logo Cliente --}}
-                <div class="w-32 h-32 sm:w-40 sm:h-40 mx-auto bg-white/5 backdrop-blur-md rounded-full p-4 border border-white/10 shadow-2xl overflow-hidden mb-8 animate-fade-in-up hover:scale-105 transition-transform duration-500">
-                    <img src="{{ asset('images/client-logo.png') }}" alt="Logo do Cliente" class="w-full h-full object-contain rounded-full drop-shadow-md">
+                {{-- LOGO HERO (SLIM GLASSMORPHISM) --}}
+                {{-- mb-12: Margem inferior ajustada --}}
+                <div class="relative inline-flex items-center justify-center mb-12 group animate-fade-in-up">
+                    
+                    {{-- 1. Glow (Aura mais suave e espalhada) --}}
+                    <div class="absolute -inset-4 bg-gradient-to-r from-accent/10 to-white/10 rounded-full blur-xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                    
+                    {{-- 2. O Cartão de Vidro (VERSÃO SLIM) --}}
+                    {{-- px-12 / py-4: Muito mais fino verticalmente, mantendo a largura --}}
+                    {{-- bg-gray-900/20: Mais transparente para se misturar com o fundo --}}
+                    <div class="relative px-8 py-4 md:px-12 md:py-4 bg-gray-900/20 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl flex items-center justify-center">
+                        
+                        {{-- 3. A IMAGEM GIGANTE --}}
+                        {{-- h-40/h-80: Tamanho mantido grande --}}
+                        {{-- -my-14 / -my-28: Margens negativas aumentadas para compensar o cartão mais fino --}}
+                        <img 
+                            src="{{ asset('images/hero.png') }}" 
+                            alt="Crow Global Hero" 
+                            class="h-40 md:h-80 w-auto object-contain -my-14 md:-my-28 filter drop-shadow-2xl transition-transform duration-300 group-hover:scale-105 relative z-10"
+                        >
+                    </div>
                 </div>
 
-                <h1 class="font-heading text-5xl md:text-8xl font-bold mb-6 animate-fade-in-up leading-tight">
+                <h1 class="font-heading text-5xl md:text-8xl font-bold mb-6 animate-fade-in-up leading-tight relative z-0">
                     <span class="text-white drop-shadow-lg">CROW</span>
                     <span class="text-accent drop-shadow-lg">GLOBAL</span>
                 </h1>
@@ -82,7 +100,6 @@
         </section>
 
         {{-- TOP DESTINATIONS (MUNICIPALITIES) --}}
-        {{-- Reintegrado aqui conforme solicitado --}}
         @include('components.municipalities')
 
         {{-- FEATURED PROPERTIES --}}

@@ -7,6 +7,11 @@
 
     <title>{{ config('app.name', 'Crow Global') }} - Portal</title>
 
+    {{-- FAVICON ADICIONADO --}}
+    <link rel="icon" href="{{ asset('images/hero.png') }}" type="image/png">
+    {{-- Opcional: Ícone para Apple/iOS --}}
+    <link rel="apple-touch-icon" href="{{ asset('images/hero.png') }}">
+
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|playfair-display:400,700" rel="stylesheet" />
 
@@ -218,8 +223,7 @@
         </button>
     </div>
 
-    {{-- Componente de Banner de Cookies (Lembre-se de criar o arquivo do componente!) --}}
+    {{-- Componente de Banner de Cookies --}}
     <x-cookie-banner />
-
 </body>
 </html>
