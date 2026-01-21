@@ -10,7 +10,7 @@
         </a>
 
         {{-- MENU DESKTOP --}}
-        <div class="hidden lg:flex items-center gap-1 xl:gap-2 shrink-1 overflow-hidden">
+       <div class="hidden lg:flex items-center gap-1 xl:gap-2 shrink-1">
             {{-- Ajustei o padding para (px-2 no LG e px-4 no XL) para evitar quebra em telas médias --}}
             <a href="{{ route('properties.index') }}" class="text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 px-2 xl:px-4 py-2 rounded-full transition-all whitespace-nowrap {{ request()->routeIs('properties.*') ? 'bg-white/10 text-white' : '' }}">
                 {{ __('Explore Properties') }}
