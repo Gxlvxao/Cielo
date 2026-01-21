@@ -8,7 +8,8 @@
     <title>{{ config('app.name', 'Cielo') }} - {{ __('seo.title') }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>[x-cloak] { display: none !important; }</style>
@@ -21,6 +22,19 @@
         </a>
 
         <div class="flex items-center gap-8">
+            
+            @auth
+                <a href="{{ route('admin.dashboard') }}" class="hidden md:block text-xs font-bold tracking-widest hover:text-cielo-accent transition-colors uppercase">
+                    Dashboard
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="hidden md:block text-xs font-bold tracking-widest hover:text-cielo-accent transition-colors uppercase">
+                    Client Area
+                </a>
+            @endauth
+
+            <div class="hidden md:block w-px h-4 bg-white/30"></div>
+
             <div class="hidden md:flex gap-4 text-xs tracking-widest font-medium">
                 <a href="{{ route('language.switch', 'pt') }}" class="{{ app()->getLocale() === 'pt' ? 'underline decoration-1 underline-offset-4' : 'opacity-60 hover:opacity-100' }}">PT</a>
                 <a href="{{ route('language.switch', 'en') }}" class="{{ app()->getLocale() === 'en' ? 'underline decoration-1 underline-offset-4' : 'opacity-60 hover:opacity-100' }}">EN</a>

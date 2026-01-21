@@ -18,23 +18,21 @@ export default {
             },
         },
         extend: {
-            // Fontes Definidas
             fontFamily: {
-                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
-                serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
+                // TRUQUE: Ambas as famílias usam Inter agora.
+                // Isso sobrescreve a Playfair Display em todos os títulos antigos da Home.
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                serif: ['Inter', ...defaultTheme.fontFamily.sans], 
             },
-            // Cores da CIELO + Cores do Sistema
             colors: {
-                // Paleta Cielo Específica (Hex Codes Diretos)
                 cielo: {
-                    dark: '#1B2433',      // Azul quase preto
-                    navy: '#2B3A4D',      // Azul escuro acinzentado
-                    accent: '#FBAF61',    // Laranja pêssego
-                    terracotta: '#A6513C',// Marrom avermelhado
-                    sand: '#C8C1B1',      // Bege acinzentado
-                    cream: '#EFEDE0',     // Off-white / creme claro (Fundo padrão)
+                    dark: '#1B2433',      
+                    navy: '#2B3A4D',      
+                    accent: '#FBAF61',    
+                    terracotta: '#A6513C',
+                    sand: '#C8C1B1',      
+                    cream: '#EFEDE0',     
                 },
-                // Variáveis do seu template (Mantidas)
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
                 ring: 'hsl(var(--ring))',
@@ -79,12 +77,10 @@ export default {
                     from: { opacity: '0' },
                     to: { opacity: '1' },
                 },
-                // Animação para o texto "surgindo"
                 'reveal': {
                     '0%': { opacity: '0', filter: 'blur(10px)', transform: 'translateY(20px)' },
                     '100%': { opacity: '1', filter: 'blur(0)', transform: 'translateY(0)' }
                 },
-                 // Animação do ticker de parceiros
                 'marquee': {
                     '0%': { transform: 'translateX(0)' },
                     '100%': { transform: 'translateX(-50%)' },

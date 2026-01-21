@@ -44,6 +44,8 @@ Route::post('/conversa/enviar', [ToolsController::class, 'sendContact'])->name('
 Route::get('/ferramentas/feng-shui', [ToolsController::class, 'fengShui'])->name('tools.feng-shui');
 Route::post('/ferramentas/feng-shui', [ToolsController::class, 'processFengShui'])->name('tools.feng-shui.process');
 
+
+
 // 7. Infraestrutura (Chatbot & Idioma)
 Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.send');
 Route::get('language/{locale}', function ($locale) {
@@ -56,6 +58,8 @@ Route::get('language/{locale}', function ($locale) {
 Route::controller(LegalController::class)->group(function () {
     Route::get('/politica-privacidade', 'privacy')->name('legal.privacy');
     Route::get('/termos-uso', 'terms')->name('legal.terms');
+    Route::get('/politica-cookies', 'cookies')->name('legal.cookies');
+    Route::get('/aviso-legal', 'notice')->name('legal.notice');
 });
 
 // ROTAS ANTIGAS (Mantidas ocultas/comentadas caso precise reativar)
