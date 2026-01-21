@@ -18,7 +18,23 @@ export default {
             },
         },
         extend: {
+            // Fontes Definidas
+            fontFamily: {
+                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+                serif: ['Playfair Display', ...defaultTheme.fontFamily.serif],
+            },
+            // Cores da CIELO + Cores do Sistema
             colors: {
+                // Paleta Cielo Específica (Hex Codes Diretos)
+                cielo: {
+                    dark: '#1B2433',      // Azul quase preto
+                    navy: '#2B3A4D',      // Azul escuro acinzentado
+                    accent: '#FBAF61',    // Laranja pêssego
+                    terracotta: '#A6513C',// Marrom avermelhado
+                    sand: '#C8C1B1',      // Bege acinzentado
+                    cream: '#EFEDE0',     // Off-white / creme claro (Fundo padrão)
+                },
+                // Variáveis do seu template (Mantidas)
                 border: 'hsl(var(--border))',
                 input: 'hsl(var(--input))',
                 ring: 'hsl(var(--ring))',
@@ -40,10 +56,6 @@ export default {
                     DEFAULT: 'hsl(var(--muted))',
                     foreground: 'hsl(var(--muted-foreground))',
                 },
-                accent: {
-                    DEFAULT: 'hsl(var(--accent))',
-                    foreground: 'hsl(var(--accent-foreground))',
-                },
                 popover: {
                     DEFAULT: 'hsl(var(--popover))',
                     foreground: 'hsl(var(--popover-foreground))',
@@ -51,16 +63,6 @@ export default {
                 card: {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',
-                },
-                bronze: {
-                    DEFAULT: 'hsl(var(--bronze))',
-                    dark: 'hsl(var(--bronze-dark))',
-                    light: 'hsl(var(--bronze-light))',
-                },
-                graphite: {
-                    DEFAULT: 'hsl(var(--graphite))',
-                    light: 'hsl(var(--graphite-light))',
-                    lighter: 'hsl(var(--graphite-lighter))',
                 },
             },
             borderRadius: {
@@ -70,31 +72,29 @@ export default {
             },
             keyframes: {
                 'fade-up': {
-                    from: {
-                        opacity: '0',
-                        transform: 'translateY(20px)',
-                    },
-                    to: {
-                        opacity: '1',
-                        transform: 'translateY(0)',
-                    },
+                    from: { opacity: '0', transform: 'translateY(20px)' },
+                    to: { opacity: '1', transform: 'translateY(0)' },
                 },
                 'fade-in': {
-                    from: {
-                        opacity: '0',
-                    },
-                    to: {
-                        opacity: '1',
-                    },
+                    from: { opacity: '0' },
+                    to: { opacity: '1' },
                 },
+                // Animação para o texto "surgindo"
+                'reveal': {
+                    '0%': { opacity: '0', filter: 'blur(10px)', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', filter: 'blur(0)', transform: 'translateY(0)' }
+                },
+                 // Animação do ticker de parceiros
+                'marquee': {
+                    '0%': { transform: 'translateX(0)' },
+                    '100%': { transform: 'translateX(-50%)' },
+                }
             },
             animation: {
                 'fade-up': 'fade-up 0.6s ease-out',
                 'fade-in': 'fade-in 0.4s ease-out',
-            },
-            fontFamily: {
-                sans: ['DM Sans', 'system-ui', 'sans-serif'],
-                heading: ['Poppins', 'system-ui', 'sans-serif'],
+                'reveal': 'reveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                'marquee': 'marquee 30s linear infinite',
             },
         },
     },
