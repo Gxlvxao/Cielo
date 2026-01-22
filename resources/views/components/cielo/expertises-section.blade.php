@@ -1,7 +1,8 @@
 <section class="bg-cielo-dark text-cielo-cream py-32 px-6 relative z-20">
     <div class="max-w-[90rem] mx-auto">
         
-        <h2 class="font-serif text-5xl md:text-7xl mb-32 text-white">
+        {{-- Aumentei o espaçamento inferior (mb) de 32 para 48 --}}
+        <h2 class="font-serif text-5xl md:text-7xl mb-48 text-white">
             {{ __('home.expertise.main_title') }}
         </h2>
 
@@ -25,7 +26,8 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                         
                         <div class="lg:col-span-4">
-                            <span class="font-mono text-sm text-cielo-accent mb-4 block opacity-80">
+                            {{-- Mudei a cor do número para branco com opacidade --}}
+                            <span class="font-mono text-sm text-white mb-4 block opacity-60">
                                 [0{{ $i }}]
                             </span>
                             <h3 class="font-serif text-3xl md:text-4xl text-white italic group-hover:translate-x-2 transition-transform duration-500">
@@ -42,7 +44,8 @@
                         <div class="lg:col-span-3 pt-4 lg:pt-0">
                             <ul class="space-y-3 border-l border-white/10 pl-6 lg:pl-8">
                                 @foreach(__("home.expertise.$i.tags") as $tag)
-                                    <li class="text-xs uppercase tracking-widest text-cielo-sand block transform transition-all duration-300 group-hover:translate-x-1 group-hover:text-cielo-accent">
+                                    {{-- Mudei as tags para branco (com hover para branco total) --}}
+                                    <li class="text-xs uppercase tracking-widest text-white/60 block transform transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">
                                         {{ $tag }}
                                     </li>
                                 @endforeach

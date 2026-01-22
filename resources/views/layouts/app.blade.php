@@ -71,6 +71,12 @@
                                     <span class="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full animate-pulse">{{ $pendingProps }}</span>
                                 @endif
                             </a>
+
+                            {{-- NOVO LINK: JORNAL --}}
+                            <a href="{{ route('admin.posts.index') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all {{ request()->routeIs('admin.posts.*') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
+                                {{ __('Jornal') }}
+                            </a>
+
                         @else
                             <a href="{{ route('dashboard') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-all {{ request()->routeIs('dashboard') ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5' }}">
                                 {{ __('My Investments') }}
@@ -149,6 +155,10 @@
                     @if(Auth::user()->isAdmin())
                         <a href="{{ route('admin.dashboard') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Overview') }}</a>
                         <a href="{{ route('admin.access-requests') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Requests') }}</a>
+                        <a href="{{ route('admin.exclusive-requests') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Wallets') }}</a>
+                        <a href="{{ route('admin.properties.pending') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Moderation') }}</a>
+                        {{-- NOVO LINK MOBILE: JORNAL --}}
+                        <a href="{{ route('admin.posts.index') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Jornal') }}</a>
                     @else
                         <a href="{{ route('dashboard') }}" class="block px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white font-medium">{{ __('Dashboard') }}</a>
                     @endif

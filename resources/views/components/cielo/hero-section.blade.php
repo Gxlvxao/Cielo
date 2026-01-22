@@ -1,18 +1,17 @@
 <div class="fixed inset-0 w-full h-screen z-0 overflow-hidden bg-cielo-dark">
     
-    <video autoplay loop muted playsinline class="absolute w-full h-full object-cover opacity-60">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-coming-to-the-beach-5016-large.mp4" type="video/mp4">
-    </video>
+    {{-- Background Image --}}
+    <img src="{{ asset('images/fotoheader.jpg') }}" 
+         alt="Cielo Hero Background" 
+         class="absolute w-full h-full object-cover opacity-80">
 
-    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+    {{-- Overlays (Gradientes para leitura do texto) --}}
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 
-    <div class="absolute top-8 left-6 md:left-16 z-20 animate-fade-in">
-        <h2 class="text-white font-serif text-3xl font-bold tracking-[0.2em] uppercase drop-shadow-md">
-            Cielo
-        </h2>
-    </div>
+    {{-- REMOVIDO: Título "Cielo" do topo --}}
 
+    {{-- Conteúdo Principal --}}
     <div class="absolute inset-0 flex flex-col justify-end pb-32 px-6 md:px-16 z-10 pointer-events-none">
         
         <div x-data="{ shown: false }" 
@@ -31,19 +30,22 @@
                  x-transition:enter="transition duration-[1000ms] delay-500 ease-out"
                  x-transition:enter-start="opacity-0 w-0"
                  x-transition:enter-end="opacity-100 w-24"
-                 class="h-1 bg-cielo-accent mb-6"></div>
+                 class="h-1 bg-[#C9A35E] mb-6"></div>
 
+            {{-- Subtítulo com Fonte INTER --}}
             <p x-show="shown"
                x-transition:enter="transition duration-[1500ms] delay-700 ease-out"
                x-transition:enter-start="opacity-0 translate-y-8"
                x-transition:enter-end="opacity-100 translate-y-0"
-               class="font-sans font-light text-lg md:text-xl leading-relaxed tracking-wide opacity-90 max-w-xl drop-shadow-md">
+               style="font-family: 'Inter', sans-serif;" 
+               class="text-lg md:text-xl leading-relaxed tracking-wide opacity-90 max-w-xl drop-shadow-md">
                 {{ __('home.hero.subtitle') }}
             </p>
 
         </div>
     </div>
 
+    {{-- Scroll Indicator --}}
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/80 z-20">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
     </div>

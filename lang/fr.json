@@ -110,5 +110,13 @@
     "footer.privacy": "Politique de Confidentialité",
     "footer.terms": "Conditions d'Utilisation",
     "footer.contact": "Contactez-nous",
-    "footer.developed": "Développé par"
+    "footer.developed": "Développé par",
+
+    "nav.menu_label": "MENU",
+    "nav.home": "Accueil",
+    "nav.curation": "Curations",
+    "nav.concept": "Le Concept",
+    "nav.journal": "Journal",
+    "nav.contact": "Contact",
+    "seo.title": "Immobilier de Luxe"
 }

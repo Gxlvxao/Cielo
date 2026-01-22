@@ -110,5 +110,13 @@
     "footer.privacy": "Política de Privacidade",
     "footer.terms": "Termos de Uso",
     "footer.contact": "Contacte-nos",
-    "footer.developed": "Desenvolvido por"
+    "footer.developed": "Desenvolvido por",
+
+    "nav.menu_label": "MENU",
+    "nav.home": "Início",
+    "nav.curation": "Curadoria",
+    "nav.concept": "O Conceito",
+    "nav.journal": "Jornal",
+    "nav.contact": "Conversa",
+    "seo.title": "Imobiliária de Luxo"
 }

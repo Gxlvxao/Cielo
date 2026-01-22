@@ -10,15 +10,28 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            
+            // 1. Relacionamento
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+            // 2. Conteúdo Principal
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('category')->index(); // Arquitetura, Estilo de Vida, etc.
-            $table->string('cover_image')->nullable();
-            $table->text('summary'); // Para o card na home
-            $table->longText('content'); // Conteúdo completo
-            $table->boolean('is_published')->default(false);
+            $table->text('summary')->nullable(); 
+            $table->longText('content');
+            $table->string('image_path')->nullable();
+            
+            // 3. Status e Controle (Essencial para o Controller funcionar)
+            $table->string('status')->default('draft'); // 'published' ou 'draft'
             $table->timestamp('published_at')->nullable();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Autor
+            $table->boolean('is_featured')->default(false);
+            
+            // 4. Metadados para o Layout
+            $table->string('category')->nullable();
+            $table->string('tag')->nullable();         // Ex: 'Design', 'Architecture'
+            $table->string('author_name')->nullable(); // Ex: 'Cielo Team'
+            $table->string('author_photo')->nullable();
+
             $table->timestamps();
         });
     }

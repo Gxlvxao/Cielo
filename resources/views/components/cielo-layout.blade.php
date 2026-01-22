@@ -7,6 +7,7 @@
 
     <title>{{ config('app.name', 'Cielo') }} - {{ __('seo.title') }}</title>
 
+    {{-- Fontes --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
@@ -16,6 +17,7 @@
 </head>
 <body class="font-sans text-cielo-dark bg-cielo-cream antialiased" x-data="{ sidebarOpen: false }">
 
+    {{-- HEADER --}}
     <header class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center transition-all duration-300 mix-blend-difference text-white">
         <a href="{{ route('home') }}" class="font-serif text-3xl tracking-widest font-bold uppercase hover:opacity-80 transition">
             Cielo
@@ -51,6 +53,7 @@
         </div>
     </header>
 
+    {{-- SIDEBAR --}}
     <div x-cloak x-show="sidebarOpen" class="fixed inset-0 z-[60] flex justify-end">
         <div @click="sidebarOpen = false" 
              x-show="sidebarOpen"
@@ -75,11 +78,12 @@
                 <svg class="w-8 h-8 text-cielo-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
+            {{-- MENU ATUALIZADO --}}
             <nav class="mt-20 space-y-6">
                 @foreach([
                     __('nav.home') => 'home', 
                     __('nav.curation') => 'properties.index', 
-                    __('nav.concept') => 'pages.about', 
+                    __('nav.concept') => 'pages.about',  {{-- AQUI ESTÁ O LINK CORRETO --}}
                     __('nav.journal') => 'blog.index', 
                     __('nav.contact') => 'pages.contact'
                 ] as $label => $route)

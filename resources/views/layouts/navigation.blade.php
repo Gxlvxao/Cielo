@@ -24,6 +24,10 @@
                         <x-nav-link :href="route('admin.properties')" :active="request()->routeIs('admin.properties')" class="text-white hover:text-accent border-transparent hover:border-accent">
                             {{ __('Properties (Admin)') }}
                         </x-nav-link>
+                        
+                        <x-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')" class="text-white hover:text-accent border-transparent hover:border-accent">
+                            {{ __('Jornal') }}
+                        </x-nav-link>
                     @endcan
 
                     @can('manageProperties')
@@ -102,6 +106,10 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.properties')" :active="request()->routeIs('admin.properties')" class="text-white hover:text-accent">
                     {{ __('Properties (Admin)') }}
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts.*')" class="text-white hover:text-accent">
+                    {{ __('Jornal') }}
                 </x-responsive-nav-link>
             @endcan
 

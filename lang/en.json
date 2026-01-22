@@ -171,6 +171,14 @@
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms of Use",
     "footer.contact": "Contact Us",
-    "footer.developed": "Developed by"
+    "footer.developed": "Developed by",
+
+    "nav.menu_label": "MENU",
+    "nav.home": "Home",
+    "nav.curation": "Curation",
+    "nav.concept": "The Concept",
+    "nav.journal": "Journal",
+    "nav.contact": "Contact",
+    "seo.title": "Luxury Real Estate"
 
 }

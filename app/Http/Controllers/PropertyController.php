@@ -24,24 +24,54 @@ class PropertyController extends Controller
         $query = Property::where('status', 'active')
                          ->where('is_exclusive', false);
 
-        // Filtros (Mantidos)
-        if ($request->filled('city')) $query->byCity($request->city);
-        if ($request->filled('type')) $query->byType($request->type);
-        if ($request->filled('transaction_type')) $query->byTransactionType($request->transaction_type);
-        if ($request->filled('bedrooms')) $query->byBedrooms($request->bedrooms);
-        if ($request->filled('min_price') && $request->filled('max_price')) {
-            $query->byPriceRange($request->min_price, $request->max_price);
+        // 1. Filtro de Palavra-Chave (Search Bar do Header)
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('city', 'like', "%{$search}%");
+            });
         }
 
-        // Ordenação: Destaques primeiro, depois os mais recentes
+        // 2. Filtros Específicos (Sidebar/Advanced)
+        if ($request->filled('city')) {
+            $query->where('city', $request->city);
+        }
+        
+        if ($request->filled('location')) { // Compatibilidade com o select do header
+            $query->where('city', $request->location);
+        }
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        if ($request->filled('transaction_type')) {
+            $query->where('transaction_type', $request->transaction_type);
+        }
+
+        if ($request->filled('bedrooms')) {
+            $query->where('bedrooms', '>=', $request->bedrooms);
+        }
+
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        // Ordenação: Destaques primeiro, Destaque Energético, depois Recentes
         $query->orderBy('is_featured', 'desc')
               ->orderBy('is_energy_highlight', 'desc') // Novo campo Cielo
               ->orderBy('published_at', 'desc');
               
-        $properties = $query->paginate(12);
+        $properties = $query->paginate(12)->withQueryString();
 
-        // RETORNA A NOVA VIEW DA CIELO
-        return view('cielo.properties.index', compact('properties'));
+        // RETORNA A VIEW (Caminho corrigido para evitar erro)
+        return view('properties.index', compact('properties'));
     }
 
     public function show(Property $property)
@@ -54,11 +84,9 @@ class PropertyController extends Controller
         } elseif ($property->status === 'active') {
             // Lógica para verificação de exclusivos vs públicos
             if ($property->is_exclusive) {
-                // Se for exclusivo, verifica se user tem permissão de "access_active"
-                // ou se foi concedido acesso específico via pivot table
+                // Se for exclusivo, verifica se user tem permissão
+                // Por enquanto, se está logado e ativo, permitimos (ajuste conforme regra de negócio)
                 if (Auth::check()) {
-                   // Adicione sua lógica de verificação de acesso Off-Market aqui se necessário
-                   // Por padrão, se está logado e passou pelo middleware, pode ver
                    $canView = true; 
                 }
             } else {
@@ -70,8 +98,8 @@ class PropertyController extends Controller
             abort(403, 'Acesso restrito ou imóvel indisponível.');
         }
 
-        // RETORNA A NOVA VIEW SINGLE DA CIELO
-        return view('cielo.properties.show', compact('property'));
+        // RETORNA A VIEW SINGLE (Caminho corrigido)
+        return view('properties.show', compact('property'));
     }
 
     // ==========================================
@@ -85,22 +113,25 @@ class PropertyController extends Controller
                          ->where('is_exclusive', true);
 
         // Filtros básicos
-        if ($request->filled('city')) $query->byCity($request->city);
+        if ($request->filled('city')) {
+            $query->where('city', $request->city);
+        }
         
         $properties = $query->latest('published_at')->paginate(9);
 
-        // View específica para Off-Market (mais luxuosa/escura)
-        return view('cielo.properties.off-market', compact('properties'));
+        // View específica para Off-Market
+        // Obs: Se esta view ainda não existir, crie resources/views/properties/off-market.blade.php
+        return view('properties.off-market', compact('properties'));
     }
 
     // ==========================================
-    // GESTÃO (MANTÉM AS VIEWS DE ADMIN ANTIGAS)
+    // GESTÃO (ADMIN / DEVELOPER)
     // ==========================================
 
     public function create()
     {
         if (!Auth::user()->canManageProperties()) abort(403);
-        return view('properties.create'); // Mantém view admin original
+        return view('properties.create');
     }
 
     public function store(Request $request)
@@ -130,7 +161,7 @@ class PropertyController extends Controller
             'whatsapp' => 'nullable|string|max:20',
             'features' => 'nullable|array',
             'is_exclusive' => 'nullable|boolean',
-            'is_energy_highlight' => 'nullable|boolean', // Adicionado
+            'is_energy_highlight' => 'nullable|boolean', // Novo campo
         ]);
 
         if ($request->hasFile('cover_image')) {
@@ -153,21 +184,15 @@ class PropertyController extends Controller
 
         $property = Property::create($validated);
 
-        if (!$isAdmin) {
-             // Notificação Admin omitida para brevidade (mantenha a original)
-        }
-
         $msg = $isAdmin ? 'Imóvel publicado com sucesso!' : 'Imóvel enviado para aprovação.';
         
-        // Redireciona para o admin view ou public view dependendo de quem criou? 
-        // Vamos manter seguro redirecionando para a edição
         return redirect()->route('properties.edit', $property)->with('success', $msg);
     }
 
     public function edit(Property $property)
     {
         if (!Auth::user()->canManageProperties() || (Auth::id() !== $property->user_id && !Auth::user()->isAdmin())) abort(403);
-        return view('properties.edit', compact('property')); // Mantém view admin original
+        return view('properties.edit', compact('property'));
     }
 
     public function update(Request $request, Property $property)
@@ -248,15 +273,12 @@ class PropertyController extends Controller
         }
         
         $property->delete();
-        // Redireciona para a lista de "Meus Imóveis" ou Admin
         return redirect()->route('properties.my')->with('success', 'Imóvel excluído!');
     }
 
     // ==========================================
-    // MÉTODOS AUXILIARES (APROVAÇÃO, VISITAS, ETC)
+    // MÉTODOS AUXILIARES
     // ==========================================
-    // (Mantenha os métodos approve, reject, myProperties, sendVisitRequest, getAccessList IGUAIS ao original)
-    // Eles não mudam pois são lógica de negócio, não de view.
     
     public function approve(Property $property)
     {

@@ -4,48 +4,64 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'title',
         'slug',
-        'category',
-        'cover_image',
-        'summary',
         'content',
-        'is_published',
-        'published_at',
-        'user_id'
+        'summary',      // Resumo do post
+        'image_path',   // Caminho da imagem (Storage)
+        'category',     // Categoria/Tag
+        'published_at', // Data de publicação
+        'is_featured'   // Destaque principal
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
-        'is_published' => 'boolean',
+        'is_featured' => 'boolean',
     ];
 
-    // Boot para gerar slug automático
-    protected static function boot()
+    // --- RELACIONAMENTOS ---
+
+    /**
+     * O autor do post (Admin/User).
+     */
+    public function user(): BelongsTo
     {
-        parent::boot();
-        static::creating(function ($post) {
-            if (empty($post->slug)) {
-                $post->slug = Str::slug($post->title);
-            }
-        });
+        return $this->belongsTo(User::class);
     }
 
-    // Scopes para facilitar consultas limpas no Controller
-    public function scopePublished($query)
+    // --- SCOPES (Consultas Reutilizáveis) ---
+
+    /**
+     * Filtra apenas posts publicados (Data válida e não futura).
+     */
+    public function scopePublished(Builder $query): void
     {
-        return $query->where('is_published', true)->where('published_at', '<=', now());
+        $query->whereNotNull('published_at')
+              ->where('published_at', '<=', now());
     }
-    
-    public function author()
+
+    /**
+     * Filtra por categoria específica.
+     */
+    public function scopeCategory(Builder $query, string $category): void
     {
-        return $this->belongsTo(User::class, 'user_id');
+        $query->where('category', $category);
+    }
+
+    /**
+     * Filtra apenas os destacados.
+     */
+    public function scopeFeatured(Builder $query): void
+    {
+        $query->where('is_featured', true);
     }
 }
