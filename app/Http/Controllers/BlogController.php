@@ -9,61 +9,45 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        // Inicia a query (supondo que você tenha o scope 'published' ou use where)
-        // Se não tiver o scope no Model, troque por: Post::where('status', 'published')
-        $query = Post::where('status', 'published'); 
+        // 1. Query Base Limpa (Usando os Scopes do Model)
+        $query = Post::published()
+                     ->search($request->input('search'))
+                     ->latest('published_at');
 
-        // 1. Lógica de Busca (Search)
-        if ($request->filled('search')) {
-            $search = $request->input('search');
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('excerpt', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%");
-            });
-        }
-
-        // Ordenação
-        $query->latest('published_at');
-
-        // 2. Lógica do Destaque (Apenas na página 1 e sem busca ativa)
+        // 2. Lógica do Destaque (Hero)
+        // Apenas removemos o destaque se estivermos na página 1 e sem busca
         $featuredPost = null;
-        if (!$request->filled('search') && ($request->input('page', 1) == 1)) {
-            $featuredPost = $query->first(); // Pega o mais recente para ser o Hero
-            
+        if ($request->missing('search') && $request->input('page', 1) == 1) {
+            $featuredPost = $query->first();
+
+            // Se encontrou um destaque, remove ele da listagem principal para não duplicar
             if ($featuredPost) {
-                $query->where('id', '!=', $featuredPost->id); // Remove ele da lista de baixo
+                $query->where('id', '!=', $featuredPost->id);
             }
         }
 
-        // Paginação dos "demais blogs menores"
+        // 3. Paginação
         $posts = $query->paginate(9)->withQueryString();
 
-        // Verifique se o arquivo está em resources/views/blog/index.blade.php
         return view('blog.index', compact('posts', 'featuredPost'));
     }
 
-    public function show($slug)
+    // O Laravel resolve o 'slug' automaticamente graças ao getRouteKeyName() no Model
+    public function show(Post $post)
     {
-        // Busca pelo slug
-        $post = Post::where('status', 'published')
-                    ->where('slug', $slug)
-                    ->firstOrFail();
-        
-        // 3. Artigos Relacionados (Mesma categoria, exceto o atual)
-        $relatedPosts = Post::where('status', 'published')
+        // Garantia de Segurança: Se tentarem acessar um post agendado/futuro pelo link direto
+        if ($post->published_at > now()) {
+            abort(404);
+        }
+
+        // Artigos Relacionados (Mesma categoria, exceto o atual)
+        $relatedPosts = Post::published()
             ->where('id', '!=', $post->id)
-            ->where(function($q) use ($post) {
-                // Tenta pegar da mesma categoria/tag se existir, senão pega aleatório
-                if ($post->category) {
-                    $q->where('category', $post->category);
-                }
-            })
+            ->category($post->category) // Scope reutilizável
             ->inRandomOrder()
             ->take(3)
             ->get();
 
-        // Passamos como 'relatedPosts' para bater com a view que eu te mandei antes
         return view('blog.show', compact('post', 'relatedPosts'));
     }
 }

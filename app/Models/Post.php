@@ -28,6 +28,28 @@ class Post extends Model
         'is_featured' => 'boolean',
     ];
 
+    // --- SETUP DE ROTAS (SEO) ---
+
+    /**
+     * Define que a chave de busca na URL será o 'slug' e não o ID.
+     * Isso permite rotas como: /journal/titulo-do-artigo
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    // --- ACESSORES (Getters Mágicos) ---
+
+    /**
+     * Permite acessar $post->image nas views, mapeando para image_path.
+     * Evita erros de "Undefined property" no front-end.
+     */
+    public function getImageAttribute()
+    {
+        return $this->image_path;
+    }
+
     // --- RELACIONAMENTOS ---
 
     /**
@@ -52,16 +74,28 @@ class Post extends Model
     /**
      * Filtra por categoria específica.
      */
-    public function scopeCategory(Builder $query, string $category): void
+    public function scopeCategory(Builder $query, ?string $category): void
     {
-        $query->where('category', $category);
+        // Só aplica o filtro se a categoria não for nula/vazia
+        if (!empty($category)) {
+            $query->where('category', $category);
+        }
+        
+        // Se for null, ele simplesmente ignora e não quebra o site,
+        // retornando posts variados (o que é ótimo para "Relacionados")
     }
 
     /**
-     * Filtra apenas os destacados.
+     * Encapsula a lógica de busca textual.
      */
-    public function scopeFeatured(Builder $query): void
+    public function scopeSearch(Builder $query, ?string $term): void
     {
-        $query->where('is_featured', true);
+        if ($term) {
+            $query->where(function ($q) use ($term) {
+                $q->where('title', 'like', "%{$term}%")
+                  ->orWhere('summary', 'like', "%{$term}%")
+                  ->orWhere('content', 'like', "%{$term}%");
+            });
+        }
     }
 }
