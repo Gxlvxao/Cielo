@@ -35,7 +35,7 @@ Route::post('/curadoria/{property}/contact', [PropertyController::class, 'sendCo
 // 4. Jornal Cielo (Blog)
 // CORREÇÃO: Unificamos para '/journal' e usamos '{slug}' para bater com o Controller
 Route::get('/journal', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/journal/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/journal/{post}', [BlogController::class, 'show'])->name('blog.show');
 
 // 5. Conversa (Contato)
 Route::get('/conversa', [PageController::class, 'contact'])->name('pages.contact');
