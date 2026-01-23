@@ -232,4 +232,16 @@ class AdminController extends Controller
         $property->delete();
         return redirect()->back()->with('success', 'Imóvel excluído permanentemente!');
     }
+
+    public function toggleEnergy(Property $property)
+{
+    // Opcional: Se quiser garantir que só exista UM destaque por vez,
+    // descomente a linha abaixo:
+    // Property::where('id', '!=', $property->id)->update(['is_energy_of_week' => false]);
+
+    $property->is_energy_of_week = !$property->is_energy_of_week;
+    $property->save();
+
+    return back()->with('success', 'Status de Energia atualizado com sucesso.');
+}
 }

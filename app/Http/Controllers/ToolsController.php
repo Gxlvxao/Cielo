@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\CapitalGainsCalculatorService;
 use Illuminate\Support\Facades\Log;
+use App\Services\FengShuiService; // Não esqueça de importar
+
 
 class ToolsController extends Controller
 {
@@ -72,4 +74,20 @@ class ToolsController extends Controller
 
         return response()->json(['message' => 'Pedido de análise recebido!']);
     }
+
+    public function fengShui(Request $request, FengShuiService $service)
+{
+    $result = null;
+
+    if ($request->isMethod('post')) {
+        $validated = $request->validate([
+            'birth_date' => 'required|date',
+            'gender' => 'required|in:male,female',
+        ]);
+
+        $result = $service->calculateProfile($validated['birth_date'], $validated['gender']);
+    }
+
+    return view('tools.feng-shui', compact('result'));
+}
 }

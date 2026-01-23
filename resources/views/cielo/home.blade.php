@@ -1,12 +1,13 @@
 <x-site-layout>
     
+    {{-- Hero Fixo no Fundo --}}
     <x-cielo.hero-section />
 
     {{-- 
-        ALTERAÇÕES REALIZADAS:
-        1. Adicionei 'mx-2 md:mx-6': Isso cria uma margem lateral. Assim a borda não cola no canto da tela.
-           Agora você verá o "arredondado" subindo e o vídeo aparecendo nas laterais.
-        2. Mantive 'rounded-t-[5rem]': Para a curva ser bem acentuada no topo.
+        CONTEÚDO QUE SOBE SOBRE O HERO
+        1. mt-[100vh]: Empurra o conteúdo para baixo da altura da tela inicial.
+        2. mx-2 md:mx-6: Cria as margens laterais para ver o vídeo no fundo.
+        3. rounded-t-[...]: Cria a curva suave no topo do conteúdo.
     --}}
     <div class="relative z-10 mt-[100vh] bg-white shadow-[0_-50px_100px_rgba(0,0,0,0.2)] rounded-t-[3rem] md:rounded-t-[5rem] overflow-hidden mx-2 md:mx-6">
         
@@ -14,7 +15,8 @@
         
         <x-cielo.stats-section />
         
-        <x-cielo.properties-section :properties="$energyProperties" />
+        {{-- CORREÇÃO AQUI: Mudamos de $energyProperties para $properties --}}
+        <x-cielo.properties-section :properties="$properties" />
         
         <x-cielo.expertises-section />
 
@@ -30,4 +32,4 @@
 
     </div>
 
-</x-cielo-layout>
+</x-site-layout>

@@ -15,6 +15,19 @@ use Illuminate\Support\Facades\Log;
 
 class AccessRequestController extends Controller
 {
+    // =========================================================================
+    // NOVO MÉTODO (Resolve o erro "Method create does not exist")
+    // =========================================================================
+    /**
+     * Show the public access request form.
+     */
+    public function create()
+    {
+        // Retorna a view do formulário que criamos
+        return view('pages.access-request');
+    }
+    // =========================================================================
+
     /**
      * Store a new access request
      */
@@ -148,7 +161,7 @@ class AccessRequestController extends Controller
     /**
      * Reject an access request
      */
-  public function reject(Request $request, AccessRequest $accessRequest)
+    public function reject(Request $request, AccessRequest $accessRequest)
     {
         if (!auth()->user() || !auth()->user()->isAdmin()) {
             abort(403);

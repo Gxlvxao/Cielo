@@ -33,7 +33,6 @@ Route::post('/curadoria/{property}/visit', [PropertyController::class, 'sendVisi
 Route::post('/curadoria/{property}/contact', [PropertyController::class, 'sendContact'])->name('properties.contact');
 
 // 4. Jornal Cielo (Blog)
-// CORREÇÃO: Unificamos para '/journal' e usamos '{slug}' para bater com o Controller
 Route::get('/journal', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/journal/{post}', [BlogController::class, 'show'])->name('blog.show');
 
@@ -41,30 +40,36 @@ Route::get('/journal/{post}', [BlogController::class, 'show'])->name('blog.show'
 Route::get('/conversa', [PageController::class, 'contact'])->name('pages.contact');
 Route::post('/conversa/enviar', [ToolsController::class, 'sendContact'])->name('contact.send');
 
-// 6. FERRAMENTAS (TOOLS) - ADICIONADO AGORA
+// 6. Solicitar Acesso (NOVO - Formulário Público)
+Route::get('/solicitar-acesso', [AccessRequestController::class, 'create'])->name('access-request.create');
+Route::post('/access-request', [AccessRequestController::class, 'store'])->name('access-request.store');
+
+// 7. FERRAMENTAS (TOOLS)
 Route::prefix('ferramentas')->name('tools.')->group(function () {
     // Vistas (GET)
     Route::get('/mais-valias', [ToolsController::class, 'showGainsSimulator'])->name('gains');
     Route::get('/credito', [ToolsController::class, 'showCreditSimulator'])->name('credit');
     Route::get('/imt', [ToolsController::class, 'showImtSimulator'])->name('imt');
-    Route::get('/feng-shui', [ToolsController::class, 'fengShui'])->name('feng-shui'); // Se existir no controller
+    
+    // FENG SHUI (GET + POST)
+    Route::match(['get', 'post'], '/feng-shui', [ToolsController::class, 'fengShui'])->name('feng-shui');
 
     // Ações (POST - AJAX)
     Route::post('/mais-valias/calcular', [ToolsController::class, 'calculateGains'])->name('gains.calculate');
     Route::post('/credito/enviar', [ToolsController::class, 'sendCreditLead'])->name('credit.send');
     Route::post('/imt/enviar', [ToolsController::class, 'sendImtLead'])->name('imt.send');
-    Route::post('/feng-shui', [ToolsController::class, 'processFengShui'])->name('feng-shui.process');
 });
 
-// 7. Infraestrutura
+// 8. Infraestrutura
 Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.send');
+
 Route::get('language/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'pt', 'fr'])) abort(400);
     session(['locale' => $locale]);
     return redirect()->back()->withCookie(cookie('crow_locale', $locale, 525600));
 })->name('language.switch');
 
-// 8. Legal
+// 9. Legal
 Route::controller(LegalController::class)->group(function () {
     Route::get('/politica-privacidade', 'privacy')->name('legal.privacy');
     Route::get('/termos-uso', 'terms')->name('legal.terms');
@@ -77,8 +82,6 @@ Route::controller(LegalController::class)->group(function () {
 | ÁREA RESTRITA (INVESTIDORES & ADMIN)
 |--------------------------------------------------------------------------
 */
-
-Route::post('/access-request', [AccessRequestController::class, 'store'])->name('access-request.store');
 
 Route::middleware(['auth', 'active_access'])->group(function () {
     
@@ -142,6 +145,9 @@ Route::middleware(['auth', 'active_access'])->group(function () {
         Route::get('/properties/pending', [AdminController::class, 'pendingProperties'])->name('properties.pending');
         Route::patch('/properties/{property}/approve-listing', [PropertyController::class, 'approve'])->name('properties.approve-listing');
         Route::patch('/properties/{property}/reject-listing', [PropertyController::class, 'reject'])->name('properties.reject-listing');
+        
+        // Ação de Toggle Energia da Semana
+        Route::patch('/properties/{property}/toggle-energy', [AdminController::class, 'toggleEnergy'])->name('properties.toggle-energy');
 
         Route::patch('/users/{user}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('users.toggle-status');
         Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('users.delete');
@@ -152,4 +158,3 @@ Route::middleware(['auth', 'active_access'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
-

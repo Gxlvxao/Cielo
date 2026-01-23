@@ -4,53 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Property;
-use App\Models\Post; // <--- Importante: Importar o Model Post
+use App\Models\Post; 
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    // Home: A "capa" do site
+    // Home: O Portal de Harmonia (Capa do Site)
     public function home()
     {
-        // 1. Imóveis "Energia da Semana"
-        // Busca imóveis ativos. Se tiver o campo 'is_energy_highlight', prioriza.
-        $energyProperties = Property::where('status', 'active')
-            ->where('is_energy_highlight', true) // Tenta pegar os destaques energéticos primeiro
+        // 1. IMÓVEIS "ENERGIA DA SEMANA"
+        // Tenta buscar 3 destaques ativos (3 é o número ideal para o Grid do layout)
+        $properties = Property::where('status', 'active')
+            ->where('is_energy_of_week', true) // Nome correto da coluna no DB
             ->latest()
-            ->take(4)
+            ->take(3)
             ->get();
 
-        // Fallback: Se não houver destaques marcados, traz os mais recentes normais
-        if ($energyProperties->isEmpty()) {
-            $energyProperties = Property::where('status', 'active')
-                ->where('is_exclusive', false) // Evita mostrar off-market na home se não for intencional
+        // LÓGICA DE PREENCHIMENTO INTELIGENTE (SMART FALLBACK)
+        // Se houver menos de 3 destaques, completamos com os imóveis mais recentes
+        // para garantir que a home page nunca fique com buracos vazios.
+        if ($properties->count() < 3) {
+            $needed = 3 - $properties->count();
+            
+            // Pega os IDs que já temos para não repetir
+            $existingIds = $properties->pluck('id')->toArray();
+
+            $recents = Property::where('status', 'active')
+                ->whereNotIn('id', $existingIds) // Exclui os que já pegamos
+                ->where('is_exclusive', false)   // Garante que são públicos
                 ->latest()
-                ->take(4)
+                ->take($needed)
                 ->get();
+
+            // Funde as duas coleções
+            $properties = $properties->merge($recents);
         }
 
-        // 2. Artigos do Jornal Cielo (Blog)
-        // Busca os 4 posts: Publicados (Data válida) + Ordenados por Destaque e Data
+        // 2. JORNAL CIELO (BLOG)
+        // Busca os 3 posts mais recentes para o rodapé ou seção de blog
         $posts = Post::query()
-            ->with('user') // Eager Loading: Carrega o autor
-            ->whereNotNull('published_at')       // Garante que tem data definida
-            ->where('published_at', '<=', now()) // Garante que a data já chegou (não é futuro)
-            ->orderByDesc('is_featured')         // 1º Critério: É destaque?
-            ->orderByDesc('published_at')        // 2º Critério: Mais recente
-            ->take(4)                            // Pega 4 (1 Destaque + 3 Grid)
+            ->with('user') // Carrega o autor para evitar N+1 queries
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('is_featured')
+            ->orderByDesc('published_at')
+            ->take(3) 
             ->get();
 
-        // Retorna a view Cielo com os dados
-        return view('cielo.home', compact('energyProperties', 'posts'));
+        // Verifica qual view carregar (prioriza a view "cielo" se existir)
+        $viewName = view()->exists('cielo.home') ? 'cielo.home' : 'home';
+
+        return view($viewName, compact('properties', 'posts'));
     }
 
     public function about()
     {
-        // Verifica se existe a view personalizada, senão usa a padrão
         if (view()->exists('cielo.pages.about')) {
             return view('cielo.pages.about');
         }
-        return view('pages.about'); // Nossa view atual criada anteriormente
+        return view('pages.about');
     }
 
     public function contact()
@@ -58,13 +70,12 @@ class PageController extends Controller
         if (view()->exists('cielo.pages.contact')) {
             return view('cielo.pages.contact');
         }
-        return view('pages.contact'); // Nossa view atual
+        return view('pages.contact');
     }
 
-    // Redirecionamentos ou views legadas
+    // Redirecionamentos para manter a integridade se alguém acessar links antigos
     public function services() 
     { 
-        // Se você tiver a view 'pages.services', pode retornar ela aqui:
         if (view()->exists('pages.services')) {
             return view('pages.services');
         }

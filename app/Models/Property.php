@@ -17,6 +17,8 @@ class Property extends Model
         'title',
         'description',
         'cover_image',
+        'is_energy_of_week', // <--- ADICIONAR
+    'energy_tagline',
         'type',
         'transaction_type',
         'condition',
