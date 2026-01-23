@@ -1,114 +1,64 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-graphite leading-tight font-heading">
-            {{ Auth::user()->role === 'developer' ? __('Developer Portal') : __('Client Portal') }}
+        <h2 class="font-serif font-bold text-2xl text-cielo-dark leading-tight">
+            {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            <div class="bg-gradient-to-br from-graphite to-gray-800 rounded-2xl p-8 shadow-xl text-white mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-accent opacity-10 rounded-full blur-3xl -mr-16 -mt-16"></div>
-                <div class="relative z-10">
-                    <h3 class="text-2xl font-bold font-heading mb-2">{{ __('Welcome back, :name', ['name' => Auth::user()->name]) }}</h3>
-                    <p class="text-gray-300">
-                        @if(Auth::user()->role === 'developer')
-                            {{ __('Manage your portfolio and track performance.') }}
-                        @else
-                            {{ __('Welcome to your exclusive investment portal.') }}
-                        @endif
-                    </p>
+    {{-- ======================== --}}
+    {{-- VISÃO DO PARCEIRO (DEV) --}}
+    {{-- ======================== --}}
+    @if(Auth::user()->role === 'developer')
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="text-gray-500 text-xs uppercase tracking-widest font-bold">Meus Imóveis</div>
+                <div class="mt-2 flex items-baseline gap-2">
+                    <span class="text-3xl font-serif text-cielo-dark">{{ Auth::user()->properties()->count() }}</span>
+                    <span class="text-sm text-gray-400">Ativos</span>
                 </div>
+                <a href="{{ route('properties.create') }}" class="mt-4 block text-center bg-cielo-dark text-white text-xs font-bold py-2 rounded hover:bg-cielo-terracotta transition-colors">
+                    + Adicionar Imóvel
+                </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                
-                <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-3 bg-blue-50 rounded-lg text-blue-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        </div>
-                        <h4 class="font-bold text-graphite text-lg">{{ __('My Profile') }}</h4>
-                    </div>
-                    <a href="{{ route('profile.edit') }}" class="text-accent font-medium text-sm hover:underline">{{ __('Manage') }} &rarr;</a>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="text-gray-500 text-xs uppercase tracking-widest font-bold">Clientes / Leads</div>
+                <div class="mt-2 flex items-baseline gap-2">
+                    <span class="text-3xl font-serif text-cielo-dark">{{ Auth::user()->clients()->count() }}</span>
+                    <span class="text-sm text-gray-400">Registados</span>
                 </div>
-
-                @if(Auth::user()->role === 'developer')
-                    <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="p-3 bg-green-50 rounded-lg text-green-600">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                            </div>
-                            <h4 class="font-bold text-graphite text-lg">{{ __('My Properties') }}</h4>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="{{ route('properties.my') }}" class="text-accent font-medium text-sm hover:underline">{{ __('View all') }}</a>
-                            <span class="text-gray-300">|</span>
-                            <a href="{{ route('properties.create') }}" class="text-accent font-medium text-sm hover:underline">{{ __('Add Property') }}</a>
-                        </div>
-                    </div>
-                @else
-                    <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="p-3 bg-accent/10 rounded-lg text-accent">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                            </div>
-                            <h4 class="font-bold text-graphite text-lg">{{ __('Explore Properties') }}</h4>
-                        </div>
-                        <a href="{{ route('properties.index') }}" class="text-accent font-medium text-sm hover:underline">{{ __('View all') }} &rarr;</a>
-                    </div>
-                @endif
-
-                <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="p-3 bg-purple-50 rounded-lg text-purple-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-                        </div>
-                        <h4 class="font-bold text-graphite text-lg">{{ __('Support') }}</h4>
-                    </div>
-                    <button class="text-accent font-medium text-sm hover:underline cursor-not-allowed opacity-50">{{ __('Support') }} (VIP)</button>
-                </div>
+                <a href="{{ route('developer.clients') }}" class="mt-4 block text-center border border-cielo-dark text-cielo-dark text-xs font-bold py-2 rounded hover:bg-gray-50 transition-colors">
+                    Ver Lista
+                </a>
             </div>
 
-            @if(isset($exclusiveProperties) && count($exclusiveProperties) > 0)
-                <div class="mb-6">
-                    <h3 class="text-2xl font-bold font-heading text-graphite mb-4">{{ __('Shared Properties with You') }}</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach($exclusiveProperties as $property)
-                            <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-gray-100 group">
-                                <div class="relative h-48 overflow-hidden">
-                                    <img src="{{ asset('storage/' . ($property->cover_image ?? 'properties/default.jpg')) }}" alt="{{ $property->title }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute top-4 right-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-                                        {{ __('Exclusive') }}
-                                    </div>
-                                </div>
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <div>
-                                            <p class="text-sm text-accent font-medium">{{ $property->city }}</p>
-                                            <h4 class="text-lg font-bold text-graphite line-clamp-1">{{ $property->title }}</h4>
-                                        </div>
-                                        <p class="text-lg font-bold text-graphite">{{ $property->formatted_price }}</p>
-                                    </div>
-                                    <div class="flex items-center gap-4 text-gray-500 text-sm mb-4">
-                                        <div class="flex items-center gap-1">
-                                            <span>{{ $property->bedrooms }}</span> <span class="text-xs">{{ __('Bedrooms') }}</span>
-                                        </div>
-                                        <div class="flex items-center gap-1">
-                                            <span>{{ $property->area }}</span> <span class="text-xs">m²</span>
-                                        </div>
-                                    </div>
-                                    <a href="{{ route('properties.show', $property) }}" class="block w-full text-center bg-graphite text-white py-2 rounded-lg hover:bg-black transition-colors">
-                                        {{ __('View Details') }}
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
-
+            <div class="bg-cielo-terracotta p-6 rounded-2xl shadow-lg text-white">
+                <div class="text-white/80 text-xs uppercase tracking-widest font-bold">Status da Conta</div>
+                <div class="mt-2 text-2xl font-serif">Parceiro Verificado</div>
+                <p class="mt-2 text-xs text-white/70">A sua conta tem permissões para publicar imóveis na rede Private.</p>
+            </div>
         </div>
-    </div>
+    @endif
+
+    {{-- ======================== --}}
+    {{-- VISÃO DO CLIENTE         --}}
+    {{-- ======================== --}}
+    @if(Auth::user()->role === 'client')
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl border border-gray-100 p-8 text-center">
+            <h3 class="font-serif text-2xl text-cielo-dark mb-4">Bem-vindo à sua área privada, {{ Auth::user()->name }}.</h3>
+            <p class="text-gray-500 max-w-lg mx-auto mb-8">
+                Aqui você pode acompanhar oportunidades exclusivas, usar nossos simuladores fiscais e gerir seus dados de acesso.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="{{ route('properties.index') }}" class="px-6 py-3 bg-cielo-dark text-white rounded-lg font-medium hover:bg-cielo-terracotta transition-colors">
+                    Explorar Imóveis
+                </a>
+                <a href="{{ route('tools.gains') }}" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:border-cielo-terracotta hover:text-cielo-terracotta transition-colors">
+                    Simular Impostos
+                </a>
+            </div>
+        </div>
+    @endif
+
 </x-app-layout>
