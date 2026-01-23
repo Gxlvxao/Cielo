@@ -19,10 +19,10 @@ class ChatbotService
 
         if (empty($apiKey)) {
             Log::critical('OpenAI API Key is missing.');
-            throw new \Exception('OpenAI API Key não configurada.');
+            // Em produção, não lance exceção para não quebrar o site inteiro, apenas logue.
+            // Mas para dev, ok lançar.
         }
 
-        // Configuração blindada para Localhost (SSL)
         $this->client = OpenAI::factory()
             ->withApiKey($apiKey)
             ->withHttpClient(new GuzzleClient([
@@ -36,13 +36,20 @@ class ChatbotService
     {
         $tools = $this->getToolsDefinition();
         
-        $systemPrompt = "You are 'Crow AI', the real estate assistant for Crow Global.
+        // --- PERSONALIDADE CIELO ---
+        $systemPrompt = "You are 'Cielo AI', the private real estate concierge for Cielo (a luxury boutique studio in Portugal).
             Current Language: '{$locale}'.
+            
+            BRAND VOICE:
+            - Sophisticated, calm, and professional.
+            - We don't just sell houses; we curate lifestyles.
+            - Use terms like 'curation', 'harmony', 'private collection' instead of just 'listings'.
+
             RULES:
             1. Answer exclusively in '{$locale}'.
-            2. Be concise and professional.
-            3. Use 'search_properties' for buying.
-            4. Use 'submit_sell_lead' for selling.
+            2. Be concise but warm.
+            3. Use 'search_properties' for buying inquiries.
+            4. Use 'submit_sell_lead' for selling inquiries.
             5. Use 'request_off_market_access' ONLY if user asks for exclusive/off-market access.
         ";
 
@@ -57,7 +64,6 @@ class ChatbotService
         );
 
         try {
-            // Chamada à API (Modelo Econômico)
             $response = $this->client->chat()->create([
                 'model' => 'gpt-4o-mini', 
                 'messages' => $messages,
@@ -98,7 +104,7 @@ class ChatbotService
                 $replyContent = $finalResponse->choices[0]->message->content;
             }
 
-            if (empty($replyContent)) $replyContent = "Ok.";
+            if (empty($replyContent)) $replyContent = "Entendido."; // Fallback seguro
             $audioBase64 = $this->textToSpeech($replyContent);
 
             return [
@@ -108,9 +114,9 @@ class ChatbotService
             ];
 
         } catch (\Exception $e) {
-            Log::error("Chatbot Error: " . $e->getMessage());
+            Log::error("Cielo Chatbot Error: " . $e->getMessage());
             return [
-                'reply' => ($locale == 'pt') ? "Tive um erro técnico momentâneo. Tente novamente." : "Temporary technical error.",
+                'reply' => ($locale == 'pt') ? "Estou a calibrar a minha ligação. Tente novamente em breve." : "I am calibrating my connection. Please try again shortly.",
                 'audio' => null,
                 'data' => null
             ];
@@ -124,11 +130,10 @@ class ChatbotService
             $response = $this->client->audio()->speech([
                 'model' => 'tts-1', 
                 'input' => $textSample,
-                'voice' => 'shimmer', 
+                'voice' => 'shimmer', // Voz feminina suave, combina com "Cielo"
             ]);
             return base64_encode($response); 
         } catch (\Exception $e) {
-            Log::error('TTS Error: ' . $e->getMessage());
             return null; 
         }
     }
@@ -151,16 +156,16 @@ class ChatbotService
 
                     $properties = $query->limit(4)->get();
 
-                    if ($properties->isEmpty()) return "No properties found.";
+                    if ($properties->isEmpty()) return "Nenhuma propriedade encontrada nesta curadoria pública.";
 
                     return [
-                        'summary' => "Found " . $properties->count() . " properties.",
+                        'summary' => "Encontrei " . $properties->count() . " imóveis na nossa coleção.",
                         'data' => $properties->map(function($p) {
                             return [
                                 'id' => $p->id,
-                                'title' => $p->title ?? 'Imóvel',
+                                'title' => $p->title ?? 'Imóvel Cielo',
                                 'price' => number_format($p->price, 0, ',', '.') . ' €',
-                                'image' => $p->cover_image ? asset('storage/' . $p->cover_image) : 'https://placehold.co/600x400',
+                                'image' => $p->cover_image ? asset('storage/' . $p->cover_image) : asset('images/placeholder.jpg'),
                                 'link' => route('properties.show', $p->id)
                             ];
                         })
@@ -168,20 +173,21 @@ class ChatbotService
 
                 case 'submit_sell_lead':
                     try {
-                        Mail::raw("Nova Lead de Venda (AI Chatbot):\n\nDescrição: {$args['description']}\nContato: {$args['contact']}", function ($msg) {
-                            $msg->to('admin@crow-global.com') // Troque pelo seu email real de teste
-                                ->subject('Nova Oportunidade de Venda 🏠');
+                        // Email genérico de admin ou o definido no .env
+                        $adminEmail = config('mail.from.address') ?? 'hello@cielo.com';
+                        
+                        Mail::raw("Nova Lead de Venda (Cielo AI):\n\nDescrição: {$args['description']}\nContato: {$args['contact']}", function ($msg) use ($adminEmail) {
+                            $msg->to($adminEmail)
+                                ->subject('💎 Nova Oportunidade de Venda (Cielo)');
                         });
-                        Log::info("Lead email sent.");
                     } catch (\Exception $e) {
                         Log::error("Mail Error: " . $e->getMessage());
                     }
-                    return "Lead saved and admin notified.";
+                    return "Lead recebida e encaminhada para a equipa de curadoria.";
 
                 case 'request_off_market_access':
-                    // Verificação extra para evitar duplicidade de email (Opcional, mas boa prática)
                     if (AccessRequest::where('email', $args['email'])->exists()) {
-                        return "Este e-mail já possui uma solicitação pendente.";
+                        return "Já existe um pedido pendente para este email.";
                     }
 
                     AccessRequest::create([
@@ -191,18 +197,18 @@ class ChatbotService
                         'message' => $args['reason'], 
                         'status' => 'pending',
                         'requested_role' => 'investor', 
-                        'country' => 'Portugal', // Obrigatório no banco
-                        'investor_type' => 'client' // <--- CORREÇÃO: Valor aceito pelo ENUM do banco
+                        'country' => 'Portugal',
+                        'investor_type' => 'client'
                     ]);
                     
-                    return "Request submitted successfully. Waiting for approval.";
+                    return "Pedido submetido ao Private Circle. Aguarde o nosso contacto.";
 
                 default:
-                    return "Function not found.";
+                    return "Função desconhecida.";
             }
         } catch (\Exception $e) {
             Log::error("DB Error ($name): " . $e->getMessage());
-            return "Error executing action: " . $e->getMessage();
+            return "Erro ao processar pedido.";
         }
     }
 
@@ -213,7 +219,7 @@ class ChatbotService
                 'type' => 'function',
                 'function' => [
                     'name' => 'search_properties',
-                    'description' => 'Search properties for sale.',
+                    'description' => 'Search properties for sale in the database.',
                     'parameters' => [
                         'type' => 'object',
                         'properties' => [
@@ -242,7 +248,7 @@ class ChatbotService
                 'type' => 'function',
                 'function' => [
                     'name' => 'request_off_market_access',
-                    'description' => 'Request exclusive access.',
+                    'description' => 'User asks for exclusive or off-market access.',
                     'parameters' => [
                         'type' => 'object',
                         'properties' => [
