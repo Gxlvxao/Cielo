@@ -1,12 +1,19 @@
 <x-public-layout>
-    @include('components.header')
+    {{-- Header da Página (Opcional, usado pelo layout para <title> ou Breadcrumbs) --}}
+    <x-slot name="header">
+        {{ __('nav.tools_imt') }}
+    </x-slot>
 
     <div class="bg-slate-50 min-h-screen pt-32 pb-12">
         
-        {{-- HEADER --}}
+        {{-- HEADER DA FERRAMENTA --}}
         <div class="text-center mb-10 animate-fade-in-up">
-            <h1 class="text-4xl font-black text-gray-900 tracking-tight mb-4">{{ __('tools.imt.title') }}</h1>
-            <p class="text-accent font-bold uppercase tracking-widest text-xs">{{ __('tools.imt.subtitle') }}</p>
+            <h1 class="text-4xl font-black text-gray-900 tracking-tight mb-4">
+                {{ __('tools.imt.title') ?? 'IMT Calculator' }}
+            </h1>
+            <p class="text-accent font-bold uppercase tracking-widest text-xs text-cielo-terracotta">
+                {{ __('tools.imt.subtitle') ?? 'Calculate Taxes & Fees' }}
+            </p>
         </div>
 
         <div class="container mx-auto px-4 md:px-8 max-w-6xl" x-data="imtCalculator()" x-init="calculate()">
@@ -18,26 +25,26 @@
                     
                     <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
                         <h3 class="text-xl font-bold text-gray-900 border-b border-slate-100 pb-4 mb-6 flex items-center gap-3">
-                            <span class="bg-accent text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                            {{ __('tools.imt.section_data') }}
+                            <span class="bg-cielo-terracotta text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+                            {{ __('tools.imt.section_data') ?? 'Property Details' }}
                         </h3>
                         
                         <div class="space-y-6">
                             
                             {{-- Local do imóvel --}}
                             <div>
-                                <label class="block text-xs font-bold uppercase text-slate-500 mb-3">{{ __('tools.imt.label_location') }}</label>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-3">{{ __('tools.imt.label_location') ?? 'Location' }}</label>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <label class="cursor-pointer group">
                                         <input type="radio" name="location" value="continente" x-model="location" @change="calculate()" class="peer sr-only">
-                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-accent peer-checked:bg-accent/5 transition-all text-sm font-bold text-slate-600 peer-checked:text-gray-900 text-center group-hover:border-gray-900/30">
-                                            {{ __('tools.imt.loc_continente') }}
+                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-cielo-terracotta peer-checked:bg-cielo-terracotta/5 transition-all text-sm font-bold text-slate-600 peer-checked:text-gray-900 text-center group-hover:border-gray-900/30">
+                                            {{ __('tools.imt.loc_continente') ?? 'Mainland Portugal' }}
                                         </div>
                                     </label>
                                     <label class="cursor-pointer group">
                                         <input type="radio" name="location" value="ilhas" x-model="location" @change="calculate()" class="peer sr-only">
-                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-accent peer-checked:bg-accent/5 transition-all text-sm font-bold text-slate-600 peer-checked:text-gray-900 text-center group-hover:border-gray-900/30">
-                                            {{ __('tools.imt.loc_islands') }}
+                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-cielo-terracotta peer-checked:bg-cielo-terracotta/5 transition-all text-sm font-bold text-slate-600 peer-checked:text-gray-900 text-center group-hover:border-gray-900/30">
+                                            {{ __('tools.imt.loc_islands') ?? 'Azores / Madeira' }}
                                         </div>
                                     </label>
                                 </div>
@@ -45,15 +52,15 @@
 
                             {{-- Finalidade do imóvel --}}
                             <div>
-                                <label class="block text-xs font-bold uppercase text-slate-500 mb-2">{{ __('tools.imt.label_purpose') }}</label>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-2">{{ __('tools.imt.label_purpose') ?? 'Purpose' }}</label>
                                 <div class="relative">
-                                    <select x-model="purpose" @change="calculate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 font-medium appearance-none">
-                                        <option value="hpp">{{ __('tools.imt.purpose_hpp') }}</option>
-                                        <option value="secundaria">{{ __('tools.imt.purpose_secondary') }}</option>
-                                        <option value="rustico">{{ __('tools.imt.purpose_rustic') }}</option>
-                                        <option value="urbano">{{ __('tools.imt.purpose_urban') }}</option>
-                                        <option value="offshore_pessoal">{{ __('tools.imt.purpose_offshore_personal') }}</option>
-                                        <option value="offshore_entidade">{{ __('tools.imt.purpose_offshore_entity') }}</option>
+                                    <select x-model="purpose" @change="calculate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-cielo-terracotta text-gray-900 font-medium appearance-none">
+                                        <option value="hpp">{{ __('tools.imt.purpose_hpp') ?? 'Permanent Residence (HPP)' }}</option>
+                                        <option value="secundaria">{{ __('tools.imt.purpose_secondary') ?? 'Secondary Residence / Investment' }}</option>
+                                        <option value="rustico">{{ __('tools.imt.purpose_rustic') ?? 'Rustic Land' }}</option>
+                                        <option value="urbano">{{ __('tools.imt.purpose_urban') ?? 'Other Urban Buildings' }}</option>
+                                        <option value="offshore_pessoal">{{ __('tools.imt.purpose_offshore_personal') ?? 'Offshore (Personal)' }}</option>
+                                        <option value="offshore_entidade">{{ __('tools.imt.purpose_offshore_entity') ?? 'Offshore (Entity)' }}</option>
                                     </select>
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -63,26 +70,26 @@
 
                             {{-- Preço do imóvel --}}
                             <div>
-                                <label class="block text-xs font-bold uppercase text-slate-500 mb-2">{{ __('tools.imt.label_price') }}</label>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-2">{{ __('tools.imt.label_price') ?? 'Price (€)' }}</label>
                                 <div class="relative">
-                                    <input type="number" x-model.number="propertyValue" @input="calculate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent text-gray-900 font-bold placeholder-slate-400" placeholder="0,00">
+                                    <input type="number" x-model.number="propertyValue" @input="calculate()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-cielo-terracotta text-gray-900 font-bold placeholder-slate-400" placeholder="0,00">
                                     <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">€</span>
                                 </div>
                             </div>
 
                             {{-- Número de compradores --}}
                             <div>
-                                <label class="block text-xs font-bold uppercase text-slate-500 mb-3">{{ __('tools.imt.label_buyers') }}</label>
+                                <label class="block text-xs font-bold uppercase text-slate-500 mb-3">{{ __('tools.imt.label_buyers') ?? 'Number of Buyers' }}</label>
                                 <div class="flex gap-4">
                                     <label class="cursor-pointer flex-1 group">
                                         <input type="radio" name="buyers" :value="1" x-model.number="buyersCount" @change="calculate()" class="peer sr-only">
-                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-accent peer-checked:bg-accent/5 transition-all text-center text-sm font-bold text-slate-600 peer-checked:text-gray-900 group-hover:border-gray-900/30">
+                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-cielo-terracotta peer-checked:bg-cielo-terracotta/5 transition-all text-center text-sm font-bold text-slate-600 peer-checked:text-gray-900 group-hover:border-gray-900/30">
                                             1
                                         </div>
                                     </label>
                                     <label class="cursor-pointer flex-1">
                                         <input type="radio" name="buyers" :value="2" x-model.number="buyersCount" @change="calculate()" class="peer sr-only">
-                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-accent peer-checked:bg-accent/5 transition-all text-center text-sm font-bold text-slate-600 peer-checked:text-gray-900 group-hover:border-gray-900/30">
+                                        <div class="px-4 py-3 rounded-xl border border-slate-200 peer-checked:border-cielo-terracotta peer-checked:bg-cielo-terracotta/5 transition-all text-center text-sm font-bold text-slate-600 peer-checked:text-gray-900 group-hover:border-gray-900/30">
                                             2
                                         </div>
                                     </label>
@@ -95,36 +102,36 @@
                     {{-- Informação Compradores --}}
                     <div x-transition class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
                         <h3 class="text-xl font-bold text-gray-900 border-b border-slate-100 pb-4 mb-6 flex items-center gap-3">
-                            <span class="bg-accent text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
-                            {{ __('tools.imt.section_buyers_info') }}
+                            <span class="bg-cielo-terracotta text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+                            {{ __('tools.imt.section_buyers_info') ?? 'Buyers Info (for Youth Exemptions)' }}
                         </h3>
                         
                         <div class="space-y-6">
                             
                             {{-- Comprador 1 --}}
                             <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                                <span class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-4 block">{{ __('tools.imt.buyer_1') }}</span>
+                                <span class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-4 block">{{ __('tools.imt.buyer_1') ?? 'Buyer 1' }}</span>
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-xs font-bold text-gray-900 mb-2">{{ __('tools.imt.label_age') }}</label>
-                                        <input type="number" x-model.number="buyer1Age" @input="checkAge(1); calculate()" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Ex: 30">
+                                        <label class="block text-xs font-bold text-gray-900 mb-2">{{ __('tools.imt.label_age') ?? 'Age' }}</label>
+                                        <input type="number" x-model.number="buyer1Age" @input="checkAge(1); calculate()" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cielo-terracotta" placeholder="Ex: 30">
                                     </div>
                                     
                                     <div>
                                         <div class="flex items-center gap-1 mb-2">
-                                            <label class="block text-xs font-bold text-gray-900">{{ __('tools.imt.label_eligible') }}</label>
+                                            <label class="block text-xs font-bold text-gray-900">{{ __('tools.imt.label_eligible') ?? 'Eligible for Youth IMT?' }}</label>
                                             <div class="group relative cursor-help">
                                                 <span class="bg-slate-200 text-slate-500 rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold">?</span>
                                                 <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-xs p-2 rounded hidden group-hover:block z-20 text-center shadow-lg">
-                                                    {{ __('tools.imt.tooltip_eligible') }}
+                                                    {{ __('tools.imt.tooltip_eligible') ?? 'Must be <= 35 years old and not a dependent.' }}
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <div class="flex gap-2">
-                                            <button type="button" @click="setBuyerEligible(1, true)" :class="buyer1Eligible ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.yes') }}</button>
-                                            <button type="button" @click="setBuyerEligible(1, false)" :class="!buyer1Eligible ? 'bg-slate-200 text-slate-700 border-slate-300' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.no') }}</button>
+                                            <button type="button" @click="setBuyerEligible(1, true)" :class="buyer1Eligible ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.yes') ?? 'Yes' }}</button>
+                                            <button type="button" @click="setBuyerEligible(1, false)" :class="!buyer1Eligible ? 'bg-slate-200 text-slate-700 border-slate-300' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.no') ?? 'No' }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -132,28 +139,28 @@
 
                             {{-- Comprador 2 (Condicional) --}}
                             <div x-show="buyersCount === 2" x-transition class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                                <span class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-4 block">{{ __('tools.imt.buyer_2') }}</span>
+                                <span class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-4 block">{{ __('tools.imt.buyer_2') ?? 'Buyer 2' }}</span>
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="block text-xs font-bold text-gray-900 mb-2">{{ __('tools.imt.label_age') }}</label>
-                                        <input type="number" x-model.number="buyer2Age" @input="checkAge(2); calculate()" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Ex: 36">
+                                        <label class="block text-xs font-bold text-gray-900 mb-2">{{ __('tools.imt.label_age') ?? 'Age' }}</label>
+                                        <input type="number" x-model.number="buyer2Age" @input="checkAge(2); calculate()" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cielo-terracotta" placeholder="Ex: 36">
                                     </div>
                                     
                                     <div>
                                         <div class="flex items-center gap-1 mb-2">
-                                            <label class="block text-xs font-bold text-gray-900">{{ __('tools.imt.label_eligible') }}</label>
+                                            <label class="block text-xs font-bold text-gray-900">{{ __('tools.imt.label_eligible') ?? 'Eligible for Youth IMT?' }}</label>
                                             <div class="group relative cursor-help">
                                                 <span class="bg-slate-200 text-slate-500 rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold">?</span>
                                                 <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-xs p-2 rounded hidden group-hover:block z-20 text-center shadow-lg">
-                                                    {{ __('tools.imt.tooltip_eligible') }}
+                                                    {{ __('tools.imt.tooltip_eligible') ?? 'Must be <= 35 years old.' }}
                                                 </div>
                                             </div>
                                         </div>
                                         
                                         <div class="flex gap-2">
-                                            <button type="button" @click="setBuyerEligible(2, true)" :class="buyer2Eligible ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.yes') }}</button>
-                                            <button type="button" @click="setBuyerEligible(2, false)" :class="!buyer2Eligible ? 'bg-slate-200 text-slate-700 border-slate-300' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.no') }}</button>
+                                            <button type="button" @click="setBuyerEligible(2, true)" :class="buyer2Eligible ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.yes') ?? 'Yes' }}</button>
+                                            <button type="button" @click="setBuyerEligible(2, false)" :class="!buyer2Eligible ? 'bg-slate-200 text-slate-700 border-slate-300' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-100'" class="flex-1 py-2 text-xs border rounded-lg transition-all font-bold uppercase">{{ __('tools.imt.no') ?? 'No' }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -164,8 +171,8 @@
 
                     {{-- Botão Simular (Mobile) --}}
                     <div class="mt-8 lg:hidden">
-                        <button @click="scrollToResults" class="w-full bg-gray-900 text-white font-black uppercase tracking-widest py-4 rounded-xl shadow-lg hover:bg-accent transition-all">
-                            {{ __('tools.imt.btn_see_results') }}
+                        <button @click="scrollToResults" class="w-full bg-gray-900 text-white font-black uppercase tracking-widest py-4 rounded-xl shadow-lg hover:bg-cielo-terracotta transition-all">
+                            {{ __('tools.imt.btn_see_results') ?? 'See Results' }}
                         </button>
                     </div>
 
@@ -182,46 +189,46 @@
                             </div>
 
                             <div class="flex justify-between items-start mb-6 border-b border-white/10 pb-4 relative z-10">
-                                <h3 class="text-xl font-bold text-white tracking-tight">{{ __('tools.imt.results_title') }}</h3>
+                                <h3 class="text-xl font-bold text-white tracking-tight">{{ __('tools.imt.results_title') ?? 'Results' }}</h3>
                                 
                                 {{-- Botão de Transparência do Cálculo --}}
                                 <button @click="showBreakdown = !showBreakdown" class="text-xs font-bold text-slate-400 hover:text-white transition-colors flex items-center gap-1 uppercase">
                                     <svg x-show="!showBreakdown" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M10 12h.01"/></svg>
                                     <svg x-show="showBreakdown" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                                    <span x-text="showBreakdown ? '{{ __('tools.imt.btn_close_details') }}' : '{{ __('tools.imt.btn_open_details') }}'"></span>
+                                    <span x-text="showBreakdown ? '{{ __('tools.imt.btn_close_details') ?? 'Close Details' }}' : '{{ __('tools.imt.btn_open_details') ?? 'View Breakdown' }}'"></span>
                                 </button>
                             </div>
 
                             {{-- Seção de Detalhes do Cálculo --}}
                             <div x-show="showBreakdown" x-transition:enter.duration.300ms x-transition:leave.duration.300ms class="bg-white/5 p-4 mb-6 rounded-2xl border border-white/10 text-xs relative z-10">
-                                <h4 class="font-bold mb-3 text-accent uppercase tracking-wider">{{ __('tools.imt.breakdown_title') }}</h4>
+                                <h4 class="font-bold mb-3 text-cielo-terracotta uppercase tracking-wider">{{ __('tools.imt.breakdown_title') ?? 'Calculation Breakdown' }}</h4>
                                 
                                 <div class="space-y-1 text-slate-300">
                                     <div class="flex justify-between">
-                                        <span>{{ __('tools.imt.breakdown_taxable') }}</span>
+                                        <span>{{ __('tools.imt.breakdown_taxable') ?? 'Taxable Value' }}</span>
                                         <span class="font-bold">€ <span x-text="formatMoney(imtBreakdown.taxableValue)"></span></span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span>{{ __('tools.imt.breakdown_buyers') }}</span>
+                                        <span>{{ __('tools.imt.breakdown_buyers') ?? 'Number of Buyers' }}</span>
                                         <span class="font-bold" x-text="buyersCount"></span>
                                     </div>
                                 </div>
 
                                 <div class="space-y-1 text-slate-300 mt-4 border-t border-white/10 pt-3">
-                                    <p class="font-bold text-sm text-white mb-2" x-text="'{{ __('tools.imt.breakdown_rate_applied') }}: ' + imtBreakdown.rateText"></p>
+                                    <p class="font-bold text-sm text-white mb-2" x-text="'{{ __('tools.imt.breakdown_rate_applied') ?? 'Rate' }}: ' + imtBreakdown.rateText"></p>
                                     
                                     <template x-if="imtBreakdown.isJovemBenefit && imtBreakdown.isMarginal">
-                                        <p class="text-slate-400">{{ __('tools.imt.breakdown_marginal_note') }} <span x-text="formatMoney(imtBreakdown.marginalExemption) + '€'"></span>.</p>
+                                        <p class="text-slate-400">{{ __('tools.imt.breakdown_marginal_note') ?? 'Marginal Exemption on' }} <span x-text="formatMoney(imtBreakdown.marginalExemption) + '€'"></span>.</p>
                                     </template>
                                     
                                     <div x-show="imtBreakdown.rateText.includes('Progressiva')" class="text-slate-400">
-                                        {{ __('tools.imt.breakdown_formula') }}
+                                        {{ __('tools.imt.breakdown_formula') ?? '(Value * Rate) - Abatement' }}
                                     </div>
                                 </div>
 
                                 <div class="flex justify-between text-white border-t border-white/10 pt-3 mt-3">
-                                    <span class="font-bold">{{ __('tools.imt.breakdown_total') }}</span>
-                                    <span class="font-black text-accent">€ <span x-text="formatMoney(imtBreakdown.finalIMT)"></span></span>
+                                    <span class="font-bold">{{ __('tools.imt.breakdown_total') ?? 'Calculated IMT' }}</span>
+                                    <span class="font-black text-cielo-terracotta">€ <span x-text="formatMoney(imtBreakdown.finalIMT)"></span></span>
                                 </div>
                                 
                             </div>
@@ -229,17 +236,17 @@
                             {{-- Resultados Principais --}}
                             <div class="space-y-5 relative z-10">
                                 <div class="flex justify-between items-center text-sm font-medium">
-                                    <span class="text-slate-400">{{ __('tools.imt.result_imt') }}</span>
+                                    <span class="text-slate-400">{{ __('tools.imt.result_imt') ?? 'IMT Tax' }}</span>
                                     <span class="font-bold text-lg">€ <span x-text="formatMoney(finalIMT)"></span></span>
                                 </div>
                                 
                                 <div class="flex justify-between items-center text-sm font-medium border-b border-white/10 pb-5">
-                                    <span class="text-slate-400">{{ __('tools.imt.result_stamp') }}</span>
+                                    <span class="text-slate-400">{{ __('tools.imt.result_stamp') ?? 'Stamp Duty (0.8%)' }}</span>
                                     <span class="font-bold text-lg">€ <span x-text="formatMoney(finalStamp)"></span></span>
                                 </div>
 
                                 <div class="bg-white/10 p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
-                                    <p class="text-xs uppercase tracking-widest text-accent font-bold mb-2">{{ __('tools.imt.result_total') }}</p>
+                                    <p class="text-xs uppercase tracking-widest text-cielo-terracotta font-bold mb-2">{{ __('tools.imt.result_total') ?? 'TOTAL TO PAY' }}</p>
                                     <p class="text-4xl font-black text-white tracking-tighter">€ <span x-text="formatMoney(totalPayable)"></span></p>
                                 </div>
                             </div>
@@ -247,9 +254,9 @@
 
                         {{-- Call to Action --}}
                         <div class="text-center space-y-4 pt-4">
-                            <p class="text-sm font-medium text-slate-600">{{ __('tools.imt.cta_text') }}</p>
-                            <button @click="showLeadModal = true" class="block w-full bg-accent text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-red-700 transition-all text-xs shadow-lg transform hover:-translate-y-1">
-                                {{ __('tools.imt.btn_report') }}
+                            <p class="text-sm font-medium text-slate-600">{{ __('tools.imt.cta_text') ?? 'Need a detailed report for your bank?' }}</p>
+                            <button @click="showLeadModal = true" class="block w-full bg-cielo-terracotta text-white font-black uppercase tracking-widest py-4 rounded-xl hover:bg-red-700 transition-all text-xs shadow-lg transform hover:-translate-y-1">
+                                {{ __('tools.imt.btn_report') ?? 'Get Full Report' }}
                             </button>
                         </div>
                     </div>
@@ -265,19 +272,19 @@
             <div x-show="showLeadModal" class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity" @click="showLeadModal = false"></div>
             <div class="inline-block align-bottom bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
                 <div class="px-8 pt-8 pb-6">
-                    <h3 class="text-2xl font-black text-gray-900 mb-2 text-center">{{ __('tools.imt.modal_title') }}</h3>
-                    <p class="text-sm text-slate-500 mb-6 text-center">{{ __('tools.imt.modal_subtitle') }}</p>
+                    <h3 class="text-2xl font-black text-gray-900 mb-2 text-center">{{ __('tools.imt.modal_title') ?? 'Receive Report' }}</h3>
+                    <p class="text-sm text-slate-500 mb-6 text-center">{{ __('tools.imt.modal_subtitle') ?? 'Enter details below' }}</p>
                     <div class="space-y-4">
-                        <input type="text" x-model="lead_name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="{{ __('tools.imt.input_name') }}">
-                        <input type="email" x-model="lead_email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="{{ __('tools.imt.input_email') }}">
+                        <input type="text" x-model="lead_name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="{{ __('tools.imt.input_name') ?? 'Name' }}">
+                        <input type="email" x-model="lead_email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm" placeholder="{{ __('tools.imt.input_email') ?? 'Email' }}">
                     </div>
                 </div>
                 <div class="bg-slate-50 px-8 py-6 flex flex-col gap-3">
-                    <button type="button" @click="submitLead" class="w-full bg-accent text-white font-bold py-3 rounded-xl hover:bg-red-700 transition-all" :disabled="loading">
-                        <span x-show="!loading">{{ __('tools.imt.btn_submit') }}</span>
-                        <span x-show="loading">{{ __('tools.imt.btn_sending') }}</span>
+                    <button type="button" @click="submitLead" class="w-full bg-cielo-terracotta text-white font-bold py-3 rounded-xl hover:bg-red-700 transition-all" :disabled="loading">
+                        <span x-show="!loading">{{ __('tools.imt.btn_submit') ?? 'Send' }}</span>
+                        <span x-show="loading">{{ __('tools.imt.btn_sending') ?? 'Sending...' }}</span>
                     </button>
-                    <button @click="showLeadModal = false" class="text-xs text-slate-400 font-bold uppercase hover:text-gray-900">{{ __('tools.imt.btn_cancel') }}</button>
+                    <button @click="showLeadModal = false" class="text-xs text-slate-400 font-bold uppercase hover:text-gray-900">{{ __('tools.imt.btn_cancel') ?? 'Cancel' }}</button>
                 </div>
             </div>
         </div>
@@ -432,13 +439,13 @@
 
                     if (this.purpose === 'rustico') {
                         imtBaseNormal = valorTotal * 0.05;
-                        imtBreakdownText = '5% ({{ __('tools.imt.rate_flat') }})';
+                        imtBreakdownText = '5% ({{ __('tools.imt.rate_flat') ?? 'Flat Rate' }})';
                     } else if (this.purpose === 'urbano') {
                         imtBaseNormal = valorTotal * 0.065;
-                        imtBreakdownText = '6.5% ({{ __('tools.imt.rate_flat') }})';
+                        imtBreakdownText = '6.5% ({{ __('tools.imt.rate_flat') ?? 'Flat Rate' }})';
                     } else if (this.purpose === 'offshore_pessoal' || this.purpose === 'offshore_entidade') {
                         imtBaseNormal = valorTotal * 0.10;
-                        imtBreakdownText = '10% ({{ __('tools.imt.rate_offshore') }})';
+                        imtBreakdownText = '10% ({{ __('tools.imt.rate_offshore') ?? 'Offshore Rate' }})';
                     } else {
                         let tabela = isHPP ? 
                                     (isContinente ? 'hpp_continente' : 'hpp_ilhas') : 
@@ -446,7 +453,7 @@
                         
                         imtBaseNormal = this.calculateNormalIMT(valorTotal, tabela);
                         
-                        imtBreakdownText = isHPP ? '{{ __('tools.imt.rate_progressive_hpp') }}' : '{{ __('tools.imt.rate_progressive_secondary') }}';
+                        imtBreakdownText = isHPP ? '{{ __('tools.imt.rate_progressive_hpp') ?? 'Progressive Rate (HPP)' }}' : '{{ __('tools.imt.rate_progressive_secondary') ?? 'Progressive Rate (Secondary)' }}';
                     }
 
                     let imtBaseJovem = imtBaseNormal;
@@ -473,21 +480,21 @@
                             }
                             
                             if (valorTotal <= limitIsencao) {
-                                imtBreakdownText = '0% ({{ __('tools.imt.rate_youth_exempt') }})';
+                                imtBreakdownText = '0% ({{ __('tools.imt.rate_youth_exempt') ?? 'Youth Exemption' }})';
                                 this.imtBreakdown.isMarginal = false;
                                 this.imtBreakdown.marginalExemption = valorTotal;
                             } else if (valorTotal > limitIsencao && valorTotal <= limitParcial) {
-                                imtBreakdownText = '8% ({{ __('tools.imt.rate_youth_marginal') }})';
+                                imtBreakdownText = '8% ({{ __('tools.imt.rate_youth_marginal') ?? 'Youth Marginal Rate' }})';
                                 this.imtBreakdown.isMarginal = true;
                                 this.imtBreakdown.marginalExemption = limitIsencao;
                                 this.imtBreakdown.marginalRate = 8;
                             }
                         } else {
-                             imtBreakdownText = '{{ __('tools.imt.rate_hpp_normal_limit') }}';
+                             imtBreakdownText = '{{ __('tools.imt.rate_hpp_normal_limit') ?? 'Standard Rate (Over Limit)' }}';
                         }
                         
                         if (youngBuyersCount < this.buyersCount) {
-                            imtBreakdownText += ` - ${youngBuyersCount}/${this.buyersCount} {{ __('tools.imt.rate_buyers_eligible') }}`;
+                            imtBreakdownText += ` - ${youngBuyersCount}/${this.buyersCount} {{ __('tools.imt.rate_buyers_eligible') ?? 'Buyers Eligible' }}`;
                         }
                     }
                     
@@ -525,7 +532,7 @@
 
                 async submitLead() {
                     if(!this.lead_name || !this.lead_email) { 
-                        alert('{{ __('tools.imt.alert_fill') }}'); 
+                        alert('{{ __('tools.imt.alert_fill') ?? 'Please fill all fields.' }}'); 
                         return; 
                     }
                     this.loading = true;
@@ -552,13 +559,13 @@
 
                         if (!response.ok) throw new Error('Falha no envio');
 
-                        alert('{{ __('tools.imt.alert_success') }}');
+                        alert('{{ __('tools.imt.alert_success') ?? 'Success!' }}');
                         this.showLeadModal = false;
                         this.lead_name = '';
                         this.lead_email = '';
                     } catch(e) {
                         console.error(e);
-                        alert('{{ __('tools.imt.alert_error') }}');
+                        alert('{{ __('tools.imt.alert_error') ?? 'Error sending.' }}');
                     } finally {
                         this.loading = false;
                     }
@@ -566,4 +573,4 @@
             }
         }
     </script>
-</x-public-layout>
+</x-public-layout>  
