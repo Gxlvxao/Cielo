@@ -41,9 +41,20 @@ Route::get('/journal/{post}', [BlogController::class, 'show'])->name('blog.show'
 Route::get('/conversa', [PageController::class, 'contact'])->name('pages.contact');
 Route::post('/conversa/enviar', [ToolsController::class, 'sendContact'])->name('contact.send');
 
-// 6. Ferramentas (Feng Shui)
-Route::get('/ferramentas/feng-shui', [ToolsController::class, 'fengShui'])->name('tools.feng-shui');
-Route::post('/ferramentas/feng-shui', [ToolsController::class, 'processFengShui'])->name('tools.feng-shui.process');
+// 6. FERRAMENTAS (TOOLS) - ADICIONADO AGORA
+Route::prefix('ferramentas')->name('tools.')->group(function () {
+    // Vistas (GET)
+    Route::get('/mais-valias', [ToolsController::class, 'showGainsSimulator'])->name('gains');
+    Route::get('/credito', [ToolsController::class, 'showCreditSimulator'])->name('credit');
+    Route::get('/imt', [ToolsController::class, 'showImtSimulator'])->name('imt');
+    Route::get('/feng-shui', [ToolsController::class, 'fengShui'])->name('feng-shui'); // Se existir no controller
+
+    // Ações (POST - AJAX)
+    Route::post('/mais-valias/calcular', [ToolsController::class, 'calculateGains'])->name('gains.calculate');
+    Route::post('/credito/enviar', [ToolsController::class, 'sendCreditLead'])->name('credit.send');
+    Route::post('/imt/enviar', [ToolsController::class, 'sendImtLead'])->name('imt.send');
+    Route::post('/feng-shui', [ToolsController::class, 'processFengShui'])->name('feng-shui.process');
+});
 
 // 7. Infraestrutura
 Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.send');

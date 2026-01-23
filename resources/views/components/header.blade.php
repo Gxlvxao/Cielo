@@ -2,10 +2,10 @@
     {{-- Ajustei o padding lateral (px-4) e o gap (lg:gap-4 xl:gap-8) para dar espaço ao logo --}}
     <nav x-data="{ mobileOpen: false, toolsOpen: false }" class="pointer-events-auto bg-gray-900/40 backdrop-blur-md border border-white/10 rounded-full px-4 lg:px-4 xl:px-6 py-3 shadow-2xl flex items-center justify-between gap-4 lg:gap-4 xl:gap-8 transition-all duration-300 hover:bg-gray-900/60 w-full max-w-[1400px]">
         
-        {{-- LOGO (MANTIDO GIGANTE) --}}
+        {{-- LOGO CIELO --}}
         <a href="{{ route('home') }}" class="shrink-0 flex items-center gap-2 group relative z-50">
             <img src="{{ asset('images/extenso.png') }}" 
-                 alt="Crow Global Logo" 
+                 alt="Cielo Logo" 
                  class="h-32 md:h-52 w-auto object-contain -my-12 md:-my-20 translate-y-1 md:translate-y-2 transition-transform duration-300 group-hover:scale-105 filter drop-shadow-2xl">
         </a>
 
@@ -58,14 +58,14 @@
             </a>
         </div>
 
-        {{-- ACTIONS (Adicionei 'shrink-0' aqui para impedir que os botões encolham) --}}
+        {{-- ACTIONS --}}
         <div class="hidden lg:flex items-center gap-2 xl:gap-4 shrink-0">
             
             {{-- LANGUAGE SWITCHER --}}
             <div class="flex items-center bg-black/20 rounded-full px-1 py-1 border border-white/5 shrink-0">
-                <a href="{{ route('language.switch', 'pt') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'pt' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">PT</a>
-                <a href="{{ route('language.switch', 'en') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'en' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">EN</a>
-                <a href="{{ route('language.switch', 'fr') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'fr' ? 'bg-accent text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">FR</a>
+                <a href="{{ route('language.switch', 'pt') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'pt' ? 'bg-cielo-terracotta text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">PT</a>
+                <a href="{{ route('language.switch', 'en') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'en' ? 'bg-cielo-terracotta text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">EN</a>
+                <a href="{{ route('language.switch', 'fr') }}" class="px-2 xl:px-3 py-1 rounded-full text-xs font-bold transition-all {{ app()->getLocale() == 'fr' ? 'bg-cielo-terracotta text-white shadow-sm' : 'text-gray-400 hover:text-white' }}">FR</a>
             </div>
 
             <div class="w-px h-6 bg-white/20 mx-1"></div>
@@ -82,7 +82,7 @@
                         {{ __('Log in') }}
                     </a>
                     {{-- Botão Request Access --}}
-                    <a href="{{ route('pages.contact') }}" class="shrink-0 text-sm font-bold text-graphite bg-accent hover:bg-white hover:text-accent px-4 xl:px-5 py-2 rounded-full transition-all shadow-lg shadow-accent/20 whitespace-nowrap">
+                    <a href="{{ route('pages.contact') }}" class="shrink-0 text-sm font-bold text-gray-900 bg-cielo-terracotta hover:bg-white hover:text-cielo-terracotta px-4 xl:px-5 py-2 rounded-full transition-all shadow-lg shadow-cielo-terracotta/20 whitespace-nowrap">
                         {{ __('Request Access') }}
                     </a>
                 @endauth
@@ -94,7 +94,7 @@
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
 
-        {{-- MOBILE MENU (Sem alterações de lógica) --}}
+        {{-- MOBILE MENU --}}
         <div x-show="mobileOpen" 
              @click.away="mobileOpen = false"
              x-transition:enter="transition ease-out duration-200"
@@ -134,15 +134,15 @@
             </a>
 
             <div class="flex justify-center gap-4 py-3 border-y border-white/10 my-1">
-                <a href="{{ route('language.switch', 'pt') }}" class="text-sm font-bold {{ app()->getLocale() == 'pt' ? 'text-accent' : 'text-gray-400' }}">PT</a>
+                <a href="{{ route('language.switch', 'pt') }}" class="text-sm font-bold {{ app()->getLocale() == 'pt' ? 'text-cielo-terracotta' : 'text-gray-400' }}">PT</a>
                 <span class="text-gray-600">|</span>
-                <a href="{{ route('language.switch', 'en') }}" class="text-sm font-bold {{ app()->getLocale() == 'en' ? 'text-accent' : 'text-gray-400' }}">EN</a>
+                <a href="{{ route('language.switch', 'en') }}" class="text-sm font-bold {{ app()->getLocale() == 'en' ? 'text-cielo-terracotta' : 'text-gray-400' }}">EN</a>
                 <span class="text-gray-600">|</span>
-                <a href="{{ route('language.switch', 'fr') }}" class="text-sm font-bold {{ app()->getLocale() == 'fr' ? 'text-accent' : 'text-gray-400' }}">FR</a>
+                <a href="{{ route('language.switch', 'fr') }}" class="text-sm font-bold {{ app()->getLocale() == 'fr' ? 'text-cielo-terracotta' : 'text-gray-400' }}">FR</a>
             </div>
             
             @auth
-                <a href="{{ url('/dashboard') }}" class="block text-accent font-bold px-4 py-3 rounded-xl bg-white/5 text-center">
+                <a href="{{ url('/dashboard') }}" class="block text-cielo-terracotta font-bold px-4 py-3 rounded-xl bg-white/5 text-center">
                     {{ __('Dashboard') }}
                 </a>
             @else
@@ -150,7 +150,7 @@
                     <a href="{{ route('login') }}" class="text-center text-gray-300 py-3 rounded-xl hover:bg-white/5 border border-white/10">
                         {{ __('Log in') }}
                     </a>
-                    <a href="{{ route('pages.contact') }}" class="text-center bg-accent text-white font-bold py-3 rounded-xl shadow-lg">
+                    <a href="{{ route('pages.contact') }}" class="text-center bg-cielo-terracotta text-white font-bold py-3 rounded-xl shadow-lg">
                         {{ __('Request Access') }}
                     </a>
                 </div>

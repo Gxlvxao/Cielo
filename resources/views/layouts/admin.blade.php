@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Admin Portal - Crow Global</title>
+    <title>Admin Portal - Cielo</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|playfair-display:400,700" rel="stylesheet" />
@@ -16,24 +16,24 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="font-sans antialiased bg-gray-50 text-graphite">
+<body class="font-sans antialiased bg-gray-50 text-gray-900">
     <div class="min-h-screen flex flex-col">
         
-        <nav x-data="{ open: false, userMenu: false }" class="bg-graphite text-white shadow-lg sticky top-0 z-50 border-b border-accent/20">
+        <nav x-data="{ open: false, userMenu: false }" class="bg-gray-900 text-white shadow-lg sticky top-0 z-50 border-b border-cielo-terracotta/20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex items-center">
                         <div class="shrink-0 flex items-center gap-2">
-                            <span class="font-heading font-bold text-xl tracking-wider">CROW<span class="text-accent">ADMIN</span></span>
+                            <span class="font-serif font-bold text-xl tracking-wider">CIELO<span class="text-cielo-terracotta">ADMIN</span></span>
                         </div>
                         
                         <div class="hidden md:flex md:ml-10 md:space-x-8 h-full">
                             <a href="{{ route('admin.dashboard') }}" 
-                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.dashboard') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
+                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.dashboard') ? 'border-cielo-terracotta text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
                                 Visão Geral
                             </a>
                             <a href="{{ route('admin.access-requests') }}" 
-                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.access-requests') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
+                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.access-requests') ? 'border-cielo-terracotta text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
                                 Pedidos (Site)
                                 @php
                                     $publicPending = \App\Models\AccessRequest::where('status', 'pending')->count();
@@ -44,7 +44,7 @@
                             </a>
                             
                             <a href="{{ route('admin.exclusive-requests') }}" 
-                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.exclusive-requests') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
+                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.exclusive-requests') ? 'border-cielo-terracotta text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
                                 Carteiras (Devs)
                                 @php
                                     $exclusivePending = \App\Models\User::whereNotNull('developer_id')->where('status', 'pending')->count();
@@ -55,8 +55,13 @@
                             </a>
 
                             <a href="{{ route('admin.properties') }}" 
-                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.properties') ? 'border-accent text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
+                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.properties') ? 'border-cielo-terracotta text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
                                 Imóveis
+                            </a>
+
+                            <a href="{{ route('admin.posts.index') }}" 
+                               class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-150 {{ request()->routeIs('admin.posts.*') ? 'border-cielo-terracotta text-white' : 'border-transparent text-gray-300 hover:text-white hover:border-gray-500' }}">
+                                Jornal
                             </a>
                         </div>
                     </div>
@@ -68,7 +73,7 @@
                                     <div class="text-xs text-gray-400">Administrador</div>
                                     <div class="font-semibold">{{ Auth::user()->name }}</div>
                                 </div>
-                                <div class="h-8 w-8 rounded-full bg-accent flex items-center justify-center text-white font-bold">
+                                <div class="h-8 w-8 rounded-full bg-cielo-terracotta flex items-center justify-center text-white font-bold">
                                     {{ substr(Auth::user()->name, 0, 1) }}
                                 </div>
                             </button>
@@ -97,7 +102,7 @@
 
         <footer class="bg-white border-t border-gray-200 py-4">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-                &copy; {{ date('Y') }} Crow Global Admin. Todos os direitos reservados.
+                &copy; {{ date('Y') }} Cielo Admin. Todos os direitos reservados.
             </div>
         </footer>
     </div>
