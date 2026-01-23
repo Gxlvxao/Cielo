@@ -72,18 +72,39 @@
              x-transition:leave="transition transform duration-500 ease-in"
              x-transition:leave-start="translate-x-0"
              x-transition:leave-end="translate-x-full"
-             class="relative w-full md:w-[500px] h-full bg-cielo-cream p-12 flex flex-col justify-between shadow-2xl">
+             class="relative w-full md:w-[500px] h-full bg-cielo-cream p-12 flex flex-col justify-between shadow-2xl overflow-y-auto">
             
             <button @click="sidebarOpen = false" class="absolute top-8 right-8 p-2 hover:rotate-90 transition duration-300">
                 <svg class="w-8 h-8 text-cielo-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
-            {{-- MENU ATUALIZADO --}}
+            {{-- MENU ATUALIZADO COM FERRAMENTAS --}}
             <nav class="mt-20 space-y-6">
                 @foreach([
                     __('nav.home') => 'home', 
                     __('nav.curation') => 'properties.index', 
-                    __('nav.concept') => 'pages.about',  {{-- AQUI ESTÁ O LINK CORRETO --}}
+                    __('nav.concept') => 'pages.about'
+                ] as $label => $route)
+                    <a href="{{ route($route) }}" class="block font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300">
+                        {{ $label }}
+                    </a>
+                @endforeach
+
+                {{-- DROPDOWN FERRAMENTAS --}}
+                <div x-data="{ toolsOpen: false }">
+                    <button @click="toolsOpen = !toolsOpen" class="flex items-center justify-between w-full font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300 focus:outline-none">
+                        <span>{{ __('nav.simulators') }}</span>
+                        <svg class="w-6 h-6 transform transition-transform duration-300" :class="toolsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    
+                    <div x-show="toolsOpen" x-collapse class="pl-8 mt-4 space-y-3 border-l border-cielo-dark/10 ml-4">
+                        <a href="{{ route('tools.gains') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">{{ __('nav.capital_gains') }}</a>
+                        <a href="{{ route('tools.imt') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">{{ __('nav.imt') }}</a>
+                        <a href="{{ route('tools.credit') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">{{ __('nav.credit') }}</a>
+                    </div>
+                </div>
+
+                @foreach([
                     __('nav.journal') => 'blog.index', 
                     __('nav.contact') => 'pages.contact'
                 ] as $label => $route)
@@ -93,7 +114,7 @@
                 @endforeach
             </nav>
 
-            <div class="space-y-4 text-cielo-navy text-sm">
+            <div class="space-y-4 text-cielo-navy text-sm mt-12">
                 <p>+351 912 345 678</p>
                 <p>hello@cielo.com</p>
                 <div class="flex gap-4 pt-4">
@@ -108,8 +129,8 @@
         {{ $slot }}
     </main>
 
-    <div class="fixed bottom-8 right-8 z-40">
-        @include('components.cielo.chatbot-trigger')
-    </div>
+    {{-- CHATBOT (NOSSO COMPONENTE REAL) --}}
+    <x-chatbot />
+
 </body>
 </html>
