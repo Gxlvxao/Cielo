@@ -1,4 +1,4 @@
-<x-cielo-layout>
+<x-site-layout>
 
     {{-- 1. HERO HEADER (Conceitual) --}}
     <div class="relative w-full h-[60vh] min-h-[500px] bg-cielo-dark">

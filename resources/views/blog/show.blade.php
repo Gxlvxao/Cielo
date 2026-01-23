@@ -1,4 +1,4 @@
-<x-cielo-layout>
+<x-site-layout>
     {{-- SEO & Meta Tags específicas podem ser injetadas aqui via @push('head') se tiver --}}
 
     {{-- 1. PROGRESS BAR DE LEITURA --}}

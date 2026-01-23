@@ -152,3 +152,4 @@ Route::middleware(['auth', 'active_access'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+

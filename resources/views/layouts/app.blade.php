@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Cielo') }} - Luxury Real Estate</title>
-
-    {{-- FAVICON --}}
-    <link rel="icon" href="{{ asset('images/hero.png') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('images/hero.png') }}">
+    <title>{{ config('app.name', 'Cielo') }} - Dashboard</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|playfair-display:400,700" rel="stylesheet" />
@@ -25,239 +21,105 @@
     </style>
 </head>
 <body class="font-sans antialiased bg-gray-50 text-cielo-dark selection:bg-cielo-terracotta selection:text-white">
-    <div class="min-h-screen flex flex-col">
-        
-        {{-- HEADER / NAV FLUTUANTE PREMIUM --}}
-        <header class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 pointer-events-none">
-            <nav x-data="{ mobileOpen: false, toolsOpen: false }" 
-                 @click.away="mobileOpen = false; toolsOpen = false"
-                 class="pointer-events-auto w-full max-w-7xl bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-full pl-6 pr-3 py-3 shadow-2xl flex items-center justify-between transition-all duration-300 hover:bg-gray-900/90 ring-1 ring-white/5">
-                
-                {{-- ESQUERDA: LOGO --}}
-                <div class="flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="shrink-0 flex items-center gap-2 group relative z-50 focus:outline-none">
-                        <div class="flex items-center gap-2">
-                            <div class="w-9 h-9 bg-cielo-terracotta rounded-full flex items-center justify-center text-white font-serif font-bold text-lg shadow-lg group-hover:scale-110 transition-transform">
-                                C
-                            </div>
-                            <span class="font-serif font-bold text-lg tracking-wider text-white hidden sm:block">
-                                CIELO
-                            </span>
-                        </div>
-                    </a>
+    
+    <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-50 overflow-hidden">
 
-                    {{-- DESKTOP MENU LINKS --}}
-                    <div class="hidden lg:flex items-center gap-1">
-                        <a href="{{ route('properties.index') }}" 
-                           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('properties.*') ? 'text-white bg-white/10 shadow-inner' : 'text-gray-300 hover:text-white hover:bg-white/5' }}">
-                            {{ __('nav.properties') }}
-                        </a>
-                        
-                        <a href="{{ route('pages.about') }}" 
-                           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('pages.about') ? 'text-white bg-white/10 shadow-inner' : 'text-gray-300 hover:text-white hover:bg-white/5' }}">
-                            {{ __('nav.concept') }}
-                        </a>
-
-                        {{-- DROPDOWN FERRAMENTAS --}}
-                        <div class="relative">
-                            <button @click="toolsOpen = !toolsOpen" 
-                                    class="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('tools.*') ? 'text-white bg-white/10 shadow-inner' : 'text-gray-300 hover:text-white hover:bg-white/5' }}">
-                                <span>{{ __('nav.tools') }}</span>
-                                <svg class="w-3.5 h-3.5 transition-transform duration-300" :class="toolsOpen ? 'rotate-180 text-cielo-terracotta' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            
-                            {{-- Dropdown Content --}}
-                            <div x-show="toolsOpen" 
-                                 x-transition:enter="transition ease-out duration-200"
-                                 x-transition:enter-start="opacity-0 translate-y-2"
-                                 x-transition:enter-end="opacity-100 translate-y-0"
-                                 x-transition:leave="transition ease-in duration-150"
-                                 x-transition:leave-start="opacity-100 translate-y-0"
-                                 x-transition:leave-end="opacity-0 translate-y-2"
-                                 class="absolute top-full left-0 mt-3 w-56 bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl overflow-hidden py-2 z-50 ring-1 ring-black/20"
-                                 style="display: none;">
-                                
-                                <a href="{{ route('tools.gains') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-cielo-terracotta transition-colors group">
-                                    <span class="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-cielo-terracotta transition-colors"></span>
-                                    {{ __('nav.tools_gains') }}
-                                </a>
-                                <a href="{{ route('tools.imt') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-cielo-terracotta transition-colors group">
-                                    <span class="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-cielo-terracotta transition-colors"></span>
-                                    {{ __('nav.tools_imt') }}
-                                </a>
-                                <a href="{{ route('tools.credit') }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-cielo-terracotta transition-colors group">
-                                    <span class="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-cielo-terracotta transition-colors"></span>
-                                    {{ __('nav.tools_credit') }}
-                                </a>
-                            </div>
-                        </div>
-
-                        <a href="{{ route('blog.index') }}" 
-                           class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 {{ request()->routeIs('blog.*') ? 'text-white bg-white/10 shadow-inner' : 'text-gray-300 hover:text-white hover:bg-white/5' }}">
-                            {{ __('nav.journal') }}
-                        </a>
+        {{-- SIDEBAR PRIVADA (ADMIN/CLIENT) --}}
+        <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 text-white transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 flex flex-col shadow-2xl border-r border-white/10">
+            
+            <div class="h-20 flex items-center justify-center border-b border-white/10 bg-gray-900">
+                <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-cielo-terracotta rounded-full flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg group-hover:scale-110 transition-transform">
+                        C
                     </div>
-                </div>
-
-                {{-- DIREITA: ACTIONS & MOBILE TOGGLE --}}
-                <div class="flex items-center gap-2 sm:gap-4">
-                    
-                    {{-- IDIOMA --}}
-                    <div class="hidden lg:flex items-center bg-black/20 rounded-full p-1 border border-white/5">
-                        @foreach(['pt', 'en', 'fr'] as $lang)
-                            <a href="{{ route('language.switch', $lang) }}" 
-                               class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all duration-300 {{ app()->getLocale() == $lang ? 'bg-cielo-terracotta text-white shadow-md' : 'text-gray-400 hover:text-white' }}">
-                               {{ $lang }}
-                            </a>
-                        @endforeach
-                    </div>
-
-                    <div class="hidden lg:block w-px h-6 bg-white/10"></div>
-
-                    {{-- CTA / LOGIN --}}
-                    <div class="hidden lg:flex items-center gap-3">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="flex items-center gap-2 text-sm font-bold text-gray-900 bg-white hover:bg-cielo-terracotta hover:text-white px-5 py-2.5 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:shadow-cielo-terracotta/30">
-                                {{ __('nav.dashboard') }}
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm font-medium text-gray-300 hover:text-white px-2 transition-colors">
-                                {{ __('nav.login') }}
-                            </a>
-                            <a href="{{ route('pages.contact') }}" class="text-sm font-bold text-white bg-cielo-terracotta hover:bg-white hover:text-cielo-terracotta px-5 py-2.5 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                                {{ __('nav.request_access') }}
-                            </a>
-                        @endauth
-                    </div>
-
-                    {{-- MOBILE MENU BUTTON --}}
-                    <button @click="mobileOpen = !mobileOpen" 
-                            class="lg:hidden p-2 text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path x-show="!mobileOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                            <path x-show="mobileOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                {{-- === MOBILE DROPDOWN MENU === --}}
-                <div x-show="mobileOpen" 
-                     x-cloak
-                     x-transition:enter="transition ease-out duration-300"
-                     x-transition:enter-start="opacity-0 -translate-y-4 scale-95"
-                     x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                     x-transition:leave="transition ease-in duration-200"
-                     x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                     x-transition:leave-end="opacity-0 -translate-y-4 scale-95"
-                     class="absolute top-full left-0 right-0 mt-3 p-4 bg-gray-900/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl lg:hidden flex flex-col gap-2 ring-1 ring-white/10 overflow-hidden">
-                    
-                    <div class="space-y-1">
-                        <a href="{{ route('home') }}" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                            {{ __('nav.home') }}
-                        </a>
-                        <a href="{{ route('properties.index') }}" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                            {{ __('nav.properties') }}
-                        </a>
-                        <a href="{{ route('pages.about') }}" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                            {{ __('nav.concept') }}
-                        </a>
-                        
-                        {{-- Ferramentas Mobile --}}
-                        <div x-data="{ toolsMobile: false }" class="rounded-xl overflow-hidden bg-white/5">
-                            <button @click="toolsMobile = !toolsMobile" class="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-gray-300 hover:text-white transition-colors">
-                                <span>{{ __('nav.tools') }}</span>
-                                <svg class="w-4 h-4 transition-transform duration-300" :class="toolsMobile ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                            </button>
-                            <div x-show="toolsMobile" x-collapse class="bg-black/20 border-t border-white/5">
-                                <a href="{{ route('tools.gains') }}" class="block pl-8 pr-4 py-3 text-sm text-gray-400 hover:text-cielo-terracotta">{{ __('nav.tools_gains') }}</a>
-                                <a href="{{ route('tools.imt') }}" class="block pl-8 pr-4 py-3 text-sm text-gray-400 hover:text-cielo-terracotta">{{ __('nav.tools_imt') }}</a>
-                                <a href="{{ route('tools.credit') }}" class="block pl-8 pr-4 py-3 text-sm text-gray-400 hover:text-cielo-terracotta">{{ __('nav.tools_credit') }}</a>
-                            </div>
-                        </div>
-
-                        <a href="{{ route('blog.index') }}" class="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                            {{ __('nav.journal') }}
-                        </a>
-                    </div>
-
-                    <div class="h-px bg-white/10 my-2"></div>
-
-                    {{-- Idioma Mobile --}}
-                    <div class="flex justify-center gap-2 py-2">
-                        @foreach(['pt', 'en', 'fr'] as $lang)
-                            <a href="{{ route('language.switch', $lang) }}" 
-                               class="w-10 h-10 flex items-center justify-center rounded-full text-xs font-bold transition-all {{ app()->getLocale() == $lang ? 'bg-cielo-terracotta text-white' : 'bg-white/5 text-gray-400' }}">
-                                {{ strtoupper($lang) }}
-                            </a>
-                        @endforeach
-                    </div>
-
-                    <div class="h-px bg-white/10 my-2"></div>
-
-                    {{-- Auth Mobile --}}
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="block w-full py-3 text-center rounded-xl bg-cielo-terracotta text-white font-bold shadow-lg">
-                            {{ __('nav.dashboard') }}
-                        </a>
-                    @else
-                        <div class="grid grid-cols-2 gap-3">
-                            <a href="{{ route('login') }}" class="py-3 text-center rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 font-medium">
-                                {{ __('nav.login') }}
-                            </a>
-                            <a href="{{ route('pages.contact') }}" class="py-3 text-center rounded-xl bg-white text-gray-900 hover:bg-gray-100 font-bold">
-                                {{ __('nav.request_access') }}
-                            </a>
-                        </div>
-                    @endauth
-                </div>
-            </nav>
-        </header>
-
-        {{-- ESPAÇAMENTO DO MENU FIXO --}}
-        <div class="mt-28"></div>
-
-        {{-- HEADER DA PÁGINA (Com proteção contra erro de Array) --}}
-        @if (isset($header))
-            <header class="bg-white shadow-sm border-b border-gray-100 mb-8 relative z-30">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    @if(is_string($header) || is_object($header))
-                        {{ $header }}
-                    @else
-                        <h2 class="font-serif text-xl text-cielo-dark leading-tight">
-                            {{ is_array($header) ? ($header['title'] ?? 'Cielo Tools') : 'Cielo' }}
-                        </h2>
-                    @endif
-                </div>
-            </header>
-        @endif
-
-        <main class="flex-grow px-4 sm:px-6 lg:px-8">
-            {{ $slot }}
-        </main>
-
-        <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-                <div class="mb-2 md:mb-0">
-                    &copy; {{ date('Y') }} <span class="text-cielo-dark font-bold font-serif">CIELO</span>. {{ __('All rights reserved.') }}
-                </div>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:text-cielo-terracotta">{{ __('Support') }}</a>
-                    <a href="{{ route('legal.privacy') }}" class="hover:text-cielo-terracotta">{{ __('Privacy Policy') }}</a>
-                </div>
+                    <span class="font-serif font-bold text-xl tracking-wider text-white">CIELO</span>
+                </a>
             </div>
-        </footer>
-    </div>
 
-    {{-- Floating Action Buttons --}}
-    <div class="fixed bottom-6 right-6 flex flex-col gap-4 z-40" x-data="{ showTop: false }" @scroll.window="showTop = (window.pageYOffset > 300)">
-        <button onclick="window.history.back()" class="w-12 h-12 bg-white text-gray-800 rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 hover:scale-110 transition-all duration-300 border border-gray-200" title="{{ __('Go Back') }}">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-        </button>
-        <button x-show="showTop" x-transition @click="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-12 h-12 bg-cielo-terracotta text-white rounded-full shadow-lg flex items-center justify-center hover:bg-cielo-terracotta/90 hover:scale-110 transition-all duration-300" title="{{ __('Back to Top') }}">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
-        </button>
-    </div>
+            <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+                @auth
+                    @if(Auth::user()->isAdmin())
+                        {{-- MENU ADMINISTRADOR --}}
+                        <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 mt-2">Administration</p>
 
-    <x-cookie-banner />
+                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all {{ request()->routeIs('admin.dashboard') ? 'bg-cielo-terracotta text-white shadow-md' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                            {{-- Icon Overview --}}
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            {{ __('Overview') }}
+                        </a>
+                        
+                        {{-- Links Admin adicionais aqui (Requests, Wallets, etc) copiados do seu arquivo anterior --}}
+                        <a href="{{ route('admin.access-requests') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all {{ request()->routeIs('admin.access-requests') ? 'bg-cielo-terracotta text-white shadow-md' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                             <span>{{ __('Requests') }}</span>
+                        </a>
+
+                        <a href="{{ route('admin.properties.pending') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all {{ request()->routeIs('admin.properties.pending') ? 'bg-cielo-terracotta text-white shadow-md' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                            <span>{{ __('Moderation') }}</span>
+                       </a>
+
+                    @else
+                        {{-- MENU CLIENTE / DEVELOPER --}}
+                        <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 mt-2">Client Area</p>
+
+                        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all {{ request()->routeIs('dashboard') ? 'bg-cielo-terracotta text-white shadow-md' : 'text-gray-400 hover:bg-white/5 hover:text-white' }}">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            {{ __('My Investments') }}
+                        </a>
+
+                        @can('manageProperties', App\Models\User::class)
+                            <a href="{{ route('properties.my') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white">
+                                {{ __('My Properties') }}
+                            </a>
+                        @endcan
+                    @endif
+                @endauth
+            </nav>
+
+            {{-- PROFILE FOOTER --}}
+            <div class="border-t border-white/10 bg-gray-900/50 p-4">
+                @auth
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-cielo-terracotta flex items-center justify-center text-white font-bold text-sm">
+                            {{ substr(Auth::user()->name, 0, 1) }}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-white truncate">{{ Auth::user()->name }}</p>
+                            <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                        </div>
+                    </div>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white bg-white/5 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-all">
+                            {{ __('Log Out') }}
+                        </button>
+                    </form>
+                @endauth
+            </div>
+        </aside>
+
+        {{-- MAIN CONTENT AREA --}}
+        <div class="flex-1 flex flex-col overflow-hidden relative">
+            <header class="bg-white shadow-sm lg:hidden flex items-center justify-between p-4 z-40">
+                <button @click="sidebarOpen = true" class="text-gray-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <span class="font-serif font-bold text-lg text-cielo-dark">CIELO DASHBOARD</span>
+            </header>
+
+            <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 z-40 bg-black/50 lg:hidden" x-transition.opacity></div>
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6">
+                @if (isset($header))
+                    <div class="mb-8">
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                            {{ $header }}
+                        </div>
+                    </div>
+                @endif
+                
+                {{ $slot }}
+            </main>
+        </div>
+    </div>
 </body>
 </html>

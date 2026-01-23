@@ -1,4 +1,4 @@
-<x-cielo-layout>
+<x-site-layout>
     
     <x-cielo.hero-section />
 

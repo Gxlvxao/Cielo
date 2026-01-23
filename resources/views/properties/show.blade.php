@@ -1,4 +1,4 @@
-<x-cielo-layout>
+<x-site-layout>
 
     <div class="pt-32 pb-20 px-4 md:px-6 bg-white min-h-screen">
         <div class="max-w-[90rem] mx-auto">

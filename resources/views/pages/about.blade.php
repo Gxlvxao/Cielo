@@ -1,4 +1,4 @@
-<x-cielo-layout>
+<x-site-layout>
     
     {{-- 1. INTRODUÇÃO (Texto Simples e Elegante) --}}
     <section class="bg-white pt-48 pb-24 px-6 relative z-10">

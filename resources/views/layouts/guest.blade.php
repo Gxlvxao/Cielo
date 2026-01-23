@@ -5,34 +5,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Cielo') }} - Client Area</title>
+        <title>{{ config('app.name', 'Cielo') }}</title>
 
+        {{-- Fonts --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-gray-900 bg-cielo-dark selection:bg-cielo-terracotta selection:text-white">
-        
+    <body class="font-sans text-cielo-dark antialiased bg-cielo-cream">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-            
-            <div class="mb-8">
+            {{-- Logo --}}
+            <div class="mb-6">
                 <a href="/" class="flex flex-col items-center group">
-                    <h1 class="font-serif text-4xl text-white tracking-widest uppercase">Cielo</h1>
-                    <span class="text-[10px] text-cielo-accent tracking-[0.4em] uppercase mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        Back to Home
-                    </span>
+                    <div class="w-16 h-16 bg-cielo-terracotta rounded-full flex items-center justify-center text-white font-serif font-bold text-3xl shadow-lg group-hover:scale-110 transition-transform duration-500">
+                        C
+                    </div>
+                    <span class="mt-4 font-serif text-2xl tracking-widest text-cielo-dark uppercase">Cielo</span>
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-8 py-10 bg-white shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden sm:rounded-sm relative">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cielo-dark via-cielo-terracotta to-cielo-dark"></div>
-                
+            {{-- Card de Login --}}
+            <div class="w-full sm:max-w-md mt-6 px-8 py-10 bg-white shadow-2xl overflow-hidden sm:rounded-2xl border border-cielo-dark/5">
                 {{ $slot }}
             </div>
-
-            <div class="mt-8 text-white/20 text-xs tracking-widest uppercase">
-                © {{ date('Y') }} Cielo Real Estate
+            
+            {{-- Footer Simples --}}
+            <div class="mt-8 text-center text-xs text-cielo-navy/40 uppercase tracking-widest">
+                &copy; {{ date('Y') }} Cielo Real Estate
             </div>
         </div>
     </body>

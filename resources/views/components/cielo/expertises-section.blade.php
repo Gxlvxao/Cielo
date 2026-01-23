@@ -1,7 +1,6 @@
 <section class="bg-cielo-dark text-cielo-cream py-32 px-6 relative z-20">
     <div class="max-w-[90rem] mx-auto">
         
-        {{-- Aumentei o espaçamento inferior (mb) de 32 para 48 --}}
         <h2 class="font-serif text-5xl md:text-7xl mb-48 text-white">
             {{ __('home.expertise.main_title') }}
         </h2>
@@ -26,7 +25,6 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                         
                         <div class="lg:col-span-4">
-                            {{-- Mudei a cor do número para branco com opacidade --}}
                             <span class="font-mono text-sm text-white mb-4 block opacity-60">
                                 [0{{ $i }}]
                             </span>
@@ -42,9 +40,9 @@
                         </div>
 
                         <div class="lg:col-span-3 pt-4 lg:pt-0">
+                            {{-- AQUI É ONDE DAVA O ERRO: Agora o PHP espera que 'tags' seja um array --}}
                             <ul class="space-y-3 border-l border-white/10 pl-6 lg:pl-8">
                                 @foreach(__("home.expertise.$i.tags") as $tag)
-                                    {{-- Mudei as tags para branco (com hover para branco total) --}}
                                     <li class="text-xs uppercase tracking-widest text-white/60 block transform transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">
                                         {{ $tag }}
                                     </li>
