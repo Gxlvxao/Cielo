@@ -1,5 +1,5 @@
 {
-    "seo.title": "Boutique Immobilière",
+    "seo.title": "Immobilier de Luxe",
     
     "nav.menu_label": "Menu",
     "nav.home": "Accueil",
@@ -15,6 +15,98 @@
     "nav.tools_gains": "Plus-values",
     "nav.tools_imt": "Simulateur IMT",
     "nav.tools_credit": "Crédit Immobilier",
+
+    "home.hero.title": "Vivez là où vous vous sentez <br> <span class=\"italic font-serif\">le plus vivant.</span>",
+    "home.hero.subtitle": "Une curation raffinée de propriétés au Portugal pour ceux qui valorisent l'harmonie, la nature et la liberté.", 
+    "home.scroll_label": "Défiler",
+    "home.intro_title": "Plus que des briques et du mortier. Nous négocions des <span class=\"italic text-cielo-terracotta\">rêves</span> et des héritages.",
+    "home.intro_text": "De l'architecture à l'énergie environnementale, nous sélectionnons des maisons qui élèvent votre niveau de vie. Nous ne vendons pas de propriétés; nous connectons les âmes aux espaces.",
+    
+    "home.about.label": "À PROPOS",
+    "home.about.text": "<span class=\"font-sans tracking-widest uppercase text-sm mr-2\">CIELO –</span> Elevated Living est un studio immobilier guidé par des valeurs, enraciné à <span class=\"italic font-serif\">Lisbonne et Cascais</span>.",
+    "home.about.subtext": "Plus que vendre des maisons, nous défendons des choix éthiques et une manière consciente d'habiter l'espace.",
+
+    "home.stats.years_label": "ANNÉES D'EXPÉRIENCE",
+    "home.stats.years_desc": "Plus d'une décennie d'expérience sur le marché immobilier portugais.",
+    "home.stats.satisfaction_label": "SATISFACTION",
+    "home.stats.satisfaction_desc": "Les clients font confiance à CIELO et recommandent nos services.",
+    "home.stats.sales_label": "VENTES",
+    "home.stats.sales_desc": "Un portefeuille croissant de propriétés vendues au Portugal.",
+    "home.stats.homeowners_label": "PROPRIÉTAIRES",
+    "home.stats.homeowners_desc": "Des familles et des individus vivant dans des espaces que nous avons vendus.",
+
+    "home.properties.label": "BIENS DISPONIBLES",
+    "home.properties.title": "Trouvez votre Calme. <br> <span class=\"italic font-serif text-cielo-terracotta\">Trouvez CIELO.</span>",
+    "home.properties.view_all": "Voir Tous les Biens",
+    
+    "properties.exclusive_label": "Liste Exclusive",
+    "properties.view_btn": "Voir Bien",
+    "properties.beds": "Lits",
+    
+    "home.expertise.title": "Notre Expertise",
+    "home.expertise.text": "Une approche holistique intégrant les données du marché, une analyse architecturale approfondie et une sensibilité énergétique.",
+    "home.expertise.service_1": "Analyse de Marché",
+    "home.expertise.service_2": "Consultation Feng Shui",
+    "home.expertise.service_3": "Conseil Juridique",
+    "home.expertise.service_4": "Architecture & Design",
+
+    "home.partners.label": "NOS PARTENAIRES",
+    "home.partners.title": "Créé en Collaboration",
+    "home.partners.subtitle": "Écosystème",
+    "home.partners.text": "Notre travail est soutenu par un écosystème de confiance : professionnels de l'immobilier, experts en inspection, avocats et consultants Feng Shui.", 
+
+    "home.testimonials.label": "TÉMOIGNAGES",
+    "home.testimonials.title": "Histoires de <br> <span class=\"italic font-serif text-cielo-terracotta\">Clients et Partenaires</span>",
+    
+    "home.blog.label": "ARTICLES & GUIDES",
+    "home.blog.view_all": "Voir Tout",
+    "home.blog.read_more": "Lire l'Histoire",
+    "home.blog.min_read": "min lecture", 
+    
+    "home.faq.title": "Tout ce que vous pourriez <br> <span class=\"italic text-cielo-terracotta\">vouloir savoir.</span>",
+
+    "home.faq.q1": "En quoi CIELO diffère d'une agence traditionnelle?",
+    "home.faq.a1": "CIELO fonctionne comme un studio immobilier plutôt qu'une agence classique. Nous nous concentrons sur le conseil, la curation et les relations à long terme.",
+
+    "home.faq.q2": "Vendez-vous seulement des maisons?",
+    "home.faq.a2": "Non. Nous soutenons nos clients avec des analyses de marché, du conseil en relocalisation, des solutions de financement, du Feng Shui et des inspections.",
+
+    "home.faq.q3": "Où êtes-vous basés?",
+    "home.faq.a3": "Notre studio est basé à Lisbonne, avec une forte présence à Cascais. Nous opérons dans tout le Portugal sous la licence AMI 12818.",
+
+    "home.faq.q4": "Comment commencer à travailler avec CIELO?",
+    "home.faq.a4": "Tout commence par une conversation. Nous prenons le temps de comprendre vos objectifs avant de vous présenter des opportunités.",
+
+    "home.faq.q5": "Représentez-vous les acheteurs ou les vendeurs?",
+    "home.faq.a5": "Nous travaillons avec les deux. Notre approche est guidée par la transparence et l'éthique.",
+
+    "home.faq.q6": "Travaillez-vous avec d'autres agents?",
+    "home.faq.a6": "Oui. Nous collaborons avec un réseau sélectionné de courtiers, d'experts et de partenaires juridiques.",
+
+    "home.faq.q7": "Aidez-vous pour le financement?",
+    "home.faq.a7": "Oui. Nous collaborons avec des partenaires financiers pour vous présenter des options adaptées.",
+
+    "home.faq.q8": "Comment évaluez-vous le Feng Shui?",
+    "home.faq.a8": "Notre analyse prend en compte l'orientation, la lumière et la circulation. Nous collaborons avec des consultants certifiés pour approfondir.",
+
+    "home.faq.q9": "Pouvez-vous aider après l'achat?",
+    "home.faq.a9": "Oui. Nous continuons à soutenir nos clients pour les rénovations et le design d'intérieur.",
+
+    "home.faq.q10": "Le service convient-il aux investisseurs?",
+    "home.faq.a10": "Oui. Nous conseillons également les investisseurs cherchant des actifs de qualité et une valeur à long terme.",
+    
+    "footer.title": "Trouvez une maison qui <br> <span class=\"italic text-cielo-accent\">correspond à votre vie.</span>",
+    "footer.text": "Que vous construisiez ou soyez prêt à emménager, nous sommes là pour vous aider à vous sentir chez vous.",
+    "footer.cta": "Prendre Contact",
+    "footer.contacts_title": "Contacts",
+    "footer.schedule": "Lun - Ven : 9h - 19h",
+    "footer.legal_title": "Juridique & Conformité",
+    "footer.privacy": "Politique de Confidentialité",
+    "footer.terms": "Conditions d'Utilisation",
+    "footer.cookies": "Politique de Cookies",
+    "footer.ral": "Résolution des Litiges (RAL)",
+    "footer.contact": "Contactez-nous",
+    "footer.developed": "Développé par",
 
     "tools.gains.title": "Simulateur de Plus-values",
     "tools.gains.subtitle": "Simulation Fiscale Immobilière",
@@ -184,37 +276,5 @@
     "tools.credit.btn_cancel": "Annuler",
     "tools.credit.alert_fill": "Veuillez remplir les champs requis.",
     "tools.credit.alert_success": "Rapport envoyé!",
-    "tools.credit.alert_error": "Erreur d'envoi.",
-
-    "home.hero.title": "Vivez là où vous vous sentez <br> <span class=\"italic font-serif\">le plus vivant.</span>",
-    "home.hero.subtitle": "Une curation raffinée de propriétés au Portugal pour ceux qui valorisent l'harmonie, la nature et la liberté.", 
-
-    "home.about.label": "À PROPOS",
-    "home.about.text": "<span class=\"font-sans tracking-widest uppercase text-sm mr-2\">CIELO –</span> Elevated Living est un studio immobilier guidé par des valeurs, enraciné à <span class=\"italic font-serif\">Lisbonne et Cascais</span>.",
-    "home.about.subtext": "Plus que vendre des maisons, nous défendons des choix éthiques et une manière consciente d'habiter l'espace.",
-
-    "home.properties.label": "BIENS DISPONIBLES",
-    "home.properties.title": "Trouvez votre Calme. <br> <span class=\"italic font-serif text-cielo-terracotta\">Trouvez CIELO.</span>",
-    "home.properties.view_all": "Voir Tous les Biens",
-
-    "home.partners.label": "NOS PARTENAIRES",
-    "home.partners.title": "Créé en Collaboration",
-    "home.partners.text": "Notre travail est soutenu par un écosystème de confiance : professionnels de l'immobilier, experts en inspection, avocats et consultants Feng Shui.", 
-
-    "home.testimonials.label": "TÉMOIGNAGES",
-    "home.testimonials.title": "Histoires de <br> <span class=\"italic font-serif text-cielo-terracotta\">Clients et Partenaires</span>",
-    
-    "home.blog.label": "ARTICLES & GUIDES",
-    "home.blog.view_all": "Voir Tout",
-    "home.blog.read_more": "Lire l'Histoire",
-    "home.blog.min_read": "min lecture", 
-
-    "footer.title": "Trouvez une maison qui <br> <span class=\"italic text-cielo-accent\">correspond à votre vie.</span>",
-    "footer.text": "Que vous construisiez ou soyez prêt à emménager, nous sommes là pour vous aider à vous sentir chez vous.",
-    "footer.cta": "Prendre Contact",
-    "footer.privacy": "Politique de Confidentialité",
-    "footer.terms": "Conditions d'Utilisation",
-    "footer.contact": "Contactez-nous",
-    "footer.developed": "Développé par",
-    "seo.title": "Immobilier de Luxe"
+    "tools.credit.alert_error": "Erreur d'envoi."
 }

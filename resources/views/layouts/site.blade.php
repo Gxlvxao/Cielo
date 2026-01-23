@@ -18,7 +18,7 @@
         .menu-backdrop { backdrop-filter: blur(8px); }
     </style>
 </head>
-<body class="font-sans text-cielo-dark bg-cielo-cream antialiased" x-data="{ sidebarOpen: false }">
+<body class="font-sans text-cielo-dark bg-cielo-cream antialiased selection:bg-cielo-terracotta selection:text-white" x-data="{ sidebarOpen: false }">
 
     {{-- PUBLIC HEADER (Fixo no topo) --}}
     <header class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center transition-all duration-300 mix-blend-difference text-white">
@@ -117,7 +117,6 @@
                         <a href="{{ route('tools.credit') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">
                             {{ __('nav.credit') ?? 'Credit' }}
                         </a>
-                        {{-- NOVO: FENG SHUI --}}
                         <a href="{{ route('tools.feng-shui') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">
                             {{ __('fengshui.title') ?? 'Feng Shui' }}
                         </a>
@@ -163,14 +162,25 @@
         {{ $slot }}
     </main>
 
-    {{-- Chatbot Component --}}
+    {{-- ========================================================== --}}
+    {{-- COMPONENTES GLOBAIS (MARKETING & UX) --}}
+    {{-- ========================================================== --}}
+
+    {{-- 1. Botões Flutuantes (WhatsApp + Scroll Top) --}}
+    <x-floating-ui />
+
+    {{-- 2. Pop-up de Intenção de Saída (Exit Intent) --}}
+    <x-exit-intent-popup />
+
+    {{-- 3. Chatbot (Se existir) --}}
     @if(view()->exists('components.chatbot'))
         <x-chatbot />
     @endif
     
-    {{-- Cookie Banner --}}
+    {{-- 4. Banner de Cookies --}}
     @if(view()->exists('components.cookie-banner'))
         <x-cookie-banner />
     @endif
+
 </body>
 </html>

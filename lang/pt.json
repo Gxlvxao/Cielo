@@ -16,6 +16,98 @@
     "nav.tools_imt": "Simulador IMT",
     "nav.tools_credit": "Crédito Habitação",
 
+    "home.hero.title": "Viva onde se sente <br> <span class=\"italic font-serif\">mais vivo.</span>",
+    "home.hero.subtitle": "Uma curadoria refinada de propriedades em Portugal para quem valoriza a harmonia, a proximidade com a natureza e a liberdade de respirar.",
+    "home.scroll_label": "Scroll",
+    "home.intro_title": "Mais do que tijolos e argamassa. Negociamos em <span class=\"italic text-cielo-terracotta\">sonhos</span> e legados.",
+    "home.intro_text": "Da arquitetura à energia ambiental, curamos casas que elevam o seu padrão de vida. Não vendemos propriedades; conectamos almas a espaços.",
+    
+    "home.about.label": "SOBRE NÓS",
+    "home.about.text": "<span class=\"font-sans tracking-widest uppercase text-sm mr-2\">CIELO –</span> Elevated Living é um estúdio imobiliário movido por valores, enraizado em <span class=\"italic font-serif\">Lisboa e Cascais</span>, com mais de 10 anos de experiência a moldar espaços de vida significativos.",
+    "home.about.subtext": "Mais do que vender casas, defendemos escolhas éticas, vida sustentável e uma forma consciente de habitar o espaço—porque <span class=\"italic font-medium border-b border-black/20 pb-1\">como vive importa tanto quanto onde vive.</span>",
+
+    "home.stats.years_label": "ANOS DE EXPERIÊNCIA",
+    "home.stats.years_desc": "Mais de uma década de experiência no mercado imobiliário português.",
+    "home.stats.satisfaction_label": "SATISFAÇÃO",
+    "home.stats.satisfaction_desc": "Os clientes confiam na CIELO e recomendam os nossos serviços baseados na experiência.",
+    "home.stats.sales_label": "VENDAS",
+    "home.stats.sales_desc": "Um portfólio crescente de propriedades vendidas de norte a sul de Portugal.",
+    "home.stats.homeowners_label": "PROPRIETÁRIOS",
+    "home.stats.homeowners_desc": "Famílias e indivíduos a viver em espaços que vendemos ou gerimos.",
+    
+    "home.properties.label": "IMÓVEIS DISPONÍVEIS",
+    "home.properties.title": "Encontre a sua Calma. <br> <span class=\"italic font-serif text-cielo-terracotta\">Encontre o CIELO.</span>",
+    "home.properties.view_all": "Ver Todos os Imóveis",
+    
+    "properties.exclusive_label": "Angariação Exclusiva",
+    "properties.view_btn": "Ver Casa",
+    "properties.beds": "Camas",
+    
+    "home.expertise.title": "A Nossa Expertise",
+    "home.expertise.text": "Uma abordagem holística integrando dados de mercado, análise arquitetónica profunda e sensibilidade energética.",
+    "home.expertise.service_1": "Análise de Mercado",
+    "home.expertise.service_2": "Consultoria Feng Shui",
+    "home.expertise.service_3": "Assessoria Jurídica",
+    "home.expertise.service_4": "Arquitetura & Design",
+
+    "home.partners.label": "NOSSOS PARCEIROS",
+    "home.partners.title": "Criado em Colaboração",
+    "home.partners.subtitle": "Ecossistema",
+    "home.partners.text": "Nosso trabalho é apoiado por um ecossistema confiável de profissionais imobiliários, especialistas em inspeção, advogados, consultores de crédito e Feng Shui, garantindo profundidade, transparência e paz de espírito.",
+    
+    "home.testimonials.label": "DEPOIMENTOS",
+    "home.testimonials.title": "Histórias de <br> <span class=\"italic font-serif text-cielo-terracotta\">Clientes e Parceiros</span>",
+    
+    "home.blog.label": "ARTIGOS & GUIAS",
+    "home.blog.view_all": "Ver Todos",
+    "home.blog.read_more": "Ler História",
+    "home.blog.min_read": "min leitura",
+    
+    "home.faq.title": "Tudo o que possa querer <br> <span class=\"italic text-cielo-terracotta\">saber.</span>",
+    
+    "home.faq.q1": "O que torna a CIELO diferente de uma agência tradicional?",
+    "home.faq.a1": "A CIELO opera como um estúdio imobiliário e não como uma agência convencional. O nosso foco está na consultoria, curadoria e relacionamentos a longo prazo—dando tanta importância a como uma casa se sente quanto ao seu valor de mercado.",
+
+    "home.faq.q2": "Vocês apenas vendem casas?",
+    "home.faq.a2": "Não. Na CIELO, vamos muito além das transações. Apoiamos os nossos clientes com análise de mercado, curadoria de propriedades, orientação na mudança, soluções de crédito, avaliações de Feng Shui e inspeções independentes.",
+
+    "home.faq.q3": "Onde estão baseados?",
+    "home.faq.a3": "O nosso estúdio está sediado em Lisboa, com forte presença em Cascais. Embora estes sejam os nossos mercados principais, temos vasta experiência em vender e aconselhar sobre casas em todo o Portugal. Operamos sob a licença AMI 12818.",
+
+    "home.faq.q4": "Como começo a trabalhar com a CIELO?",
+    "home.faq.a4": "Tudo começa com uma conversa. Dedicamos tempo a entender os seus objetivos, estilo de vida e prioridades antes de apresentar oportunidades que realmente se encaixem.",
+
+    "home.faq.q5": "Representam compradores ou vendedores?",
+    "home.faq.a5": "Trabalhamos com ambos. Em todos os casos, a nossa abordagem é guiada pela transparência, ética e alinhamento claro de expectativas desde o início.",
+
+    "home.faq.q6": "Trabalham com outros agentes e profissionais?",
+    "home.faq.a6": "Sim. Colaboramos com uma rede selecionada de corretores, especialistas em inspeção, consultores de Feng Shui, advogados e parceiros financeiros.",
+
+    "home.faq.q7": "Ajudam com soluções de crédito e financiamento?",
+    "home.faq.a7": "Sim. Colaboramos com intermediários de crédito de confiança e instituições financeiras para apresentar opções de financiamento adequadas ao seu perfil, seja residente ou não residente.",
+
+    "home.faq.q8": "Como avaliam o Feng Shui de uma casa?",
+    "home.faq.a8": "A nossa análise de Feng Shui considera a orientação, luz natural, circulação e o layout. Quando necessário, colaboramos com consultores certificados para avaliar o fluxo de energia e a harmonia.",
+
+    "home.faq.q9": "Podem ajudar após a conclusão da compra?",
+    "home.faq.a9": "Sim. A nossa relação não termina na escritura. Continuamos a apoiar os clientes com necessidades pós-compra, incluindo renovações, design de interiores e gestão de serviços.",
+
+    "home.faq.q10": "O serviço é adequado para investidores?",
+    "home.faq.a10": "Sim. Embora muitos clientes nos procurem para habitação própria, também aconselhamos investidores que procuram ativos de qualidade, valor a longo prazo e posicionamento estratégico no mercado português.",
+    
+    "footer.title": "Encontre uma casa que <br> <span class=\"italic text-cielo-accent\">combine com a sua vida.</span>",
+    "footer.text": "Quer esteja a construir do zero ou pronto para mudar, estamos aqui para ajudar a sentir-se em casa.",
+    "footer.cta": "Entrar em Contato",
+    "footer.contacts_title": "Contactos",
+    "footer.schedule": "Seg - Sex: 9h - 19h",
+    "footer.legal_title": "Legal & Compliance",
+    "footer.privacy": "Política de Privacidade",
+    "footer.terms": "Termos de Uso",
+    "footer.cookies": "Política de Cookies",
+    "footer.ral": "Resolução de Litígios (RAL)",
+    "footer.contact": "Contacte-nos",
+    "footer.developed": "Desenvolvido por",
+
     "tools.gains.title": "Simulador de Mais-Valias",
     "tools.gains.subtitle": "Simulação Fiscal Imobiliária",
     "tools.gains.section_acquisition": "Dados de Aquisição",
@@ -184,61 +276,5 @@
     "tools.credit.btn_cancel": "Cancelar",
     "tools.credit.alert_fill": "Por favor preencha os campos obrigatórios.",
     "tools.credit.alert_success": "Relatório enviado com sucesso!",
-    "tools.credit.alert_error": "Erro ao enviar relatório.",
-
-    "home.hero_title": "Living <br> Art.",
-    "home.scroll_label": "Scroll",
-    "home.intro_title": "Mais do que tijolos e argamassa. Negociamos em <span class=\"italic text-cielo-terracotta\">sonhos</span> e legados.",
-    "home.intro_text": "Da arquitetura à energia ambiental, curamos casas que elevam o seu padrão de vida. Não vendemos propriedades; conectamos almas a espaços.",
-    
-    "home.stats.experience": "Anos de Experiência",
-    "home.stats.satisfaction": "Satisfação do Cliente",
-    "home.stats.sold": "Propriedades Vendidas",
-    "home.stats.homeowners": "Proprietários Ativos",
-    
-    "properties.exclusive_label": "Angariação Exclusiva",
-    "properties.view_btn": "Ver Casa",
-    "properties.beds": "Camas",
-    
-    "home.expertise.title": "A Nossa Expertise",
-    "home.expertise.text": "Uma abordagem holística integrando dados de mercado, análise arquitetónica profunda e sensibilidade energética.",
-    "home.expertise.service_1": "Análise de Mercado",
-    "home.expertise.service_2": "Consultoria Feng Shui",
-    "home.expertise.service_3": "Assessoria Jurídica",
-    "home.expertise.service_4": "Arquitetura & Design",
-    
-    "home.partners.subtitle": "Ecossistema",
-    
-    "home.faq.title": "Tudo o que possa querer saber",
-    
-    "home.hero.title": "Viva onde se sente <br> <span class=\"italic font-serif\">mais vivo.</span>",
-    "home.hero.subtitle": "Uma curadoria refinada de propriedades em Portugal para quem valoriza a harmonia, a proximidade com a natureza e a liberdade de respirar.", 
-
-    "home.about.label": "SOBRE NÓS",
-    "home.about.text": "<span class=\"font-sans tracking-widest uppercase text-sm mr-2\">CIELO –</span> Elevated Living é um estúdio imobiliário movido por valores, enraizado em <span class=\"italic font-serif\">Lisboa e Cascais</span>, com mais de 10 anos de experiência a moldar espaços de vida significativos.",
-    "home.about.subtext": "Mais do que vender casas, defendemos escolhas éticas, vida sustentável e uma forma consciente de habitar o espaço—porque <span class=\"italic font-medium border-b border-black/20 pb-1\">como vive importa tanto quanto onde vive.</span>",
-
-    "home.properties.label": "IMÓVEIS DISPONÍVEIS",
-    "home.properties.title": "Encontre a sua Calma. <br> <span class=\"italic font-serif text-cielo-terracotta\">Encontre o CIELO.</span>",
-    "home.properties.view_all": "Ver Todos os Imóveis",
-
-    "home.partners.label": "NOSSOS PARCEIROS",
-    "home.partners.title": "Criado em Colaboração",
-    "home.partners.text": "Nosso trabalho é apoiado por um ecossistema confiável de profissionais imobiliários, especialistas em inspeção, advogados, consultores de crédito e Feng Shui, garantindo profundidade, transparência e paz de espírito.", 
-
-    "home.testimonials.label": "DEPOIMENTOS",
-    "home.testimonials.title": "Histórias de <br> <span class=\"italic font-serif text-cielo-terracotta\">Clientes e Parceiros</span>",
-    
-    "home.blog.label": "ARTIGOS & GUIAS",
-    "home.blog.view_all": "Ver Todos",
-    "home.blog.read_more": "Ler História",
-    "home.blog.min_read": "min leitura", 
-
-    "footer.title": "Encontre uma casa que <br> <span class=\"italic text-cielo-accent\">combine com a sua vida.</span>",
-    "footer.text": "Quer esteja a construir do zero ou pronto para mudar, estamos aqui para ajudar a sentir-se em casa.",
-    "footer.cta": "Entrar em Contato",
-    "footer.privacy": "Política de Privacidade",
-    "footer.terms": "Termos de Uso",
-    "footer.contact": "Contacte-nos",
-    "footer.developed": "Desenvolvido por"
+    "tools.credit.alert_error": "Erro ao enviar relatório."
 }

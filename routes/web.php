@@ -158,3 +158,45 @@ Route::middleware(['auth', 'active_access'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// --- ROTA DE DEBUG DE TRADUÇÕES (Apague depois de usar) ---
+Route::get('/debug-translations', function () {
+    $locales = ['pt', 'en', 'fr'];
+    $report = [];
+    $hasError = false;
+
+    foreach ($locales as $locale) {
+        $path = lang_path($locale);
+        
+        if (!is_dir($path)) {
+            $report["📂 $locale"] = "Pasta não encontrada!";
+            continue;
+        }
+
+        $files = glob("$path/*.php");
+        foreach ($files as $file) {
+            $filename = basename($file);
+            
+            try {
+                // Tenta incluir o arquivo manualmente
+                $content = include $file;
+
+                if (!is_array($content)) {
+                    $type = gettype($content);
+                    $report["$locale / $filename"] = "❌ ERRO CRÍTICO: O arquivo retorna '$type' em vez de 'array'. (Provável arquivo vazio)";
+                    $hasError = true;
+                } else {
+                    $report["$locale / $filename"] = "✅ OK (" . count($content) . " chaves)";
+                }
+            } catch (\Throwable $e) {
+                $report["$locale / $filename"] = "🔥 ERRO DE SINTAXE: " . $e->getMessage();
+                $hasError = true;
+            }
+        }
+    }
+
+    return response()->json([
+        'status' => $hasError ? 'ENCONTRADOS ERROS' : 'TUDO PERFEITO',
+        'detalhes' => $report
+    ]);
+});

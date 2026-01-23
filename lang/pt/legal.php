@@ -4,10 +4,10 @@ return [
     'privacy' => [
         'title' => 'Política de Privacidade',
         'content' => '
-            <p>A <strong>Crow Global Investments, Lda.</strong> respeita a privacidade dos seus utilizadores e compromete-se a proteger os dados pessoais que nos sejam confiados, em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD – Regulamento UE 2016/679) e demais legislação aplicável.</p>
+            <p>A <strong>Cielo, Lda.</strong> respeita a privacidade dos seus utilizadores e compromete-se a proteger os dados pessoais que nos sejam confiados, em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD – Regulamento UE 2016/679) e demais legislação aplicável.</p>
             
             <h3 class="text-xl font-bold mt-6 mb-2">1. Responsável pelo Tratamento de Dados</h3>
-            <p>A entidade responsável pelo tratamento dos dados pessoais é a Crow Global Investments, Lda., doravante designada por “Crow Global Investments”.</p>
+            <p>A entidade responsável pelo tratamento dos dados pessoais é a Cielo, Lda., doravante designada por “Cielo”.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">2. Dados Pessoais Recolhidos</h3>
             <p>Podemos recolher e tratar os seguintes dados:</p>
@@ -42,7 +42,7 @@ return [
             <p>Os dados serão conservados apenas pelo período necessário às finalidades que motivaram a sua recolha ou conforme exigido por lei.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">6. Partilha de Dados</h3>
-            <p>A Crow Global Investments não vende nem cede dados pessoais a terceiros, salvo quando:</p>
+            <p>A Cielo não vende nem cede dados pessoais a terceiros, salvo quando:</p>
             <ul class="list-disc ml-6 mt-2">
                 <li>Legalmente obrigada</li>
                 <li>Necessário para a prestação de serviços (ex.: fornecedores tecnológicos), garantindo sempre a confidencialidade</li>
@@ -61,7 +61,7 @@ return [
             <p>Adotamos medidas técnicas e organizativas adequadas para proteger os dados contra acesso não autorizado, perda ou divulgação indevida.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">9. Alterações</h3>
-            <p>A Crow Global Investments reserva-se o direito de atualizar esta Política de Privacidade a qualquer momento.</p>
+            <p>A Cielo reserva-se o direito de atualizar esta Política de Privacidade a qualquer momento.</p>
         ',
     ],
     'terms' => [
@@ -70,7 +70,7 @@ return [
             <p>Ao aceder e utilizar o website <strong>crowglobalinvestiments.pt</strong>, o utilizador concorda com os presentes Termos de Serviço.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">1. Objeto</h3>
-            <p>O website tem carácter informativo e institucional, apresentando a atividade, visão e serviços da Crow Global Investments.</p>
+            <p>O website tem carácter informativo e institucional, apresentando a atividade, visão e serviços da Cielo.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">2. Utilização do Website</h3>
             <p>O utilizador compromete-se a:</p>

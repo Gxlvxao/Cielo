@@ -14,7 +14,7 @@
     "nav.tools": "Tools",
     "nav.tools_gains": "Capital Gains",
     "nav.tools_imt": "IMT Calculator",
-    "nav.tools_credit": "Credit Simulator",
+    "nav.tools_credit": "Mortgage Simulator",
 
     "home.hero.title": "Live where you feel <br> <span class=\"italic font-serif\">most alive.</span>",
     "home.hero.subtitle": "A refined curation of properties in Portugal for those who value harmony, closeness to nature, and the freedom to breathe.",
@@ -27,13 +27,13 @@
     "home.about.subtext": "More than selling houses, we stand for ethical choices, sustainable living, and a thoughtful way of inhabiting space—because <span class=\"italic font-medium border-b border-black/20 pb-1\">how you live matters as much as where you live.</span>",
 
     "home.stats.years_label": "YEARS OF EXPERIENCE",
-    "home.stats.years_desc": "More than a decade of experience in Portuguese real estate market",
+    "home.stats.years_desc": "More than a decade of experience in the Portuguese real estate market.",
     "home.stats.satisfaction_label": "SATISFACTION",
     "home.stats.satisfaction_desc": "Clients trust CIELO and recommend our services based on experience.",
     "home.stats.sales_label": "SALES",
-    "home.stats.sales_desc": "A growing portfolio of properties sold across Portugal",
+    "home.stats.sales_desc": "A growing portfolio of properties sold from north to south of Portugal.",
     "home.stats.homeowners_label": "HOMEOWNERS",
-    "home.stats.homeowners_desc": "Families and individuals now living in spaces that we sold or rent out.",
+    "home.stats.homeowners_desc": "Families and individuals living in spaces we sold or managed.",
     
     "home.properties.label": "AVAILABLE HOMES",
     "home.properties.title": "Find your Calm. <br> <span class=\"italic font-serif text-cielo-terracotta\">Find CIELO.</span>",
@@ -43,29 +43,13 @@
     "properties.view_btn": "View Home",
     "properties.beds": "Beds",
     
-    "home.expertise.main_title": "Our Expertise",
+    "home.expertise.title": "Our Expertise",
     "home.expertise.text": "A holistic approach integrating market data, deep architectural analysis, and energetic sensitivity.",
-    
-    "home.expertise.1.title": "Local Knowledge",
-    "home.expertise.1.desc": "Every CIELO journey begins with deep local knowledge. From Lisbon to Cascais and beyond, we understand each neighborhood’s character, rhythms, and long-term value — guiding our clients with insight shaped by experience, not trends.",
-    "home.expertise.1.tags": ["Neighborhood Insight", "Market Analysis", "Local Networks", "Long-Term Value"],
-    
-    "home.expertise.2.title": "Tailored",
-    "home.expertise.2.desc": "No two clients are the same. Our approach is entirely bespoke — shaped around your lifestyle, priorities, and vision. From first conversation to final decision, every step is considered, personal, and precise.",
-    "home.expertise.2.tags": ["Personal Advisory", "Lifestyle Alignment", "Strategic Guidance", "Client-Focused Process"],
+    "home.expertise.service_1": "Market Analysis",
+    "home.expertise.service_2": "Feng Shui Consulting",
+    "home.expertise.service_3": "Legal Advisory",
+    "home.expertise.service_4": "Architecture & Design",
 
-    "home.expertise.3.title": "Curation",
-    "home.expertise.3.desc": "We don’t list everything — we curate. Each property is carefully selected for its quality, character, and sense of place, ensuring every home we present meets our standards of harmony, comfort, and enduring value.",
-    "home.expertise.3.tags": ["Selective Portfolio", "Quality Standards", "Architectural Character", "Lifestyle Fit"],
-
-    "home.expertise.4.title": "Feng Shui",
-    "home.expertise.4.desc": "A home is more than walls and structure — it is energy and flow. Our Feng Shui approach considers light, orientation, circulation, and balance, helping create spaces that support wellbeing, clarity, and ease of living.",
-    "home.expertise.4.tags": ["Energy Flow", "Spatial Advisory", "Natural Balance", "Wellbeing Design"],
-
-    "home.expertise.5.title": "Home Inspection",
-    "home.expertise.5.desc": "Confidence comes from clarity. Our home inspection process looks beyond appearances, carefully assessing condition, structure, and potential — so every decision is informed, transparent, and secure.",
-    "home.expertise.5.tags": ["Property Assessment", "Structural Review", "Technical Due Diligence", "Peace of Mind"],
-    
     "home.partners.label": "OUR PARTNERS",
     "home.partners.title": "Crafted Through Collaboration",
     "home.partners.subtitle": "Our Ecosystem",
@@ -73,16 +57,6 @@
     
     "home.testimonials.label": "TESTIMONIALS",
     "home.testimonials.title": "Stories from <br> <span class=\"italic font-serif text-cielo-terracotta\">Clients & Partners</span>",
-    "home.testimonials.1.desc": "Buying with Cielo was a journey of self-discovery. They understood what we needed before we did.",
-    "home.testimonials.1.author": "The Coimbra Family",
-    "home.testimonials.2.desc": "Professionalism wrapped in genuine care. A rare find in the luxury market.",
-    "home.testimonials.2.author": "Sarah & James",
-    "home.testimonials.3.desc": "Their curation is impeccable. Every property visited was a potential dream home.",
-    "home.testimonials.3.author": "Miguel A.",
-    "home.testimonials.4.desc": "The Feng Shui analysis changed how we view our living space completely.",
-    "home.testimonials.4.author": "Elena R.",
-    "home.testimonials.5.desc": "Seamless, transparent, and incredibly stylish. The perfect partner for investors.",
-    "home.testimonials.5.author": "Global Ventures Ltd.",
     
     "home.blog.label": "ARTICLES & GUIDES",
     "home.blog.view_all": "View All Articles",
@@ -91,41 +65,46 @@
     
     "home.faq.title": "Everything you might <br> <span class=\"italic text-cielo-terracotta\">want to know.</span>",
     
-    "home.faq.q1": "What makes CIELO different from a traditional real estate agency?",
-    "home.faq.a1": "CIELO operates as a real estate studio rather than a traditional brokerage. Our focus is on advisory, curation, and long-term relationships—placing equal importance on how a home feels as on its market value.",
-    
-    "home.faq.q2": "Do you sell houses?",
-    "home.faq.a2": "No. At CIELO, we go far beyond transactions. We support our clients with market analysis, property curation, relocation guidance, mortgage introductions, Feng Shui assessments, and independent home inspections—ensuring each decision is informed, aligned, and thoughtful.",
-    
+    "home.faq.q1": "What makes CIELO different from a traditional agency?",
+    "home.faq.a1": "CIELO operates as a real estate studio, not a conventional agency. Our focus is on advisory, curation, and long-term relationships—placing as much importance on how a home feels as on its market value.",
+
+    "home.faq.q2": "Do you only sell houses?",
+    "home.faq.a2": "No. At CIELO, we go far beyond transactions. We support our clients with market analysis, property curation, relocation guidance, mortgage solutions, Feng Shui assessments, and independent inspections.",
+
     "home.faq.q3": "Where are you based?",
-    "home.faq.a3": "Our studio is based in Lisbon, with a strong presence in Cascais. While these are our core markets, we have extensive experience selling and advising on homes across Portugal, from urban centers to coastal and countryside locations. We work under the real estate license AMI 12818.",
-    
+    "home.faq.a3": "Our studio is based in Lisbon, with a strong presence in Cascais. While these are our main markets, we have vast experience selling and advising on homes across Portugal. We operate under license AMI 12818.",
+
     "home.faq.q4": "How do I start working with CIELO?",
-    "home.faq.a4": "It begins with a conversation. We take time to understand your goals, lifestyle, and priorities before presenting opportunities that truly fit. From there, we guide you through each step with clarity, discretion, and care.",
-    
-    "home.faq.q5": "Do you represent buyers, sellers, or both?",
-    "home.faq.a5": "We work with both buyers and sellers. In all cases, our approach is guided by transparency, ethics, and clear alignment of expectations from the start.",
-    
-    "home.faq.q6": "Do you work with other real estate agents and professionals?",
-    "home.faq.a6": "Yes. We collaborate with a selected network of brokers, home inspection specialists, Feng Shui consultants, legal advisors, and financial partners to ensure a comprehensive and transparent service.",
-    
-    "home.faq.q7": "Do you help with mortgage and financing solutions?",
-    "home.faq.a7": "Yes. We collaborate with trusted mortgage lenders and financial institutions to introduce financing options suited to your profile, whether you are a resident or non-resident buyer.",
-    
+    "home.faq.a4": "It starts with a conversation. We dedicate time to understand your goals, lifestyle, and priorities before presenting opportunities that truly fit.",
+
+    "home.faq.q5": "Do you represent buyers or sellers?",
+    "home.faq.a5": "We work with both. In all cases, our approach is guided by transparency, ethics, and clear alignment of expectations from the start.",
+
+    "home.faq.q6": "Do you work with other agents and professionals?",
+    "home.faq.a6": "Yes. We collaborate with a selected network of brokers, inspection specialists, Feng Shui consultants, lawyers, and financial partners.",
+
+    "home.faq.q7": "Do you help with credit and financing solutions?",
+    "home.faq.a7": "Yes. We collaborate with trusted credit intermediaries and financial institutions to present financing options suitable for your profile, whether resident or non-resident.",
+
     "home.faq.q8": "How do you assess the Feng Shui of a home?",
-    "home.faq.a8": "Our Feng Shui analysis considers orientation, natural light, circulation, layout, and the relationship between spaces. When needed, we collaborate with trusted Feng Shui consultants to evaluate energy flow and harmony, helping clients understand how a home supports wellbeing and balance.",
-    
-    "home.faq.q9": "Can you assist after the purchase is completed?",
-    "home.faq.a9": "Yes. Our relationship doesn’t end at closing. We continue to support clients with post-purchase needs, including renovations, interior alignment, Feng Shui refinement, and trusted service providers.",
-    
-    "home.faq.q10": "Is your service suitable for investors as well as lifestyle buyers?",
-    "home.faq.a10": "Yes. While many clients come to us for lifestyle-led purchases, we also advise investors seeking quality assets, long-term value, and strategic positioning in the Portuguese real estate market.",
+    "home.faq.a8": "Our Feng Shui analysis considers orientation, natural light, circulation, and layout. When necessary, we collaborate with certified consultants to evaluate energy flow and harmony.",
+
+    "home.faq.q9": "Can you help after the purchase is complete?",
+    "home.faq.a9": "Yes. Our relationship doesn't end at the deed. We continue to support clients with post-purchase needs, including renovations, interior design, and service management.",
+
+    "home.faq.q10": "Is the service suitable for investors?",
+    "home.faq.a10": "Yes. While many clients seek us for their own housing, we also advise investors looking for quality assets, long-term value, and strategic positioning in the Portuguese market.",
     
     "footer.title": "Find a home that <br> <span class=\"italic text-cielo-accent\">fits your life.</span>",
     "footer.text": "Whether you’re building from scratch or ready to move in, we’re here to help you feel at home.",
     "footer.cta": "Get in Touch",
+    "footer.contacts_title": "Contacts",
+    "footer.schedule": "Mon - Fri: 9am - 7pm",
+    "footer.legal_title": "Legal & Compliance",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms of Use",
+    "footer.cookies": "Cookie Policy",
+    "footer.ral": "Dispute Resolution (RAL)",
     "footer.contact": "Contact Us",
     "footer.developed": "Developed by",
 

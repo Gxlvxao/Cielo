@@ -1,5 +1,5 @@
 <x-site-layout>
-    <x-slot name="title">Solicitar Acesso Private</x-slot>
+    <x-slot name="title">{{ __('access.meta_title') }}</x-slot>
 
     <div class="min-h-screen flex flex-col lg:flex-row">
         
@@ -9,19 +9,19 @@
             <div class="absolute inset-0 bg-gradient-to-t from-cielo-dark via-transparent to-transparent"></div>
             
             <div class="absolute bottom-20 left-20 max-w-lg text-white">
-                <h2 class="font-serif text-5xl mb-6">Join the Circle.</h2>
+                <h2 class="font-serif text-5xl mb-6">{{ __('access.hero_title') }}</h2>
                 <p class="font-light text-lg opacity-80 leading-relaxed">
-                    Acesso exclusivo a propriedades off-market e ferramentas de investimento imobiliário de alta precisão.
+                    {{ __('access.hero_subtitle') }}
                 </p>
                 
                 <div class="mt-12 flex gap-8">
                     <div>
                         <span class="block text-2xl font-serif">500+</span>
-                        <span class="text-xs uppercase tracking-widest opacity-60">Investidores</span>
+                        <span class="text-xs uppercase tracking-widest opacity-60">{{ __('access.stats_investors') }}</span>
                     </div>
                     <div>
                         <span class="block text-2xl font-serif">€120M</span>
-                        <span class="text-xs uppercase tracking-widest opacity-60">Portfólio</span>
+                        <span class="text-xs uppercase tracking-widest opacity-60">{{ __('access.stats_portfolio') }}</span>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             
             {{-- Back Button (Mobile) --}}
             <a href="{{ route('home') }}" class="absolute top-8 right-8 text-xs font-bold uppercase tracking-widest text-cielo-dark/50 hover:text-cielo-terracotta transition-colors">
-                Voltar
+                {{ __('access.back') }}
             </a>
 
             {{-- Inicializa com 'client' para bater com o enum do controller --}}
@@ -40,17 +40,17 @@
                 
                 {{-- Header do Form --}}
                 <div class="mb-10">
-                    <span class="text-cielo-terracotta text-xs font-bold tracking-[0.2em] uppercase block mb-3">Membership Application</span>
-                    <h1 class="font-serif text-4xl text-cielo-dark">Solicitar Acesso</h1>
+                    <span class="text-cielo-terracotta text-xs font-bold tracking-[0.2em] uppercase block mb-3">{{ __('access.form_eyebrow') }}</span>
+                    <h1 class="font-serif text-4xl text-cielo-dark">{{ __('access.form_title') }}</h1>
                 </div>
 
                 {{-- Feedback de Sucesso --}}
                 @if(session('success'))
                     <div class="mb-8 p-6 bg-green-50 border border-green-100 rounded-xl text-green-800 text-sm">
                         <svg class="w-6 h-6 mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <p class="font-bold mb-1">Solicitação Recebida.</p>
-                        <p>A nossa equipa de curadoria irá analisar o seu perfil e entrará em contacto brevemente com as credenciais.</p>
-                        <a href="{{ route('home') }}" class="inline-block mt-4 text-green-700 underline font-bold text-xs uppercase tracking-wider">Voltar à Home</a>
+                        <p class="font-bold mb-1">{{ __('access.success_title') }}</p>
+                        <p>{{ __('access.success_message') }}</p>
+                        <a href="{{ route('home') }}" class="inline-block mt-4 text-green-700 underline font-bold text-xs uppercase tracking-wider">{{ __('access.back_home') }}</a>
                     </div>
                 @else
 
@@ -63,12 +63,12 @@
                         <button @click="investor_type = 'client'" 
                                 class="flex-1 py-3 text-xs font-bold uppercase tracking-widest relative z-10 transition-colors text-center"
                                 :class="investor_type === 'client' ? 'text-white' : 'text-gray-400 hover:text-gray-600'">
-                            Investidor
+                            {{ __('access.role_investor') }}
                         </button>
                         <button @click="investor_type = 'developer'" 
                                 class="flex-1 py-3 text-xs font-bold uppercase tracking-widest relative z-10 transition-colors text-center"
                                 :class="investor_type === 'developer' ? 'text-white' : 'text-gray-400 hover:text-gray-600'">
-                            Parceiro / Dev
+                            {{ __('access.role_developer') }}
                         </button>
                     </div>
 
@@ -82,14 +82,14 @@
 
                         {{-- Nome --}}
                         <div>
-                            <x-input-label for="name" value="Nome Completo *" class="uppercase text-[10px] tracking-widest text-gray-400" />
+                            <x-input-label for="name" :value="__('access.label_name')" class="uppercase text-[10px] tracking-widest text-gray-400" />
                             <x-text-input id="name" class="block mt-1 w-full bg-white border-gray-200 focus:border-cielo-terracotta focus:ring-cielo-terracotta py-3" type="text" name="name" :value="old('name')" required autofocus />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
                         {{-- Email --}}
                         <div>
-                            <x-input-label for="email" value="Email Corporativo *" class="uppercase text-[10px] tracking-widest text-gray-400" />
+                            <x-input-label for="email" :value="__('access.label_email')" class="uppercase text-[10px] tracking-widest text-gray-400" />
                             <x-text-input id="email" class="block mt-1 w-full bg-white border-gray-200 focus:border-cielo-terracotta focus:ring-cielo-terracotta py-3" type="email" name="email" :value="old('email')" required />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
@@ -97,36 +97,33 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {{-- País (Obrigatório no Controller) --}}
                             <div>
-                                <x-input-label for="country" value="País de Residência *" class="uppercase text-[10px] tracking-widest text-gray-400" />
+                                <x-input-label for="country" :value="__('access.label_country')" class="uppercase text-[10px] tracking-widest text-gray-400" />
                                 <x-text-input id="country" class="block mt-1 w-full bg-white border-gray-200 py-3" type="text" name="country" :value="old('country')" required />
                                 <x-input-error :messages="$errors->get('country')" class="mt-2" />
                             </div>
 
-                            {{-- Telefone (Obrigatório no seu form antigo, opcional no controller mas bom ter) --}}
-                            {{-- Se o controller não validar 'phone', ele será ignorado ou precisa ser add ao $validated --}}
-                            {{-- **NOTA:** Vi que o seu controller NÃO tem 'phone' no validate. Vou adicionar como 'message' extra ou você deve add no controller. --}}
-                            {{-- Para garantir, vou concatenar o telefone na mensagem no JS ou Backend se não tiver coluna --}}
+                            {{-- Telefone --}}
                             <div>
-                                <x-input-label for="phone" value="Telefone" class="uppercase text-[10px] tracking-widest text-gray-400" />
+                                <x-input-label for="phone" :value="__('access.label_phone')" class="uppercase text-[10px] tracking-widest text-gray-400" />
                                 <x-text-input id="phone" class="block mt-1 w-full bg-white border-gray-200 py-3" type="text" name="phone" :value="old('phone')" />
                             </div>
                         </div>
 
                         {{-- Montante de Investimento (Opcional) --}}
                         <div x-show="investor_type === 'client'" x-transition>
-                            <x-input-label for="investment_amount" value="Capacidade de Investimento (Opcional)" class="uppercase text-[10px] tracking-widest text-gray-400" />
+                            <x-input-label for="investment_amount" :value="__('access.label_investment')" class="uppercase text-[10px] tracking-widest text-gray-400" />
                             <select name="investment_amount" id="investment_amount" class="block mt-1 w-full bg-white border-gray-200 rounded-md shadow-sm focus:border-cielo-terracotta focus:ring focus:ring-cielo-terracotta focus:ring-opacity-50 py-3 text-sm">
-                                <option value="">Selecionar...</option>
-                                <option value="< 500k">Até €500k</option>
-                                <option value="500k - 1M">€500k - €1M</option>
-                                <option value="1M - 3M">€1M - €3M</option>
-                                <option value="> 3M">Mais de €3M</option>
+                                <option value="">{{ __('access.select_placeholder') }}</option>
+                                <option value="< 500k">{{ __('access.investment_upto_500k') }}</option>
+                                <option value="500k - 1M">{{ __('access.investment_500k_1m') }}</option>
+                                <option value="1M - 3M">{{ __('access.investment_1m_3m') }}</option>
+                                <option value="> 3M">{{ __('access.investment_plus_3m') }}</option>
                             </select>
                         </div>
 
                         {{-- Upload de Documento (Proof of Funds / Portfolio) --}}
                         <div>
-                            <x-input-label for="proof_document" value="Documento (Proof of Funds / Portfolio)" class="uppercase text-[10px] tracking-widest text-gray-400" />
+                            <x-input-label for="proof_document" :value="__('access.label_document')" class="uppercase text-[10px] tracking-widest text-gray-400" />
                             <input type="file" name="proof_document" id="proof_document" class="block w-full text-sm text-gray-500
                                 file:mr-4 file:py-2 file:px-4
                                 file:rounded-full file:border-0
@@ -134,35 +131,35 @@
                                 file:bg-cielo-terracotta/10 file:text-cielo-terracotta
                                 hover:file:bg-cielo-terracotta/20 mt-2
                             "/>
-                            <p class="text-[10px] text-gray-400 mt-1">PDF, JPG ou PNG (Máx. 5MB). Opcional.</p>
+                            <p class="text-[10px] text-gray-400 mt-1">{{ __('access.document_help') }}</p>
                             <x-input-error :messages="$errors->get('proof_document')" class="mt-2" />
                         </div>
 
                         {{-- Mensagem --}}
                         <div>
-                            <x-input-label for="message" value="Nota Adicional" class="uppercase text-[10px] tracking-widest text-gray-400" />
+                            <x-input-label for="message" :value="__('access.label_message')" class="uppercase text-[10px] tracking-widest text-gray-400" />
                             <textarea id="message" name="message" rows="3" 
                                 class="block mt-1 w-full border-gray-200 focus:border-cielo-terracotta focus:ring-cielo-terracotta rounded-md shadow-sm resize-none text-sm font-sans"
-                                placeholder="Interesse específico em alguma zona ou tipo de ativo?"></textarea>
+                                placeholder="{{ __('access.message_placeholder') }}"></textarea>
                         </div>
 
                         {{-- Consentimento (Obrigatório) --}}
                         <div class="flex items-start">
                             <input type="checkbox" name="consent" id="consent" required class="mt-1 rounded border-gray-300 text-cielo-terracotta focus:ring-cielo-terracotta">
                             <label for="consent" class="ml-2 text-xs text-gray-500 leading-relaxed">
-                                Concordo que a Cielo processe os meus dados para fins de verificação de elegibilidade e conformidade (KYC/AML), de acordo com a <a href="{{ route('legal.privacy') }}" class="underline hover:text-cielo-dark">Política de Privacidade</a>.
+                                {{ __('access.consent_text') }} <a href="{{ route('legal.privacy') }}" class="underline hover:text-cielo-dark">{{ __('access.privacy_policy') }}</a>.
                             </label>
                         </div>
                         <x-input-error :messages="$errors->get('consent')" class="mt-2" />
 
                         <div class="pt-4">
                             <button type="submit" class="w-full bg-cielo-dark text-white py-4 rounded-lg font-bold uppercase tracking-[0.15em] text-xs hover:bg-cielo-terracotta transition-all duration-500 shadow-lg hover:shadow-xl">
-                                Submeter Candidatura
+                                {{ __('access.submit_btn') }}
                             </button>
                         </div>
 
                         <p class="text-center text-[10px] text-gray-400 uppercase tracking-widest mt-6">
-                            Já é membro? <a href="{{ route('login') }}" class="text-cielo-terracotta hover:underline font-bold">Login</a>
+                            {{ __('access.already_member') }} <a href="{{ route('login') }}" class="text-cielo-terracotta hover:underline font-bold">{{ __('access.login') }}</a>
                         </p>
                     </form>
                 @endif
