@@ -90,23 +90,45 @@
             </button>
 
             <nav class="mt-20 space-y-6">
-                {{-- Links de Navegação --}}
+                {{-- Home --}}
                 <a href="{{ route('home') }}" class="block font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300">
                     {{ __('nav.home') ?? 'Home' }}
                 </a>
+
+                {{-- Curadoria (Imóveis) --}}
                 <a href="{{ route('properties.index') }}" class="block font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300">
                     {{ __('nav.curation') ?? 'Properties' }}
                 </a>
-                <a href="{{ route('pages.about') }}" class="block font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300">
-                    {{ __('nav.concept') ?? 'About' }}
-                </a>
 
-                {{-- Dropdown Ferramentas --}}
-                <div x-data="{ toolsOpen: false }">
-                    <button @click="toolsOpen = !toolsOpen" class="flex items-center justify-between w-full font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300 focus:outline-none">
-                        <span>{{ __('nav.simulators') ?? 'Tools' }}</span>
-                        <svg class="w-6 h-6 transform transition-transform duration-300" :class="toolsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                {{-- GRUPO 1: INSTITUCIONAL (Dropdown "The Brand") --}}
+                <div x-data="{ brandOpen: false }">
+                    <button @click="brandOpen = !brandOpen" class="flex items-center justify-between w-full font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300 focus:outline-none group">
+                        <span>{{ __('nav.corporate') ?? 'The Brand' }}</span>
+                        {{-- Seta que gira --}}
+                        <svg class="w-6 h-6 transform transition-transform duration-300 text-cielo-navy/50 group-hover:text-cielo-terracotta" :class="brandOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
+                    
+                    {{-- Submenu Institucional --}}
+                    <div x-show="brandOpen" x-collapse class="pl-8 mt-4 space-y-3 border-l border-cielo-dark/10 ml-4">
+                        <a href="{{ route('pages.about') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">
+                            {{ __('nav.concept') ?? 'Concept' }}
+                        </a>
+                        <a href="{{ route('pages.partners') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">
+                            {{ __('nav.partners') ?? 'Partners' }}
+                        </a>
+                        <a href="{{ route('pages.recruitment') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">
+                            {{ __('nav.recruitment') ?? 'Careers' }}
+                        </a>
+                    </div>
+                </div>
+
+                {{-- GRUPO 2: FERRAMENTAS (Dropdown) --}}
+                <div x-data="{ toolsOpen: false }">
+                    <button @click="toolsOpen = !toolsOpen" class="flex items-center justify-between w-full font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300 focus:outline-none group">
+                        <span>{{ __('nav.simulators') ?? 'Tools' }}</span>
+                        <svg class="w-6 h-6 transform transition-transform duration-300 text-cielo-navy/50 group-hover:text-cielo-terracotta" :class="toolsOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    
                     <div x-show="toolsOpen" x-collapse class="pl-8 mt-4 space-y-3 border-l border-cielo-dark/10 ml-4">
                         <a href="{{ route('tools.gains') }}" class="block text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">
                             {{ __('nav.capital_gains') ?? 'Gains' }}
@@ -123,14 +145,17 @@
                     </div>
                 </div>
 
+                {{-- Journal --}}
                 <a href="{{ route('blog.index') }}" class="block font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300">
                     {{ __('nav.journal') ?? 'Journal' }}
                 </a>
+                
+                {{-- Contacto --}}
                 <a href="{{ route('pages.contact') }}" class="block font-serif text-4xl text-cielo-dark hover:text-cielo-terracotta transition-colors italic hover:pl-4 duration-300">
                     {{ __('nav.contact') ?? 'Contact' }}
                 </a>
 
-                {{-- BLOCO NOVO: Solicitar Acesso --}}
+                {{-- CTA --}}
                 <div class="pt-8 border-t border-cielo-dark/10 mt-8">
                     <a href="{{ route('access-request.create') }}" class="flex items-center justify-between group">
                         <span class="font-serif text-2xl text-cielo-terracotta italic hover:underline">
@@ -147,11 +172,11 @@
 
             {{-- Footer do Menu --}}
             <div class="space-y-4 text-cielo-navy text-sm mt-12">
-                <p>+351 912 345 678</p>
-                <p>hello@cielo.com</p>
+                <p>+351 920 383 259</p>
+                <p>info@cielo.pt</p>
                 <div class="flex gap-4 pt-4">
-                    <a href="#" class="uppercase tracking-widest text-xs border-b border-cielo-dark pb-1">Instagram</a>
-                    <a href="#" class="uppercase tracking-widest text-xs border-b border-cielo-dark pb-1">LinkedIn</a>
+                    <a href="https://www.instagram.com/casablanca.pt/" target="_blank" class="uppercase tracking-widest text-xs border-b border-cielo-dark pb-1 hover:text-cielo-terracotta hover:border-cielo-terracotta transition-colors">Instagram</a>
+                    <a href="https://www.facebook.com/casablancaproperty" target="_blank" class="uppercase tracking-widest text-xs border-b border-cielo-dark pb-1 hover:text-cielo-terracotta hover:border-cielo-terracotta transition-colors">Facebook</a>
                 </div>
             </div>
         </div>
@@ -162,22 +187,14 @@
         {{ $slot }}
     </main>
 
-    {{-- ========================================================== --}}
-    {{-- COMPONENTES GLOBAIS (MARKETING & UX) --}}
-    {{-- ========================================================== --}}
-
-    {{-- 1. Botões Flutuantes (WhatsApp + Scroll Top) --}}
+    {{-- COMPONENTES GLOBAIS --}}
     <x-floating-ui />
-
-    {{-- 2. Pop-up de Intenção de Saída (Exit Intent) --}}
     <x-exit-intent-popup />
 
-    {{-- 3. Chatbot (Se existir) --}}
     @if(view()->exists('components.chatbot'))
         <x-chatbot />
     @endif
     
-    {{-- 4. Banner de Cookies --}}
     @if(view()->exists('components.cookie-banner'))
         <x-cookie-banner />
     @endif

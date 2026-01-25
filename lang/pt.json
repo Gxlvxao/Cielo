@@ -276,5 +276,37 @@
     "tools.credit.btn_cancel": "Cancelar",
     "tools.credit.alert_fill": "Por favor preencha os campos obrigatórios.",
     "tools.credit.alert_success": "Relatório enviado com sucesso!",
-    "tools.credit.alert_error": "Erro ao enviar relatório."
+    "tools.credit.alert_error": "Erro ao enviar relatório.", 
+
+    
+    "nav.recruitment": "Trabalhe Conosco",
+    "recruitment.hero_title": "Junte-se à Cielo",
+    "recruitment.hero_subtitle": "Faça parte da excelência no mercado imobiliário de luxo.",
+    "recruitment.intro_title": "A sua carreira começa aqui",
+    "recruitment.intro_text": "Estamos sempre à procura de talentos excepcionais. Se tem paixão pelo imobiliário, excelência no atendimento e uma visão global, queremos conhecer o seu perfil.",
+    "recruitment.openings_title": "Oportunidades Disponíveis",
+    "recruitment.role_consultant": "Consultor Imobiliário",
+    "recruitment.role_broker": "Private Broker",
+    "recruitment.location_lisbon": "Lisboa & Cascais",
+    "recruitment.location_porto": "Grande Porto",
+    "recruitment.spontaneous_title": "Candidatura Espontânea",
+    "recruitment.spontaneous_text": "Envie o seu CV e carta de apresentação para a nossa equipa.",
+
+    
+    "nav.corporate": "Cielo",
+    "nav.concept": "O Conceito",
+    "nav.partners": "Parceiros",
+    "nav.recruitment": "Trabalhe Conosco",
+    "nav.home": "Início",
+    "nav.curation": "Curadoria",
+    "nav.simulators": "Ferramentas",
+    "nav.capital_gains": "Mais Valias",
+    "nav.imt": "IMT & IS",
+    "nav.credit": "Crédito",
+    "fengshui.title": "Feng Shui",
+    "nav.journal": "Jornal",
+    "nav.contact": "Contato",
+    "nav.request_access": "Solicitar Acesso"
+
+
 }

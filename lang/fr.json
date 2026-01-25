@@ -276,5 +276,35 @@
     "tools.credit.btn_cancel": "Annuler",
     "tools.credit.alert_fill": "Veuillez remplir les champs requis.",
     "tools.credit.alert_success": "Rapport envoyé!",
-    "tools.credit.alert_error": "Erreur d'envoi."
+    "tools.credit.alert_error": "Erreur d'envoi.",
+
+    
+    "nav.recruitment": "Carrières",
+    "recruitment.hero_title": "Rejoignez Cielo",
+    "recruitment.hero_subtitle": "Faites partie de l'excellence sur le marché immobilier de luxe.",
+    "recruitment.intro_title": "Votre carrière commence ici",
+    "recruitment.intro_text": "Nous sommes toujours à la recherche de talents exceptionnels. Si vous avez la passion de l'immobilier, l'excellence du service et une vision globale, nous voulons vous rencontrer.",
+    "recruitment.openings_title": "Postes Ouverts",
+    "recruitment.role_consultant": "Consultant Immobilier",
+    "recruitment.role_broker": "Courtier Privé",
+    "recruitment.location_lisbon": "Lisbonne & Cascais",
+    "recruitment.location_porto": "Grand Porto",
+    "recruitment.spontaneous_title": "Candidature Spontanée",
+   "recruitment.spontaneous_text": "Envoyez votre CV et lettre de motivation à notre équipe.",
+
+   "nav.corporate": "Cielo",
+    "nav.concept": "Le Concept",
+    "nav.partners": "Partenaires",
+    "nav.recruitment": "Carrières",
+    "nav.home": "Accueil",
+    "nav.curation": "Propriétés",
+    "nav.simulators": "Outils",
+    "nav.capital_gains": "Plus-Values",
+    "nav.imt": "Taxes",
+    "nav.credit": "Crédit",
+    "fengshui.title": "Feng Shui",
+    "nav.journal": "Journal",
+    "nav.contact": "Contact",
+    "nav.request_access": "Demander l'Accès"
+
 }

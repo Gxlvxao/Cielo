@@ -276,5 +276,34 @@
     "tools.credit.btn_cancel": "Cancel",
     "tools.credit.alert_fill": "Please fill in required fields.",
     "tools.credit.alert_success": "Report sent successfully!",
-    "tools.credit.alert_error": "Error sending report."
+    "tools.credit.alert_error": "Error sending report.",
+
+    "nav.recruitment": "Careers",
+    "recruitment.hero_title": "Join Cielo",
+    "recruitment.hero_subtitle": "Be part of excellence in the luxury real estate market.",
+    "recruitment.intro_title": "Your career starts here",
+    "recruitment.intro_text": "We are always looking for exceptional talent. If you have a passion for real estate, excellence in service, and a global vision, we want to meet you.",
+    "recruitment.openings_title": "Open Positions",
+    "recruitment.role_consultant": "Real Estate Consultant",
+    "recruitment.role_broker": "Private Broker",
+    "recruitment.location_lisbon": "Lisbon & Cascais",
+    "recruitment.location_porto": "Greater Porto",
+    "recruitment.spontaneous_title": "Spontaneous Application",
+    "recruitment.spontaneous_text": "Send your CV and cover letter to our team.",
+
+    "nav.corporate": "Cielo",
+    "nav.concept": "The Concept",
+    "nav.partners": "Partners",
+    "nav.recruitment": "Careers",
+    "nav.home": "Home",
+    "nav.curation": "Properties",
+    "nav.simulators": "Tools",
+    "nav.capital_gains": "Capital Gains",
+    "nav.imt": "Taxes",
+    "nav.credit": "Mortgage",
+    "fengshui.title": "Feng Shui",
+    "nav.journal": "Journal",
+    "nav.contact": "Contact",
+    "nav.request_access": "Request Access"
+
 }

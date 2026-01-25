@@ -89,4 +89,16 @@ class PageController extends Controller
         }
         return redirect()->route('home');
     }
+
+    public function recruitment()
+    {
+        return view('pages.recruitment');
+    }
+
+    // Página de Parceiros
+    public function partners()
+    {
+        return view('pages.partners');
+    }
+    
 }

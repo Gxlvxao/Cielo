@@ -44,6 +44,11 @@ Route::post('/conversa/enviar', [ToolsController::class, 'sendContact'])->name('
 Route::get('/solicitar-acesso', [AccessRequestController::class, 'create'])->name('access-request.create');
 Route::post('/access-request', [AccessRequestController::class, 'store'])->name('access-request.store');
 
+
+// trabalhe conosco
+Route::get('/trabalhe-conosco', [PageController::class, 'recruitment'])->name('pages.recruitment');
+Route::get('/parceiros', [PageController::class, 'partners'])->name('pages.partners');
+
 // 7. FERRAMENTAS (TOOLS)
 Route::prefix('ferramentas')->name('tools.')->group(function () {
     // Vistas (GET)
