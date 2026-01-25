@@ -304,6 +304,28 @@
     "fengshui.title": "Feng Shui",
     "nav.journal": "Journal",
     "nav.contact": "Contact",
-    "nav.request_access": "Request Access"
+    "nav.request_access": "Request Access",
+
+    
+    "partners.label": "Global Network",
+    "partners.hero_title_1": "Connections that",
+    "partners.hero_title_2": "transcend borders.",
+    "partners.hero_text": "Our strength lies in our partnerships. We unite with the most prestigious brands in global real estate to offer your asset incomparable exposure.",
+
+    "partners.section_label": "OUR PARTNERS",
+    "partners.collaboration_title": "Created in Collaboration",
+    "partners.collaboration_text": "Our work is supported by a trusted ecosystem of real estate professionals, inspection experts, lawyers, credit consultants, and Feng Shui masters, ensuring depth, transparency, and peace of mind.",
+
+    "partners.sothebys_title": "The gold standard of luxury.",
+    "partners.sothebys_text": "As partners of the Sotheby's International Realty network, we connect your property to the world's most qualified buyers, combining century-old tradition with marketing innovation.",
+    "partners.global_reach": "Global Reach",
+
+    "partners.christies_title": "The art of living.",
+    "partners.christies_text": "Specialists in properties that are true works of art. Our affiliation with Christie's allows access to an exclusive clientele of international collectors and investors.",
+    "partners.exclusivity": "Exclusivity",
+
+    "partners.maxsell_title": "Data Intelligence",
+    "partners.maxsell_text": "MaxSell is our strategic technology partner.",
+    "partners.know_tech": "Discover the Tech"
 
 }

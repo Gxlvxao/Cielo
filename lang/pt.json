@@ -306,7 +306,28 @@
     "fengshui.title": "Feng Shui",
     "nav.journal": "Jornal",
     "nav.contact": "Contato",
-    "nav.request_access": "Solicitar Acesso"
+    "nav.request_access": "Solicitar Acesso",
+
+    "partners.label": "Rede Global",
+    "partners.hero_title_1": "Conexões que",
+    "partners.hero_title_2": "transcendem fronteiras.",
+    "partners.hero_text": "A nossa força reside nas nossas parcerias. Unimo-nos às marcas mais prestigiadas do imobiliário mundial para oferecer ao seu ativo uma exposição incomparável.",
+    
+    "partners.section_label": "NOSSOS PARCEIROS",
+    "partners.collaboration_title": "Criado em Colaboração",
+    "partners.collaboration_text": "Nosso trabalho é apoiado por um ecossistema confiável de profissionais imobiliários, especialistas em inspeção, advogados, consultores de crédito e Feng Shui, garantindo profundidade, transparência e paz de espírito.",
+
+    "partners.sothebys_title": "O padrão ouro do luxo.",
+    "partners.sothebys_text": "Como parceiros da rede Sotheby's International Realty, conectamos a sua propriedade aos compradores mais qualificados do mundo, combinando tradição centenária com inovação em marketing.",
+    "partners.global_reach": "Alcance Global",
+
+    "partners.christies_title": "Arte de viver.",
+    "partners.christies_text": "Especialistas em propriedades que são verdadeiras obras de arte. A nossa afiliação com a Christie's permite o acesso a uma clientela exclusiva de colecionadores e investidores internacionais.",
+    "partners.exclusivity": "Exclusividade",
+
+    "partners.maxsell_title": "Inteligência de Dados",
+    "partners.maxsell_text": "A MaxSell é o nosso parceiro estratégico de tecnologia.",
+    "partners.know_tech": "Conheça a Tecnologia"
 
 
 }
