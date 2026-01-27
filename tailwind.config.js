@@ -19,10 +19,11 @@ export default {
         },
         extend: {
             fontFamily: {
-                // TRUQUE: Ambas as famílias usam Inter agora.
-                // Isso sobrescreve a Playfair Display em todos os títulos antigos da Home.
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
-                serif: ['Inter', ...defaultTheme.fontFamily.sans], 
+                // Aqui removemos o "truque" e fazemos do jeito certo:
+                // 'sans' usa a BR OMNY (para textos corridos)
+                sans: ['"BR OMNY"', ...defaultTheme.fontFamily.sans],
+                // 'display' usa a ADAM (para títulos grandes)
+                display: ['ADAM', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 cielo: {

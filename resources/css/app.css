@@ -2,74 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === CONFIGURAÇÃO DE FONTES === */
+@layer base {
+    /* Fonte de Títulos: ADAM */
+    @font-face {
+        font-family: 'ADAM';
+        src: url('/fonts/ADAM.woff2') format('woff2'); /* Caminho na pasta public */
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* Fonte de Texto: BR OMNY (Regular) */
+    @font-face {
+        font-family: 'BR OMNY';
+        src: url('/fonts/BROMNY-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* Fonte de Texto: BR OMNY (Bold) */
+    @font-face {
+        font-family: 'BR OMNY';
+        src: url('/fonts/BROMNY-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* Aplicação Global */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'ADAM', sans-serif;
+    }
+
+    body {
+        font-family: 'BR OMNY', sans-serif;
+    }
+}
+
+/* === VARIÁVEIS DE CORES DO SISTEMA === */
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 6%;
-
     --card: 0 0% 100%;
     --card-foreground: 0 0% 6%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 6%;
-
     --primary: 0 0% 6%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 6%;
-
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-
     --accent: 36 38% 52%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 0 0% 90%;
     --input: 0 0% 90%;
     --ring: 36 38% 52%;
-
     --radius: 0.5rem;
-
-    /* Premium bronze palette */
-    --bronze: 36 38% 52%;
-    --bronze-dark: 36 38% 42%;
-    --bronze-light: 36 38% 72%;
-
-    /* Graphite variations */
-    --graphite: 0 0% 6%;
-    --graphite-light: 0 0% 15%;
-    --graphite-lighter: 0 0% 25%;
   }
 
   .dark {
     --background: 0 0% 6%;
     --foreground: 0 0% 100%;
-
     --card: 0 0% 10%;
     --card-foreground: 0 0% 100%;
-
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 100%;
-
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 6%;
-
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
-
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
-
     --accent: 36 38% 52%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 0 0% 20%;
     --input: 0 0% 20%;
     --ring: 36 38% 52%;
@@ -80,13 +93,7 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
   }
-}
-
-/* Fix para o select/dropdown no modo dark */
-select, option {
-    @apply text-foreground bg-background;
 }

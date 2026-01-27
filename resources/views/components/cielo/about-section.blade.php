@@ -1,4 +1,4 @@
-<section class="bg-white py-40 px-6 min-h-screen flex items-center justify-center relative overflow-hidden" 
+<section class="bg-background py-24 md:py-32 min-h-[60vh] flex items-center justify-center relative overflow-hidden" 
          x-data="{ 
             scrolled: false,
             init() {
@@ -7,48 +7,56 @@
                         this.scrolled = true;
                         observer.disconnect();
                     }
-                }, { threshold: 0.1 });
+                }, { threshold: 0.2 });
                 observer.observe(this.$el);
             }
          }">
     
-    {{-- Reduzi o max-w para 5xl e adicionei mx-auto para garantir o foco central --}}
-    <div class="max-w-5xl mx-auto text-center relative z-10">
-        
-        <div class="mb-12 overflow-hidden">
-            {{-- Troquei para font-inter --}}
-            <p class="font-inter text-xs font-bold tracking-[0.4em] uppercase text-cielo-terracotta transform transition-all duration-[1000ms] ease-out delay-300"
-               :class="scrolled ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-                {{ __('home.about.label') }}
-            </p>
-        </div>
+    {{-- Decoração de fundo --}}
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-cielo-cream/10 -skew-x-12 translate-x-1/2 pointer-events-none" aria-hidden="true"></div>
 
-        <div class="space-y-12 transition-all duration-[2000ms] ease-out"
-             :class="scrolled ? 'blur-0 opacity-100 scale-100' : 'blur-xl opacity-30 scale-95'">
+    <div class="container mx-auto px-6 relative z-10 text-center">
+        
+        {{-- Wrapper (Reduzi o space-y de 16 para 10) --}}
+        <div class="max-w-4xl mx-auto space-y-10 transition-all duration-[2000ms] ease-out"
+             :class="scrolled ? 'blur-0 opacity-100 scale-100' : 'blur-xl opacity-0 scale-95'">
             
-            {{-- 
-                1. Removi 'font-serif' e coloquei 'font-inter'.
-                2. Ajustei o leading para 'tight' e tracking para 'tight' para ficar mais moderno.
-            --}}
-            <h2 class="font-inter font-light text-4xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-cielo-dark mb-8">
-                {!! __('home.about.text') !!}
+            {{-- Label --}}
+            <div>
+                <span class="inline-block text-xs font-sans font-bold tracking-[0.4em] text-cielo-terracotta uppercase">
+                    {{ __('philosophy.label') }}
+                </span>
+            </div>
+
+            {{-- Título (Reduzido de 9xl para 5xl/6xl) --}}
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-tight text-cielo-dark">
+                {!! __('philosophy.title') !!}
             </h2>
 
-            {{-- 
-                1. Reduzi o max-w para '2xl' para o texto não ficar muito "esticado" (leitura melhor).
-                2. Fonte Inter também aqui.
-            --}}
-            <p class="font-inter text-lg md:text-xl text-cielo-navy/80 font-light leading-relaxed max-w-3xl mx-auto">
-                {!! __('home.about.subtext') !!}
-            </p>
+            {{-- Blocos de Texto --}}
+            <div class="space-y-6">
+                {{-- Subtítulo (Reduzido de 3xl para 2xl) --}}
+                <p class="font-sans text-xl md:text-2xl text-cielo-navy font-light leading-snug max-w-2xl mx-auto">
+                    {{ __('philosophy.subtitle') }}
+                </p>
+                
+                {{-- Texto Corrido (Reduzido para base/lg) --}}
+                <p class="font-sans text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
+                    {{ __('philosophy.text') }}
+                </p>
+            </div>
+
+            {{-- Botão --}}
+            <div class="pt-6">
+                <a href="{{ route('properties.index') }}" 
+                   class="inline-flex flex-col items-center group">
+                    <span class="text-xs font-bold uppercase tracking-widest text-cielo-dark group-hover:text-cielo-terracotta transition-colors mb-2">
+                        {{ __('philosophy.cta') }}
+                    </span>
+                    <span class="h-px w-8 bg-cielo-dark group-hover:w-16 group-hover:bg-cielo-terracotta transition-all duration-500 ease-out"></span>
+                </a>
+            </div>
 
         </div>
-
-    </div>
-
-    {{-- Mantive os detalhes visuais --}}
-    <div class="absolute inset-0 pointer-events-none flex justify-between px-6 md:px-20 opacity-5">
-        <div class="w-px h-full bg-cielo-dark"></div>
-        <div class="w-px h-full bg-cielo-dark"></div>
     </div>
 </section>
