@@ -16,14 +16,14 @@
              x-init="setTimeout(() => shown = true, 500)" 
              class="max-w-4xl text-left text-white">
             
-            {{-- LOGO CIELO (Adicionado) --}}
+            {{-- LOGO CIELO (Corrigido: Removido brightness-0 invert) --}}
             <img x-show="shown"
                  src="{{ asset('images/cielo.png') }}"
                  alt="Cielo Logo"
                  x-transition:enter="transition duration-[1500ms] ease-out"
                  x-transition:enter-start="opacity-0 translate-y-8"
                  x-transition:enter-end="opacity-100 translate-y-0"
-                 class="h-10 md:h-14 w-auto mb-8 drop-shadow-xl brightness-0 invert" {{-- brightness/invert para garantir que fique branco sobre o fundo --}}
+                 class="h-10 md:h-14 w-auto mb-8 drop-shadow-xl" 
             >
 
             {{-- Título Principal --}}
