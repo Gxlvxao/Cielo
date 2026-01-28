@@ -18,7 +18,7 @@
             
             {{-- LOGO CIELO (Corrigido: Removido brightness-0 invert) --}}
             <img x-show="shown"
-                 src="{{ asset('images/cielo.png') }}"
+                 src="{{ asset('images/cielo1.png') }}"
                  alt="Cielo Logo"
                  x-transition:enter="transition duration-[1500ms] ease-out"
                  x-transition:enter-start="opacity-0 translate-y-8"
