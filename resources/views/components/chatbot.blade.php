@@ -2,7 +2,8 @@
     // 1. Detecta o idioma
     $locale = app()->getLocale();
     
-    // 2. Define a frase de boas-vindas "Cielo Boutique"
+    // 2. Define a frase de boas-vindas
+    // CORREÇÃO: 'default' sem aspas para funcionar como fallback
     $greeting = match($locale) {
         'en' => "Hello. I am Cielo's private concierge. Whether you seek to buy, sell, or access our Off-Market collection, I am here to assist.",
         'fr' => "Bonjour. Je suis le concierge privé de Cielo. Que vous souhaitiez acheter, vendre ou accéder à notre collection Off-Market, je suis là pour vous aider.",
@@ -19,7 +20,9 @@
 
 <div x-data="chatbot()" x-init="initBot()" class="fixed bottom-6 right-6 z-[90] flex flex-col items-end">
     
+    {{-- JANELA DO CHAT --}}
     <div x-show="open" 
+         style="display: none;" 
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 translate-y-4 scale-95"
          x-transition:enter-end="opacity-100 translate-y-0 scale-100"
@@ -41,6 +44,7 @@
             </button>
         </div>
 
+        {{-- AREA DE MENSAGENS --}}
         <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-[#FDFCF8] space-y-4 scroll-smooth">
             <template x-for="(msg, index) in messages" :key="index">
                 <div :class="msg.role === 'user' ? 'flex justify-end' : 'flex justify-start'">
@@ -77,6 +81,7 @@
             </div>
         </div>
 
+        {{-- INPUT AREA --}}
         <div class="p-3 bg-white border-t border-gray-100">
             <div class="flex items-center gap-2 bg-gray-50 rounded-full px-2 py-2 border border-gray-200 focus-within:border-cielo-terracotta transition">
                 
@@ -99,13 +104,18 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </button>
             </div>
-            <p class="text-[9px] text-center text-gray-300 mt-2 uppercase tracking-widest">Powered by Cielo Intelligence</p>
+            
+            {{-- DEVELOPED BY MAXSELL --}}
+            <div class="mt-3 flex items-center justify-center gap-2 opacity-60 hover:opacity-100 transition-opacity duration-300">
+                <span class="text-[8px] text-gray-400 uppercase tracking-widest font-bold">Developed by</span>
+                <img src="{{ asset('images/maxsell.png') }}" alt="MaxSell Technology" class="h-3 w-auto grayscale opacity-80">
+            </div>
         </div>
     </div>
 
-    {{-- BOTÃO FLUTUANTE (Ícone AI) --}}
+    {{-- BOTÃO FLUTUANTE --}}
     <button @click="open = !open" 
-        class="bg-cielo-dark hover:bg-cielo-terracotta text-white p-4 rounded-full shadow-2xl transition-all hover:scale-105 flex items-center justify-center group relative border border-white/10">
+        class="bg-cielo-dark hover:bg-cielo-terracotta text-white p-4 rounded-full shadow-2xl transition-all hover:scale-105 flex items-center justify-center group relative border border-white/10 w-16 h-16">
         
         {{-- Bolinha de notificação --}}
         <span x-show="!open" class="absolute top-0 right-0 flex h-3 w-3">
@@ -113,11 +123,13 @@
             <span class="relative inline-flex rounded-full h-3 w-3 bg-cielo-terracotta border border-cielo-dark"></span>
         </span>
 
-        {{-- Ícone Brilho (Fechado) --}}
-        <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+        {{-- Ícone: Chat Bubble (Universal) --}}
+        <svg x-show="!open" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+        </svg>
         
         {{-- Ícone X (Aberto) --}}
-        <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path></svg>
+        <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
 
     <script>
@@ -137,7 +149,7 @@
                     this.$watch('messages', () => {
                         this.$nextTick(() => {
                             const container = document.getElementById('chat-messages');
-                            container.scrollTop = container.scrollHeight;
+                            if(container) container.scrollTop = container.scrollHeight;
                         });
                     });
                 },

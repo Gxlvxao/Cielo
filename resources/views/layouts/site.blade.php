@@ -22,18 +22,14 @@
 <body class="font-sans text-cielo-dark bg-cielo-cream antialiased selection:bg-cielo-terracotta selection:text-white" 
       x-data="{ menuOpen: false }">
 
-    {{-- 1. RAIL SIDEBAR (Só Desktop - A classe hidden já está no componente) --}}
+    {{-- 1. RAIL SIDEBAR (Desktop) --}}
     <x-cielo.sidebar-rail />
 
-    {{-- 2. MOBILE HEADER (Só Mobile - md:hidden) --}}
-    {{-- Substitui a sidebar no celular para ganhar espaço --}}
+    {{-- 2. MOBILE HEADER (Mobile) --}}
     <div class="fixed top-0 left-0 w-full h-16 bg-cielo-dark/90 backdrop-blur-md z-50 flex items-center justify-between px-6 md:hidden border-b border-white/10 transition-all duration-300">
-        {{-- Logo Simples --}}
         <a href="{{ route('home') }}" class="font-display text-2xl text-white tracking-widest uppercase">
             Cielo
         </a>
-        
-        {{-- Trigger do Menu (Hamburguer Simples) --}}
         <button @click="menuOpen = true" class="text-white p-2">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -41,13 +37,13 @@
         </button>
     </div>
 
-    {{-- 3. MENU OVERLAY (Tela Cheia) --}}
+    {{-- 3. MENU OVERLAY (Full Screen) --}}
     <div x-cloak 
          x-show="menuOpen" 
          @toggle-menu.window="menuOpen = !menuOpen"
          class="fixed inset-0 z-[60] flex justify-end items-stretch">
         
-        {{-- Backdrop Escuro --}}
+        {{-- Backdrop --}}
         <div @click="menuOpen = false"
              x-show="menuOpen"
              x-transition:enter="transition opacity duration-500"
@@ -58,7 +54,7 @@
              x-transition:leave-end="opacity-0"
              class="absolute inset-0 bg-cielo-dark/90 menu-backdrop cursor-pointer"></div>
 
-        {{-- Painel do Menu --}}
+        {{-- Painel --}}
         <div x-show="menuOpen"
              x-transition:enter="transition transform duration-500 cubic-bezier(0.16, 1, 0.3, 1)"
              x-transition:enter-start="translate-x-full"
@@ -68,15 +64,14 @@
              x-transition:leave-end="translate-x-full"
              class="relative w-full md:w-[600px] h-full bg-cielo-cream text-cielo-dark shadow-2xl overflow-y-auto flex flex-col">
             
-            {{-- Botão Fechar --}}
+            {{-- Fechar --}}
             <button @click="menuOpen = false" class="absolute top-6 right-6 p-2 hover:rotate-90 transition duration-300 z-50 text-cielo-dark hover:text-cielo-terracotta">
                 <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
-            {{-- Conteúdo do Menu --}}
             <div class="p-8 md:p-12 flex flex-col h-full justify-between mt-12 md:mt-0">
                 
-                {{-- Topo: Login e Idioma --}}
+                {{-- Topo --}}
                 <div class="flex flex-wrap gap-8 items-center text-xs font-bold tracking-widest uppercase text-cielo-navy/60">
                     @auth
                         <a href="{{ route('dashboard') }}" class="hover:text-cielo-terracotta transition-colors">
@@ -100,30 +95,33 @@
                     </div>
                 </div>
 
-                {{-- Navegação Principal --}}
+                {{-- Navegação --}}
                 <nav class="space-y-4 md:space-y-6 mt-8 md:mt-12">
                     
                     <a href="{{ route('home') }}" class="block font-display text-4xl md:text-6xl text-cielo-dark hover:text-cielo-terracotta transition-all duration-300 hover:pl-4">
                         {{ __('nav.home') ?? 'Home' }}
                     </a>
 
+                    {{-- Link Imóveis (Antes Curadoria) --}}
                     <a href="{{ route('properties.index') }}" class="block font-display text-4xl md:text-6xl text-cielo-dark hover:text-cielo-terracotta transition-all duration-300 hover:pl-4">
-                        {{ __('nav.curation') ?? 'Properties' }}
+                        {{ __('nav.properties') ?? 'Properties' }}
                     </a>
 
-                    {{-- Dropdowns --}}
+                    {{-- Dropdown A Marca (Cielo) --}}
                     <div x-data="{ brandOpen: false }">
                         <button @click="brandOpen = !brandOpen" class="flex items-center justify-between w-full font-display text-4xl md:text-6xl text-cielo-dark hover:text-cielo-terracotta transition-all duration-300 hover:pl-4 focus:outline-none group text-left">
-                            <span>{{ __('nav.corporate') ?? 'The Brand' }}</span>
+                            <span>{{ __('nav.corporate') ?? 'Cielo' }}</span>
                             <svg class="w-6 h-6 md:w-8 md:h-8 transform transition-transform duration-300 text-cielo-navy/30 group-hover:text-cielo-terracotta" :class="brandOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="brandOpen" x-collapse class="pl-6 mt-4 space-y-3 border-l-2 border-cielo-dark/5 ml-4">
-                            <a href="{{ route('pages.about') }}" class="block font-sans text-base md:text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">{{ __('nav.concept') ?? 'Concept' }}</a>
+                            {{-- Link Sobre Nós (Antes Conceito) --}}
+                            <a href="{{ route('pages.about') }}" class="block font-sans text-base md:text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">{{ __('nav.concept') ?? 'About Us' }}</a>
                             <a href="{{ route('pages.partners') }}" class="block font-sans text-base md:text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">{{ __('nav.partners') ?? 'Partners' }}</a>
                             <a href="{{ route('pages.recruitment') }}" class="block font-sans text-base md:text-lg uppercase tracking-widest text-cielo-navy hover:text-cielo-terracotta transition-colors">{{ __('nav.recruitment') ?? 'Careers' }}</a>
                         </div>
                     </div>
 
+                    {{-- Dropdown Ferramentas --}}
                     <div x-data="{ toolsOpen: false }">
                         <button @click="toolsOpen = !toolsOpen" class="flex items-center justify-between w-full font-display text-4xl md:text-6xl text-cielo-dark hover:text-cielo-terracotta transition-all duration-300 hover:pl-4 focus:outline-none group text-left">
                             <span>{{ __('nav.simulators') ?? 'Tools' }}</span>
@@ -174,13 +172,11 @@
         </div>
     </div>
 
-    {{-- 3. CONTEÚDO PRINCIPAL (Main) --}}
-    {{-- FIX: pl-0 no Mobile (sem barra) e pl-20 no Desktop (com barra) --}}
+    {{-- Main Content --}}
     <main class="pl-0 md:pl-20 min-h-screen w-full relative z-0">
         {{ $slot }}
     </main>
 
-    {{-- COMPONENTES GLOBAIS --}}
     <x-floating-ui />
     <x-exit-intent-popup />
 
