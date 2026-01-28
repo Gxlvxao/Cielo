@@ -4,10 +4,10 @@ return [
     'privacy' => [
         'title' => 'Privacy Policy',
         'content' => '
-            <p><strong>Crow Global Investments, Lda.</strong> respects the privacy of its users and is committed to protecting the personal data entrusted to us, in compliance with the General Data Protection Regulation (GDPR – EU Regulation 2016/679) and other applicable legislation.</p>
+            <p><strong>Cielo Real Estate</strong> respects the privacy of its users and is committed to protecting the personal data entrusted to us, in compliance with the General Data Protection Regulation (GDPR – EU Regulation 2016/679) and other applicable legislation.</p>
             
             <h3 class="text-xl font-bold mt-6 mb-2">1. Data Controller</h3>
-            <p>The entity responsible for processing personal data is Crow Global Investments, Lda., hereinafter referred to as “Crow Global Investments”.</p>
+            <p>The entity responsible for processing personal data is Cielo Real Estate, hereinafter referred to as “Cielo”.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">2. Collected Personal Data</h3>
             <p>We may collect and process the following data:</p>
@@ -42,7 +42,7 @@ return [
             <p>Data will be retained only for the period necessary for the purposes that motivated its collection or as required by law.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">6. Data Sharing</h3>
-            <p>Crow Global Investments does not sell or transfer personal data to third parties, except when:</p>
+            <p>Cielo does not sell or transfer personal data to third parties, except when:</p>
             <ul class="list-disc ml-6 mt-2">
                 <li>Legally obliged</li>
                 <li>Necessary for the provision of services (e.g., technology providers), always ensuring confidentiality</li>
@@ -61,16 +61,16 @@ return [
             <p>We adopt appropriate technical and organizational measures to protect data against unauthorized access, loss, or improper disclosure.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">9. Changes</h3>
-            <p>Crow Global Investments reserves the right to update this Privacy Policy at any time.</p>
+            <p>Cielo reserves the right to update this Privacy Policy at any time.</p>
         ',
     ],
     'terms' => [
         'title' => 'Terms of Service',
         'content' => '
-            <p>By accessing and using the website <strong>crowglobalinvestiments.pt</strong>, the user agrees to these Terms of Service.</p>
+            <p>By accessing and using the website <strong>cielo.pt</strong>, the user agrees to these Terms of Service.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">1. Object</h3>
-            <p>The website is informational and institutional, presenting the activity, vision, and services of Crow Global Investments.</p>
+            <p>The website is informational and institutional, presenting the activity, vision, and services of Cielo Real Estate.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">2. Website Usage</h3>
             <p>The user commits to:</p>
@@ -84,10 +84,10 @@ return [
             <p>All content provided is merely informative and does not constitute financial, legal, or investment advice.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">4. Intellectual Property</h3>
-            <p>All website content (texts, logos, images, design) is the property of Crow Global Investments or duly authorized third parties and is protected by copyright.</p>
+            <p>All website content (texts, logos, images, design) is the property of Cielo Real Estate or duly authorized third parties and is protected by copyright.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">5. Liability</h3>
-            <p>Crow Global Investments is not responsible for:</p>
+            <p>Cielo is not responsible for:</p>
             <ul class="list-disc ml-6 mt-2">
                 <li>Decisions made based on website information</li>
                 <li>Technical failures, interruptions, or errors</li>
@@ -101,7 +101,7 @@ return [
     'cookies' => [
         'title' => 'Cookie Policy',
         'content' => '
-            <p>The website <strong>crowglobalinvestiments.pt</strong> uses cookies to improve user experience.</p>
+            <p>The website <strong>cielo.pt</strong> uses cookies to improve user experience.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">1. What are Cookies</h3>
             <p>Cookies are small text files stored on the user’s device when visiting a website.</p>
@@ -132,7 +132,7 @@ return [
         'title' => 'Legal Notice',
         'content' => '
             <h3 class="text-xl font-bold mt-6 mb-2">1. General Information</h3>
-            <p>This website is owned by <strong>Crow Global Investments, Lda.</strong></p>
+            <p>This website is owned by <strong>Cielo Real Estate</strong>.</p>
 
             <h3 class="text-xl font-bold mt-6 mb-2">2. Nature of Information</h3>
             <p>The information provided:</p>
@@ -143,7 +143,7 @@ return [
             </ul>
 
             <h3 class="text-xl font-bold mt-6 mb-2">3. Limitation of Liability</h3>
-            <p>Crow Global Investments is not responsible for:</p>
+            <p>Cielo is not responsible for:</p>
             <ul class="list-disc ml-6 mt-2">
                 <li>Losses or damages resulting from the use of the website</li>
                 <li>Incorrect interpretations of the provided information</li>

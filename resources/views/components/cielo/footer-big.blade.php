@@ -2,20 +2,17 @@
     
     {{-- 
         IMAGEM DE FUNDO & MÁSCARA
-        - Base: bg-cielo-dark (Azul da marca)
-        - Máscara: bg-cielo-dark/30 (Azul suave, 30% de opacidade). 
-          Dá o tom da marca sem esconder a foto.
     --}}
     <div class="absolute inset-0 z-0">
         {{-- Máscara leve azul --}}
         <div class="absolute inset-0 bg-cielo-dark/30 z-10"></div>
         
-        {{-- Imagem Real (Sem grayscale para manter as cores vivas sob o azul) --}}
+        {{-- Imagem Real --}}
         <img src="/images/footer.jpg" 
              class="w-full h-full object-cover z-0" 
              alt="Cielo Private">
         
-        {{-- Gradiente sutil no topo para garantir transição suave do conteúdo anterior --}}
+        {{-- Gradiente sutil no topo --}}
         <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-cielo-dark/50 to-transparent z-10"></div>
     </div>
 
@@ -46,11 +43,7 @@
         </div>
     </div>
 
-    {{-- 
-        SEÇÃO DE INFORMAÇÕES
-        - Fundo: Azul escuro com 80% de opacidade e Blur.
-        - Cria uma base sólida para leitura técnica, mas deixa o fundo "vazar" levemente.
-    --}}
+    {{-- SEÇÃO DE INFORMAÇÕES --}}
     <div class="relative z-20 bg-cielo-dark/80 backdrop-blur-md border-t border-white/10">
         <div class="max-w-[90rem] mx-auto px-6 py-12">
             
@@ -104,14 +97,22 @@
 
             </div>
 
-            {{-- Footer Bottom --}}
-            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-white/40">
-                <p>© {{ date('Y') }} Cielo Real Estate.</p>
+            {{-- Footer Bottom (CENTRALIZADO) --}}
+            <div class="pt-8 border-t border-white/10 flex flex-col items-center justify-center gap-6 text-[10px] uppercase tracking-widest text-white/40">
                 
-                <div class="flex items-center gap-2 hover:text-white/80 transition-colors">
-                    <span>{{ __('footer.developed') }}</span>
-                    <img src="/images/maxsell.png" alt="MaxSell" class="h-3 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
+                {{-- Copyright e Logo da MaxSell agrupados e centralizados --}}
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                    <p>© {{ date('Y') }} Cielo Real Estate.</p>
+                    
+                    {{-- Separador Visual (Bolinha) --}}
+                    <span class="hidden md:block w-1 h-1 rounded-full bg-white/20"></span>
+
+                    <div class="flex items-center gap-2 hover:text-white/80 transition-colors">
+                        <span>{{ __('footer.developed') }}</span>
+                        <img src="/images/maxsell.png" alt="MaxSell" class="h-3 w-auto brightness-0 invert opacity-50 hover:opacity-100 transition-opacity">
+                    </div>
                 </div>
+
             </div>
 
         </div>
