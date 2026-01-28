@@ -3,9 +3,11 @@
     {{-- 1. Logo / Home Icon --}}
     <a href="{{ route('home') }}" class="p-3 text-white/80 hover:text-cielo-accent transition-colors duration-300 relative group/tooltip">
         <span class="sr-only">Home</span>
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-        </svg>
+        
+        {{-- LOGO CLEAN (Substituindo o ícone SVG) --}}
+        <img src="{{ asset('images/clean.png') }}" 
+             alt="Cielo Home" 
+             class="w-6 h-6 object-contain brightness-0 invert"> 
         
         {{-- Tooltip --}}
         <div class="absolute left-full top-1/2 -translate-y-1/2 ml-4 px-3 py-1 bg-white text-cielo-dark text-[10px] font-bold tracking-widest uppercase rounded opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow-lg">
