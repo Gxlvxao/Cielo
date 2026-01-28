@@ -326,6 +326,26 @@
 
     "partners.maxsell_title": "Data Intelligence",
     "partners.maxsell_text": "MaxSell is our strategic technology partner.",
-    "partners.know_tech": "Discover the Tech"
+    "partners.know_tech": "Discover the Tech",
+
+    "testimonials.label": "TESTIMONIALS",
+    "testimonials.title": "Stories that<br>Inspire Trust",
+    "testimonials.review_1": "We found not just a house, but a home for our new chapter.",
+    "testimonials.review_2": "The process was transparent and the curation impeccable.",
+    "testimonials.review_3": "A safe investment and a peaceful summer retreat.",
+    "testimonials.review_4": "Rare professionalism. They understood exactly what we sought.",
+    "testimonials.review_5": "The energy of the house changed our lives. Eternal gratitude.", 
+
+    "footer.off_market_label": "PRIVATE MARKET",
+    "footer.off_market_title": "True luxury<br>requires privacy.",
+    "footer.off_market_text": "Our most exclusive curation remains confidential. Request access to the Off-Market portfolio to discover unique opportunities.",
+    "footer.off_market_cta": "Request Access",
+    "footer.contacts_title": "CONTACTS",
+    "footer.legal_title": "LEGAL",
+    "footer.privacy": "Privacy Policy",
+    "footer.terms": "Terms & Conditions",
+    "footer.cookies": "Cookie Policy",
+    "footer.ral": "Dispute Resolution",
+    "footer.developed": "Developed by"
 
 }

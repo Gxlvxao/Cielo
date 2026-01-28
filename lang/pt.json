@@ -327,7 +327,29 @@
 
     "partners.maxsell_title": "Inteligência de Dados",
     "partners.maxsell_text": "A MaxSell é o nosso parceiro estratégico de tecnologia.",
-    "partners.know_tech": "Conheça a Tecnologia"
+    "partners.know_tech": "Conheça a Tecnologia",
+
+    
+    "testimonials.label": "DEPOIMENTOS",
+    "testimonials.title": "Histórias que<br>Inspiram Confiança",
+    "testimonials.review_1": "Encontramos não só uma casa, mas um lar para nossa nova fase.",
+    "testimonials.review_2": "O processo foi transparente e a curadoria impecável.",
+    "testimonials.review_3": "Investimento seguro e um refúgio de paz para o verão.",
+    "testimonials.review_4": "Profissionalismo raro. Entenderam exatamente o que buscávamos.",
+    "testimonials.review_5": "A energia da casa mudou nossas vidas. Gratidão eterna.", 
+
+    "footer.off_market_label": "PRIVATE MARKET",
+    "footer.off_market_title": "O verdadeiro luxo<br>exige privacidade.",
+    "footer.off_market_text": "A nossa curadoria mais exclusiva permanece confidencial. Solicite acesso ao portfólio Off-Market para descobrir oportunidades únicas.",
+    "footer.off_market_cta": "Solicitar Acesso",
+    "footer.contacts_title": "CONTACTOS",
+    "footer.legal_title": "LEGAL",
+    "footer.privacy": "Política de Privacidade",
+    "footer.terms": "Termos e Condições",
+    "footer.cookies": "Política de Cookies",
+    "footer.ral": "Resolução de Litígios",
+    "footer.developed": "Developed by"
+
 
 
 }
