@@ -5,40 +5,40 @@
          alt="Cielo Hero Background" 
          class="absolute w-full h-full object-cover opacity-80">
 
-    {{-- Overlays (Gradientes para leitura do texto) --}}
-    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-
-    {{-- REMOVIDO: Título "Cielo" do topo --}}
+    {{-- Overlays (Gradientes refinados) --}}
+    <div class="absolute inset-0 bg-gradient-to-r from-cielo-dark/80 via-cielo-dark/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-cielo-dark/70 via-transparent to-transparent"></div>
 
     {{-- Conteúdo Principal --}}
-    <div class="absolute inset-0 flex flex-col justify-end pb-32 px-6 md:px-16 z-10 pointer-events-none">
+    {{-- AQUI ESTÁ O FIX: Ajustei o padding-left (pl) para fugir da sidebar --}}
+    <div class="absolute inset-0 flex flex-col justify-center md:justify-end pb-32 pl-24 pr-6 md:pl-44 md:pr-16 z-10 pointer-events-none">
         
         <div x-data="{ shown: false }" 
              x-init="setTimeout(() => shown = true, 500)" 
              class="max-w-4xl text-left text-white">
             
+            {{-- Título Principal --}}
             <h1 x-show="shown"
                 x-transition:enter="transition duration-[1500ms] ease-out"
                 x-transition:enter-start="opacity-0 translate-y-12 blur-sm"
                 x-transition:enter-end="opacity-100 translate-y-0 blur-0"
-                class="font-serif italic text-5xl md:text-7xl lg:text-8xl leading-[1.1] mb-6 drop-shadow-lg text-shadow-sm">
+                class="font-display text-3xl md:text-5xl lg:text-6xl leading-tight mb-5 drop-shadow-lg tracking-widest uppercase">
                 {!! __('home.hero.title') !!}
             </h1>
 
+            {{-- Linha Decorativa --}}
             <div x-show="shown"
                  x-transition:enter="transition duration-[1000ms] delay-500 ease-out"
                  x-transition:enter-start="opacity-0 w-0"
-                 x-transition:enter-end="opacity-100 w-24"
-                 class="h-1 bg-[#C9A35E] mb-6"></div>
+                 x-transition:enter-end="opacity-100 w-20"
+                 class="h-0.5 bg-[#C9A35E] mb-6 shadow-sm"></div>
 
-            {{-- Subtítulo com Fonte INTER --}}
+            {{-- Subtítulo --}}
             <p x-show="shown"
                x-transition:enter="transition duration-[1500ms] delay-700 ease-out"
                x-transition:enter-start="opacity-0 translate-y-8"
                x-transition:enter-end="opacity-100 translate-y-0"
-               style="font-family: 'Inter', sans-serif;" 
-               class="text-lg md:text-xl leading-relaxed tracking-wide opacity-90 max-w-xl drop-shadow-md">
+               class="font-sans text-base md:text-lg font-light leading-relaxed tracking-wide opacity-90 max-w-lg drop-shadow-md text-cielo-cream">
                 {{ __('home.hero.subtitle') }}
             </p>
 
@@ -46,7 +46,10 @@
     </div>
 
     {{-- Scroll Indicator --}}
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/80 z-20">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+    {{-- Ajustei levemente para garantir que fique centralizado na tela, ignorando a sidebar visualmente se preferir, ou podemos deslocar também --}}
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/60 z-20">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
     </div>
 </div>
