@@ -4,6 +4,7 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import intersect from '@alpinejs/intersect';
 
+
 // 2. Registrar Plugin
 Alpine.plugin(intersect);
 
