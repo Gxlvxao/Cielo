@@ -249,7 +249,7 @@
     "tools.imt.breakdown_buyers": "Acheteurs",
     "tools.imt.breakdown_rate_applied": "Taux Appliqué",
     "tools.imt.breakdown_marginal_note": "Exonération marginale appliquée sur",
-    "tools.imt.breakdown_formula": "Formule Standard : (Valeur * Taux) - Parcela a Déduire",
+    "tools.imt.breakdown_formula": "Formule Standard : (Valeur * Taux) - Parcelle à Déduire",
     "tools.imt.breakdown_total": "Total IMT",
     "tools.imt.result_imt": "Impôt IMT",
     "tools.imt.result_stamp": "Droit de Timbre (0.8%)",

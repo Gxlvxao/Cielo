@@ -21,7 +21,6 @@
             </div>
 
             {{-- BLOCO 2: PERSONALIDADE DA MARCA --}}
-            {{-- Layout deslocado para a direita com borda lateral para criar hierarquia --}}
             <div class="flex justify-end">
                 <div class="md:w-2/3 pl-6 md:pl-12 border-l-2 border-cielo-terracotta/20">
                     <span class="font-sans text-xs font-bold tracking-[0.3em] uppercase text-gray-400 mb-6 block">
@@ -40,7 +39,7 @@
     {{-- 2. STATS --}}
     <x-cielo.stats-section />
 
-    {{-- 3. PROCESSO (Ícones Mantidos) --}}
+    {{-- 3. PROCESSO --}}
     <section class="bg-gray-50 py-32 px-6">
         <div class="max-w-[90rem] mx-auto">
             
@@ -54,7 +53,6 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
                 @foreach(__('about.process.items') as $item)
                     <div class="group">
-                        {{-- Ícones SVG Originais --}}
                         <div class="w-12 h-12 mb-6 text-cielo-dark group-hover:text-cielo-terracotta transition-colors duration-300">
                             @if($loop->index == 0) {{-- Expert Guidance --}}
                                 <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
